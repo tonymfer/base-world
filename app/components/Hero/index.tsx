@@ -34,7 +34,17 @@ export default function BaseGlobe(
   const { data } = useApi({
     url: "countries",
     method: "GET",
-  });
+  }) as {
+    data: {
+      casts: number;
+      countryCode: string;
+      countryName: string;
+      createdAt: string;
+      id: number;
+      latitude: number;
+      longitude: number;
+    }[];
+  };
 
   console.log(data);
 
@@ -124,7 +134,7 @@ export default function BaseGlobe(
               >
                 <span className="">{i + 1}.</span>
                 <span className="whitespace-nowrap ml-1">{countryName} </span>
-                <span className="ml-1 flex items-center justify-center gap-2 text-xl whitespace-nowrap font-bold text-yellow-500">
+                <span className="ml-1 flex items-center justify-center gap-2 text-xl whitespace-nowrap font-bold text-blue-400">
                   {casts}
                   {i === 0 && <span className="flex">🎉</span>}
                 </span>
