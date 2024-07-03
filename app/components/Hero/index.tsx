@@ -121,7 +121,7 @@ export default function BaseGlobe(
         initial={{ opacity: 0 }}
         animate={{ opacity: globeActive ? 1 : 0 }}
         transition={{ duration: 0.5, staggerChildren: 1 }}
-        className="absolute overflow-scroll scrollbar-hide left-0 padded-horizontal hidden mobile:flex h-screen w-[200px] z-[1] text-white flex-col items-start justify-center"
+        className="absolute overflow-scroll scrollbar-hide left-0 padded-horizontal hidden mobile:flex h-screen w-[400px] z-[1] text-white flex-col items-start justify-center"
       >
         {data
           ?.sort((a, b) => b.casts - a.casts)
@@ -168,7 +168,7 @@ export default function BaseGlobe(
           <div className=" flex h-fit w-fit flex-col text-white items-center">
             <h1 className="flex w-full flex-col items-center justify-start gap-2 whitespace-pre-wrap text-center text-xl font-thin text-white se:text-2xl detail:mt-0 detail:flex detail:flex-row detail:whitespace-nowrap detail:text-3xl laptop:text-4xl">
               <span className="">Bringing the world onchain,</span>
-              <span className="">a communtiy of builders</span>
+              <span className="">a community of builders</span>
               <span className="">on Base</span>
             </h1>
             <motion.button
