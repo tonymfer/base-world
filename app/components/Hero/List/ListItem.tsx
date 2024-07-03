@@ -27,23 +27,27 @@ export default function ListItem({ data, index, className }: ListItemProps) {
   const shareQs = queryString.stringify({
     text: `this cast deserves some 👏`,
     "embeds[]": [
-      `https://tip.hunt.town/allowance/${fid}?t=${Date.now()}`,
       `https://warpcast.com/${username}/${castHash}`,
+      `https://tip.hunt.town/allowance/${fid}?t=${Date.now()}`,
     ],
   });
 
   const shareLink = `https://warpcast.com/~/compose?${shareQs}`;
 
   return (
-    <Link
-      href={`https://warpcast.com/${username}/${castHash}`}
+    <div
       className={`shadow-lg pointer-events-none mb-3 overscroll-none rounded-md p-4 py-5 ${className}`}
       style={{
         animationDelay: `${index * 0.1}s`,
       }}
     >
       <div className={`flex w-full items-center justify-between ${className}`}>
-        <div>
+        <Link
+          className="pointer-events-auto"
+          href={`warpcast.com/${username}`}
+          target="_blank"
+          rel="noreferrer noopener"
+        >
           <div
             className={`flex w-full items-center justify-start gap-2 ${className}`}
           >
@@ -60,9 +64,9 @@ export default function ListItem({ data, index, className }: ListItemProps) {
               {username}
             </h1>
           </div>
-        </div>
+        </Link>
         <Link
-          className="text-3xl pointer-events-auto"
+          className="text-[26px] pointer-events-auto"
           href={shareLink}
           target="_blank"
           rel="noreferrer noopener"
@@ -70,11 +74,14 @@ export default function ListItem({ data, index, className }: ListItemProps) {
           👏
         </Link>
       </div>
-      <div
-        className={`mt-2.5 flex w-full justify-start whitespace-pre-wrap text-sm text-grey line-clamp-1 ${className}`}
+      <Link
+        className={`mt-2.5 pointer-events-auto flex w-full justify-start whitespace-pre-wrap text-sm text-grey line-clamp-1 ${className}`}
+        href={`https://warpcast.com/${username}/${castHash}`}
+        target="_blank"
+        rel="noreferrer noopener"
       >
         {text}
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }
