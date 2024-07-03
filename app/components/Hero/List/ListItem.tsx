@@ -44,7 +44,7 @@ export default function ListItem({ data, index, className }: ListItemProps) {
       <div className={`flex w-full items-center justify-between ${className}`}>
         <Link
           className="pointer-events-auto"
-          href={`warpcast.com/${username}`}
+          href={`https://warpcast.com/${username}`}
           target="_blank"
           rel="noreferrer noopener"
         >

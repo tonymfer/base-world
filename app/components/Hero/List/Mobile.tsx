@@ -87,7 +87,7 @@ export default function List({ data }: { data: any }) {
     >
       <div
         ref={nodeRef}
-        className={`handle text-black absolute left-[10px] z-[50000] h-screen w-[calc(100%-20px)] rounded-t-2xl border-[1px] border-b-0 border-gray-900 p-6 pb-0 text-white bg-white transition-all delay-[0.05s] duration-200 detail:hidden
+        className={`handle text-black absolute left-[10px] z-[50000] h-screen w-[calc(100%-20px)] rounded-t-2xl border-[1px] border-b-0 border-gray-900 p-6 pb-0 bg-white transition-all delay-[0.05s] duration-200 detail:hidden
         ${activeCity ? "opacity-100" : "pointer-events-none opacity-0"}
         `}
       >
@@ -136,7 +136,7 @@ export default function List({ data }: { data: any }) {
           <h1 className="text-4xl font-bold text-black uppercase leading-none">
             {activeCity?.countryName}
           </h1>
-          <h2 className="flex w-full justify-end text-xl text-gray-400">
+          <h2 className="flex w-full justify-end text-xl text-black">
             <span className="mr-2 text-lg">total : </span>
             <span className="text-xl text-primary">
               {activeCity?.casts || 0}{" "}
@@ -144,22 +144,17 @@ export default function List({ data }: { data: any }) {
             </span>
           </h2>
           {fetching ? (
-            <div className="scrollable mt-5 flex grow flex-col gap-3 overflow-hidden overflow-y-scroll scrollbar-hide">
-              {new Array(10).fill(0).map((_, i) => (
-                <div
-                  key={i}
-                  className={`flex w-full animate-heartBeat flex-col items-start justify-between gap-2 rounded-md bg-[#191919] bg-opacity-20 p-4 py-5 animate-infinite animate-duration-[3s]`}
-                  style={{
-                    animationDelay: `${i * 0.07}s`,
-                  }}
-                >
-                  <div className="flex w-full items-center justify-start gap-2">
-                    <div className="aspect-square h-10 w-10 rounded-full bg-gray-800 bg-opacity-20" />
-                    <div className="aspect-square h-7 w-40 rounded bg-gray-800 bg-opacity-20" />
-                  </div>
-                  <div className="aspect-square h-4 w-full rounded bg-gray-800 bg-opacity-20" />
-                </div>
-              ))}
+            <div className="mt-5 flex items-center justify-center">
+              <svg
+                fill="#000"
+                viewBox="0 0 512 512"
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                className="animate-spin"
+              >
+                <path d="m460.116 373.846-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676-6.389-.367-11.417-5.577-11.417-11.976v-24.043c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
+              </svg>
             </div>
           ) : (
             <div

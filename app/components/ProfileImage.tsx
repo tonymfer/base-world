@@ -41,13 +41,13 @@ export default function ProfileImage({
           alt=""
           width={imageSize}
           height={imageSize}
-          onError={(e) => {
-            console.error("error loading image", src, nickname);
-            api.get(`users/refresh_image/${id}.json`).catch((e) => {
-              console.error(`error refreshing image for user ${id}`, e);
-            });
-            (e.target as HTMLImageElement)?.remove?.();
-          }}
+          // onError={(e) => {
+          //   console.error("error loading image", src, nickname);
+          //   api.get(`users/refresh_image/${id}.json`).catch((e) => {
+          //     console.error(`error refreshing image for user ${id}`, e);
+          //   });
+          //   (e.target as HTMLImageElement)?.remove?.();
+          // }}
         />
       )}
     </div>
