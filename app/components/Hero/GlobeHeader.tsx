@@ -13,8 +13,8 @@ export default function GlobeHeader() {
     <div
       className={`${
         burgerVisible || mobile
-          ? "pointer-events-none opacity-100"
-          : "pointer-events-none opacity-100"
+          ? "pointer-events-auto opacity-100"
+          : "pointer-events-auto opacity-100"
       } fixed z-[30000] flex h-20 w-screen justify-between overflow-visible pt-10 padded-horizontal-wide`}
     >
       <button
@@ -59,6 +59,28 @@ export default function GlobeHeader() {
           ></path>
         </svg>
       </button>
+
+      <div className="flex flex-col text-xs gap-1 items-center justify-center">
+        <div className="text-white">made with ♥️ by</div>
+        <div className="flex items-center justify-center gap-1">
+          <a
+            href="https://warpcast.com/to"
+            rel="noopener noreferrer"
+            target="_blank"
+            className="px-2 py-1 w-fit rounded-lg bg-[#472A91] text-white text-xs"
+          >
+            @to
+          </a>
+          <a
+            href="https://warpcast.com/undefined"
+            rel="noopener noreferrer"
+            target="_blank"
+            className="px-2 py-1 w-fit rounded-lg bg-[#472A91] text-white text-xs"
+          >
+            @undefined
+          </a>
+        </div>
+      </div>
     </div>
   );
 }

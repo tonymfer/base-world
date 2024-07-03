@@ -131,27 +131,6 @@ export default function BaseGlobe(
               <span className="">a communtiy of builders</span>
               <span className="">on Base</span>
             </h1>
-            <div className="flex flex-col items-center justify-center">
-              <div className="text-white">made with ♥️ by</div>
-              <div className="flex items-center justify-center gap-1">
-                <a
-                  href="https://warpcast.com/to"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  className="px-2 py-1 w-fit rounded-lg bg-[#472A91] text-white text-sm"
-                >
-                  @to
-                </a>
-                <a
-                  href="https://warpcast.com/undefined"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  className="px-2 py-1 w-fit rounded-lg bg-[#472A91] text-white text-sm"
-                >
-                  @undefined
-                </a>
-              </div>
-            </div>
             <motion.button
               whileTap={{ scale: 0.98 }}
               onClick={() => {
