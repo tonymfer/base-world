@@ -121,7 +121,7 @@ export default function BaseGlobe(
         initial={{ opacity: 0 }}
         animate={{ opacity: globeActive ? 1 : 0 }}
         transition={{ duration: 0.5, staggerChildren: 1 }}
-        className="absolute overflow-scroll scrollbar-hide left-0 padded-horizontal hidden mobile:flex h-screen w-[500px] z-[29000] text-white flex-col items-start justify-center"
+        className="absolute overflow-scroll scrollbar-hide left-0 padded-horizontal hidden mobile:flex h-screen w-[200px] z-[1] text-white flex-col items-start justify-center"
       >
         {data
           ?.sort((a, b) => b.casts - a.casts)
