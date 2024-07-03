@@ -162,7 +162,7 @@ export default function List({ data }: { data: any }) {
             >
               {activeCityResponse?.casts
                 .sort((a, b) => {
-                  return Number(b.timestamp) - Number(a.timestamp);
+                  return Number(a.timestamp) - Number(b.timestamp);
                 })
                 .map((data, i) => (
                   <ListItem

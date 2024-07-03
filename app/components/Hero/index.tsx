@@ -107,6 +107,31 @@ export default function BaseGlobe(
       ref={scrollContainerRef}
       className="relative flex scrollbar-hide h-screen w-screen touch-pan-x touch-pan-y select-none items-center overscroll-none bg-black"
     >
+      <div className="absolute overflow-scroll scrollbar-hide left-0 padded-horizontal hidden mobile:flex h-screen w-[500px] z-[2000000] text-white flex-col items-start justify-center">
+        {data
+          ?.sort((a, b) => b.casts - a.casts)
+          .map((d, i) => {
+            const { casts, countryName } = d;
+            return (
+              <div
+                key={i}
+                style={{
+                  opacity: 1 - i * 0.02,
+                }}
+                className={`flex pointer-events-none font-thin items-center text-xl justify-center ${
+                  i < 3 ? "font-bold" : ""
+                }`}
+              >
+                <span className="">{i + 1}.</span>
+                <span className="whitespace-nowrap ml-1">{countryName} </span>
+                <span className="ml-1 flex items-center justify-center gap-2 text-xl whitespace-nowrap font-bold text-yellow-500">
+                  {casts}
+                  {i === 0 && <span className="flex">🎉</span>}
+                </span>
+              </div>
+            );
+          })}
+      </div>
       <div className="h-full w-full">
         <div
           className={`absolute z-0 ${

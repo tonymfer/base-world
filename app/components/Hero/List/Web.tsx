@@ -116,11 +116,11 @@ export default function List({ data }: { data: any }) {
           </div>
         ) : (
           <div
-            className={`cancel mt-5  flex grow flex-col overflow-hidden overflow-y-scroll overscroll-none scrollbar-hide`}
+            className={`cancel mt-5 flex grow flex-col overflow-hidden overflow-y-scroll overscroll-none scrollbar-hide`}
           >
             {activeCityResponse?.casts
               .sort((a, b) => {
-                return Number(b.timestamp) - Number(a.timestamp);
+                return Number(a.timestamp) - Number(b.timestamp);
               })
               .map((data, i) => (
                 <ListItem
