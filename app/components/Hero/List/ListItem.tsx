@@ -74,11 +74,14 @@ export default function ListItem({ data, index, className }: ListItemProps) {
           👏
         </Link>
       </div>
-      <div
+      <Link
         className={`mt-2.5 flex w-full justify-start whitespace-pre-wrap text-sm text-grey line-clamp-1 ${className}`}
+        href={`https://warpcast.com/${username}/${castHash}`}
+        target="_blank"
+        rel="noreferrer noopener"
       >
         {text}
-      </div>
+      </Link>
     </div>
   );
 }
