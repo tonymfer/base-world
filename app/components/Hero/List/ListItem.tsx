@@ -35,19 +35,15 @@ export default function ListItem({ data, index, className }: ListItemProps) {
   const shareLink = `https://warpcast.com/~/compose?${shareQs}`;
 
   return (
-    <div
+    <Link
+      href={`https://warpcast.com/${username}/${castHash}`}
       className={`shadow-lg pointer-events-none mb-3 overscroll-none rounded-md p-4 py-5 ${className}`}
       style={{
         animationDelay: `${index * 0.1}s`,
       }}
     >
       <div className={`flex w-full items-center justify-between ${className}`}>
-        <Link
-          className="pointer-events-auto"
-          href={`warpcast.com/${username}`}
-          target="_blank"
-          rel="noreferrer noopener"
-        >
+        <div>
           <div
             className={`flex w-full items-center justify-start gap-2 ${className}`}
           >
@@ -64,7 +60,7 @@ export default function ListItem({ data, index, className }: ListItemProps) {
               {username}
             </h1>
           </div>
-        </Link>
+        </div>
         <Link
           className="text-3xl pointer-events-auto"
           href={shareLink}
@@ -74,14 +70,11 @@ export default function ListItem({ data, index, className }: ListItemProps) {
           👏
         </Link>
       </div>
-      <Link
+      <div
         className={`mt-2.5 flex w-full justify-start whitespace-pre-wrap text-sm text-grey line-clamp-1 ${className}`}
-        href={`https://warpcast.com/${username}/${castHash}`}
-        target="_blank"
-        rel="noreferrer noopener"
       >
         {text}
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 }

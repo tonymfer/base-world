@@ -420,7 +420,7 @@ function highlightLabel(activeCity: ActiveCity) {
   });
 
   const elem = document.getElementById(
-    `${activeCity.city}-div`
+    `${activeCity.countryName}-div`
   ) as HTMLDivElement;
 
   if (elem) {
