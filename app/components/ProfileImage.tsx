@@ -41,6 +41,7 @@ export default function ProfileImage({
           alt=""
           width={imageSize}
           height={imageSize}
+          unoptimized
           // onError={(e) => {
           //   console.error("error loading image", src, nickname);
           //   api.get(`users/refresh_image/${id}.json`).catch((e) => {
