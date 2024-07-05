@@ -32,7 +32,7 @@ function styleElement(element, length, fontSize, maxFontSize, d) {
   const scaleFontSize = (casts, minSize, maxSize) => {
     // Define the range for casts
     const minCasts = 1; // Assuming 1 is the minimum number of casts
-    const maxCasts = 100; // Set this to what you consider a max reasonable number of casts
+    const maxCasts = 500; // Set this to what you consider a max reasonable number of casts
 
     // Scale casts to the fontSize range
     const scaledSize =
@@ -57,8 +57,9 @@ function styleElement(element, length, fontSize, maxFontSize, d) {
   element.style.bottom = "0";
   element.style.left = "0";
   element.style.color = "#000";
+  // element.style.color = "#104DF1";
   element.style.backgroundColor = "rgba(255, 255, 255, 1)";
-  element.style.padding = "5px 10px";
+  element.style.padding = "2.5px 5px";
   element.style.borderRadius = "5px";
   element.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.2)";
   element.style.zIndex = "1";
