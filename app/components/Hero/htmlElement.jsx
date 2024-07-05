@@ -1,6 +1,6 @@
 export default function htmlElement({ d, mobile }) {
   // Constants for configuration
-  const fontSize = mobile ? 3 : 6;
+  const fontSize = mobile ? 8 : 12;
   const length = Math.min(Math.sqrt(d.casts) * 1, 15);
   const maxFontSize = mobile ? 30 : 50;
   const id = `${d.countryName}-div`;
