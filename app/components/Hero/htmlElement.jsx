@@ -1,8 +1,8 @@
 export default function htmlElement({ d, mobile }) {
   // Constants for configuration
-  const fontSize = mobile ? 8 : 15;
-  const length = Math.min(Math.sqrt(d.casts) * 3, 15);
-  const maxFontSize = mobile ? 43 : 70;
+  const fontSize = mobile ? 3 : 6;
+  const length = Math.min(Math.sqrt(d.casts) * 1, 15);
+  const maxFontSize = mobile ? 30 : 50;
   const id = `${d.countryName}-div`;
 
   // Check for an existing element or create a new one
@@ -29,10 +29,23 @@ function createNewElement(id, innerHTML) {
 }
 
 function styleElement(element, length, fontSize, maxFontSize, d) {
-  const computedFontSize = `${Math.min(
-    parseInt(Math.sqrt(d.casts) * fontSize),
-    maxFontSize
-  )}px`;
+  const scaleFontSize = (casts, minSize, maxSize) => {
+    // Define the range for casts
+    const minCasts = 1; // Assuming 1 is the minimum number of casts
+    const maxCasts = 100; // Set this to what you consider a max reasonable number of casts
+
+    // Scale casts to the fontSize range
+    const scaledSize =
+      ((casts - minCasts) / (maxCasts - minCasts)) * (maxSize - minSize) +
+      minSize;
+    return Math.min(Math.max(scaledSize, minSize), maxSize); // Ensure the size is within bounds
+  };
+
+  // Calculate the font size using the scaling function
+  const computedFontSize = `${scaleFontSize(d.casts, fontSize, maxFontSize)}px`;
+
+  // ... rest of the styleElement function remains unchanged ...
+  element.style.fontSize = computedFontSize;
 
   element.style.transform = `translate(-50%, ${length * -1}px)`;
   element.style.textTransform = "uppercase";

@@ -133,7 +133,7 @@ export default function BaseGlobe(
                 style={{
                   opacity: 1 - i * 0.02,
                 }}
-                className={`flex pointer-events-none font-thin items-center text-xl justify-center ${
+                className={`flex group-hover:bg-white rounded-sm pointer-events-none font-thin items-center text-xl justify-center ${
                   i < 3 ? "font-bold" : ""
                 }`}
               >
