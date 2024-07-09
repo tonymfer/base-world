@@ -17,7 +17,7 @@ export default function SheetDemo() {
         <SheetHeader>
           <SheetTitle>Edit profile</SheetTitle>
           <SheetDescription>
-            Make changes to your profile here. Click save when you're done.
+            {`Make changes to your profile here. Click save when you're done.`}
           </SheetDescription>
         </SheetHeader>
         <SheetFooter>
