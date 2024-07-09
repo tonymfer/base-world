@@ -9,6 +9,7 @@ export default function GlobeHeader() {
   const globeActive = useMapStore((s) => s.globeActive);
   const activeCity = useMapStore((s) => s.activeCity);
   const mobile = useLandingStore((s) => s.mobile);
+
   return (
     <div
       className={`${
@@ -81,6 +82,7 @@ export default function GlobeHeader() {
           </a>
         </div>
       </div>
+      {/* <SideMenu /> */}
     </div>
   );
 }

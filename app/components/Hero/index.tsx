@@ -1,31 +1,24 @@
-import * as TWEEN from "@tweenjs/tween.js";
 import useApi from "@/app/hooks/useApi";
-import dynamic from "next/dynamic";
-import { useEffect, useMemo, useRef } from "react";
 import { useLandingStore } from "@/app/stores/landing";
 import { ActiveCity, useMapStore } from "@/app/stores/map";
-import styles from "styles/Button.module.css";
-import { activateGlobe, deactivateGlobe } from "@/app/utils/globe";
 import isMobile from "@/app/utils/device";
-import List from "./List";
+import { activateGlobe, zoomInCity, zoomOutCity } from "@/app/utils/globe";
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
+import { useEffect, useMemo, useRef, useState } from "react";
+import List from "./List";
+import { api } from "@/app/utils/api";
+import { useDebounce } from "@uidotdev/usehooks";
 
 const Globe = dynamic(() => import("./ThreeGlobe"), { ssr: false });
 
-export default function BaseGlobe(
-  {
-    //   userCount,
-    //   isLoading,
-    // }: {
-    //   userCount: string;
-    //   isLoading: boolean;
-  }
-) {
+export default function BaseGlobe() {
   const ready = useMapStore((s) => s.ready);
   const globeActive = useMapStore((s) => s.globeActive);
   const setGlobeActive = useMapStore((s) => s.setGlobeActive);
   const activeCity = useMapStore((s) => s.activeCity);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const countriesRef = useRef<HTMLDivElement>(null);
   const scrollNumber = isMobile() ? 150 : 30;
   const setScrolling = useLandingStore((s) => s.setScrolling);
   const scrolling = useLandingStore((s) => s.scrolling);
@@ -45,8 +38,6 @@ export default function BaseGlobe(
       longitude: number;
     }[];
   };
-
-  console.log(data);
 
   useEffect(() => {
     const handleScroll = (e: WheelEvent | TouchEvent) => {
@@ -102,6 +93,39 @@ export default function BaseGlobe(
     };
   }, [scrollContainerRef, globeActive, ready]);
 
+  useEffect(() => {
+    // ... other useEffect code ...
+
+    const updateMask = () => {
+      const container = countriesRef.current;
+      if (container) {
+        const atTop = container.scrollTop === 0;
+        const atBottom =
+          container.scrollHeight - container.scrollTop ===
+          container.clientHeight;
+        container.style.maskImage = atTop
+          ? "linear-gradient(to bottom, transparent, white 0%, white 5%, white 95%, transparent)"
+          : atBottom
+          ? "linear-gradient(to bottom, transparent, white 5%, white 100%, transparent)"
+          : "linear-gradient(to bottom, transparent, white 5%, white 95%, transparent)";
+      }
+    };
+
+    const container = countriesRef.current;
+    if (container) {
+      container.addEventListener("scroll", updateMask);
+    }
+
+    // Call updateMask initially to set the correct mask
+    updateMask();
+
+    return () => {
+      if (container) {
+        container.removeEventListener("scroll", updateMask);
+      }
+    };
+  }, [countriesRef, globeActive, ready]);
+
   const memoizedGlobe = useMemo(() => {
     if (!data) return null;
 
@@ -112,40 +136,79 @@ export default function BaseGlobe(
     );
   }, [data]);
 
+  const activeCityResponse = useMapStore((state) => state.activeCityResponse);
+  const setActiveCity = useMapStore((state) => state.setActiveCity);
+  const globeRef = useMapStore((state) => state.globeRef);
+  const [fetching, setFetching] = useState(false);
+  const setActiveCityResponse = useMapStore(
+    (state) => state.setActiveCityResponse
+  );
+
+  const [temp, setTemp] = useState<any>();
+
+  async function handleHover() {
+    const d = temp;
+    setActiveCity(d);
+    zoomInCity(d, "left");
+    setFetching(true);
+    const response = await api(`country/${d.id}`, {
+      method: "GET",
+    });
+    setFetching(false);
+    setActiveCityResponse(await response.json());
+  }
+
+  const debouncedCity = useDebounce(temp, 300);
+
+  useEffect(() => {
+    if (!globeActive) return;
+    if (debouncedCity) {
+      zoomInCity(temp, "right");
+    }
+  }, [debouncedCity, globeRef]);
+
   return (
     <div
       ref={scrollContainerRef}
-      className="relative flex scrollbar-hide h-screen w-screen touch-pan-x touch-pan-y select-none items-center overscroll-none bg-black"
+      className="relative flex scrollbar-hide h-screen w-screen items-center bg-black"
     >
       <motion.div
+        ref={countriesRef}
         initial={{ opacity: 0 }}
-        animate={{ opacity: globeActive ? 1 : 0 }}
+        animate={{ opacity: globeActive && !activeCity ? 1 : 0 }}
         transition={{ duration: 0.5, staggerChildren: 1 }}
-        className="absolute overflow-scroll scrollbar-hide left-0 padded-horizontal hidden mobile:flex h-screen w-[400px] z-[1] text-white flex-col items-start justify-center"
+        style={{
+          pointerEvents: globeActive && !activeCity ? "auto" : "none",
+        }}
+        className="absolute z-[10] transition-all scrollbar-hide left-0 padded-horizontal-wide hidden mobile:flex h-2/3 top-1/6 w-[400px] text-white flex-col items-start justify-start"
       >
-        {data
-          ?.sort((a, b) => b.casts - a.casts)
-          .map((d, i) => {
-            const { casts, countryName } = d;
-            return (
-              <div
-                key={i}
-                style={{
-                  opacity: 1 - i * 0.02,
-                }}
-                className={`flex group-hover:bg-white rounded-sm pointer-events-none font-thin items-center text-xl justify-center ${
-                  i < 3 ? "font-bold" : ""
-                }`}
-              >
-                <span className="">{i + 1}.</span>
-                <span className="whitespace-nowrap ml-1">{countryName} </span>
-                <span className="ml-1 flex items-center justify-center gap-2 text-[22px] whitespace-nowrap font-normal text-blue-400">
-                  {casts}
-                  {i === 0 && <span className="flex">🎉</span>}
-                </span>
-              </div>
-            );
-          })}
+        <div className="relative overflow-y-auto scrollbar-hide h-full">
+          <div className="flex w-full flex-col pointer-events-none justify-start">
+            {data
+              ?.sort((a, b) => b.casts - a.casts)
+              .map((d, i) => {
+                const { casts, countryName } = d;
+                return (
+                  <motion.div
+                    key={i}
+                    onClick={handleHover}
+                    onHoverStart={() => !activeCity && setTemp(d)}
+                    // onMouseEnter={() => setTemp(d)}
+                    className={`relative flex transition-all pointer-events-auto min-h-[min-content] w-full overflow-visible hover:bg-white px-1.5 py-1 hover:font-normal hover:text-black rounded-sm font-thin items-center text-xl justify-start`}
+                  >
+                    <span className="">{i + 1}.</span>
+                    <span className="whitespace-nowrap ml-1">
+                      {countryName}{" "}
+                    </span>
+                    <span className="ml-1 flex items-center justify-center gap-2 text-[22px] whitespace-nowrap font-normal text-blue-400">
+                      {casts}
+                      {i === 0 && <span className="flex">🎉</span>}
+                    </span>
+                  </motion.div>
+                );
+              })}
+          </div>
+        </div>
       </motion.div>
       <div className="h-full w-full">
         <div

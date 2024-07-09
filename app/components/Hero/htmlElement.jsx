@@ -66,4 +66,7 @@ function styleElement(element, length, fontSize, maxFontSize, d) {
   element.style.display = "inline-block";
   // element.style.textShadow = "2px 4px 3px #000";
   element.style.transition = "transform 0.5s ease-out";
+  element.addEventListener("click", () => {
+    console.log("Clicked on", d.countryName);
+  });
 }

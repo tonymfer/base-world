@@ -24,7 +24,6 @@ export default function ThreeGlobe({ data }) {
   const setActiveCityResponse = useMapStore(
     (state) => state.setActiveCityResponse
   );
-  const globeActive = useMapStore((state) => state.globeActive);
   const activeCity = useMapStore((state) => state.activeCity);
   const mobile = useLandingStore((state) => state.mobile);
 
@@ -100,7 +99,7 @@ export default function ThreeGlobe({ data }) {
     };
   }, []);
 
-  const handleLabelClick = useCallback(async (city) => {
+  const handleLabelClick = async (city) => {
     if (activeCity && city.id === activeCity.id) return;
     const {
       activeCityResponse,
@@ -123,7 +122,7 @@ export default function ThreeGlobe({ data }) {
     } else {
       handleLogic();
     }
-  }, []);
+  };
 
   const pointLat = useCallback((d) => {
     return d.latitude;

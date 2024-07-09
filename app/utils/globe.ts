@@ -53,7 +53,10 @@ export function init() {
   document.body.classList.add("globe-inactive");
 }
 
-export function zoomInCity(city: ActiveCity) {
+export function zoomInCity(
+  city: ActiveCity,
+  direction: "left" | "right" = "left"
+) {
   const globeRef = useMapStore.getState().globeRef;
   if (!globeRef.current) return;
   let animateId: number;
@@ -70,14 +73,18 @@ export function zoomInCity(city: ActiveCity) {
     pointOfView,
   };
 
-  const xOffset = mobile ? 0 : Math.min(width * 0.4, 1000);
+  let xOffset = mobile ? 0 : Math.min(width * 0.4, 1000);
+  if (direction === "right") {
+    xOffset = -xOffset;
+  }
+  let latLongVar = direction === "right" ? -1 : 1;
 
   // Create an object for the ending state of the tween
   const end = {
     xOffset,
     pointOfView: {
-      lat: city.latitude - latValue,
-      lng: city.longitude - longValue,
+      lat: city.latitude - latValue * latLongVar,
+      lng: city.longitude - longValue * latLongVar,
       altitude: zoomedGlobeSize - extraZoomIn,
     },
   };
@@ -87,7 +94,7 @@ export function zoomInCity(city: ActiveCity) {
   highlightLabel(city);
 
   const tween = new TWEEN.Tween(start)
-    .to(end, 1000) // Adjust duration to your needs
+    .to(end, 1300) // Adjust duration to your needs
     .easing(TWEEN.Easing.Cubic.Out)
     .onUpdate(() => {
       const currentGlobeRef = globeRef.current;
@@ -384,7 +391,7 @@ export function handleMouseUp(
   }
 }
 
-function handleGlobeClick(
+export function handleGlobeClick(
   e: MouseEvent,
   globeRef: GlobeRef,
   data: City[],
