@@ -183,7 +183,7 @@ export default function BaseGlobe() {
         className="absolute z-[10] transition-all scrollbar-hide left-0 padded-horizontal-wide hidden mobile:flex h-2/3 top-1/6 w-[400px] text-white flex-col items-start justify-start"
       >
         <div className="relative overflow-y-auto scrollbar-hide h-full">
-          <div className="flex w-full flex-col pointer-events-none justify-start">
+          <div className="flex w-full flex-col justify-start">
             {data
               ?.sort((a, b) => b.casts - a.casts)
               .slice(0, 15)
