@@ -61,7 +61,7 @@ export default function GlobeHeader() {
         </svg>
       </button>
 
-      <div className="flex flex-col text-xs gap-1 items-center justify-center">
+      {/* <div className="flex flex-col text-xs gap-1 items-center justify-center">
         <div className="text-white">made with ♥️ by</div>
         <div className="flex items-center justify-center gap-1">
           <a
@@ -81,7 +81,7 @@ export default function GlobeHeader() {
             @undefined
           </a>
         </div>
-      </div>
+      </div> */}
       {/* <SideMenu /> */}
     </div>
   );

@@ -207,10 +207,10 @@ export default function BaseGlobe() {
                     </span>
                     <span className="ml-1 flex items-center justify-center gap-2 text-sm whitespace-nowrap font-normal text-white">
                       <span className="bg-white group-hover:border-blue-500 group-hover:border-[2px] text-black px-1 rounded-sm ">
-                        👥 {followers}
+                        {followers} 👥
                       </span>
                       <span className="bg-blue-500 group-hover:border-blue-500 group-hover:border-[2px] text-black px-1 rounded-sm">
-                        💬 {casts}
+                        {casts} 💬
                       </span>
                     </span>
                   </motion.div>
