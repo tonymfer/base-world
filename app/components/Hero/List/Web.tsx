@@ -95,10 +95,13 @@ export default function List({ data }: { data: any }) {
           {activeCity?.countryName}
         </h1>
         <h2 className="mt-5 flex w-full justify-end text-xl text-black">
-          <span className="mr-1 text-lg">total :</span>
+          <span className="mr-1 text-lg">users :</span>
+          <span className="text-xl text-primary">
+            {activeCity?.followers || 0}{" "}
+          </span>
+          <span className="mr-1 text-lg">casts :</span>
           <span className="text-xl text-primary">
             {activeCity?.casts || 0}{" "}
-            {activeCity?.casts === 1 ? "cast" : "casts"}
           </span>
         </h2>
         {fetching ? (
