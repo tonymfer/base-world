@@ -195,7 +195,7 @@ export default function BaseGlobe() {
                     onClick={handleHover}
                     onHoverStart={() => !activeCity && setTemp(d)}
                     // onMouseEnter={() => setTemp(d)}
-                    className={`relative flex pointer-events-none transition-all min-h-[min-content] w-full overflow-visible hover:bg-white px-1.5 py-1 hover:font-normal hover:text-black rounded-sm font-thin items-center text-xl justify-start`}
+                    className={`relative flex transition-all min-h-[min-content] w-full overflow-visible hover:bg-white px-1.5 py-1 hover:font-normal hover:text-black rounded-sm font-thin items-center text-xl justify-start`}
                   >
                     <span className="">{i + 1}.</span>
                     <span className="whitespace-nowrap ml-1">
