@@ -36,8 +36,12 @@ export default function BaseGlobe() {
       id: number;
       latitude: number;
       longitude: number;
+      channelId: string;
+      followers: number;
     }[];
   };
+
+  console.log(data);
 
   useEffect(() => {
     const handleScroll = (e: WheelEvent | TouchEvent) => {
@@ -185,25 +189,29 @@ export default function BaseGlobe() {
         <div className="relative overflow-y-auto scrollbar-hide h-full">
           <div className="flex w-full flex-col justify-start">
             {data
-              ?.sort((a, b) => b.casts - a.casts)
+              ?.sort((a, b) => b.followers - a.followers)
               .slice(0, 15)
               .map((d, i) => {
-                const { casts, countryName } = d;
+                const { casts, channelId, countryName, followers } = d;
                 return (
                   <motion.div
                     key={i}
                     onClick={handleHover}
                     onHoverStart={() => !activeCity && setTemp(d)}
                     // onMouseEnter={() => setTemp(d)}
-                    className={`relative flex transition-all min-h-[min-content] w-full overflow-visible hover:bg-white px-1.5 py-1 hover:font-normal hover:text-black rounded-sm font-thin items-center text-xl justify-start`}
+                    className={`relative group flex transition-all min-h-[min-content] w-full overflow-visible hover:bg-white px-1.5 py-1 hover:font-normal hover:text-black rounded-sm font-thin items-center text-xl justify-start`}
                   >
                     <span className="">{i + 1}.</span>
                     <span className="whitespace-nowrap ml-1">
-                      {countryName}{" "}
+                      {countryName} -{" "}
                     </span>
-                    <span className="ml-1 flex items-center justify-center gap-2 text-[22px] whitespace-nowrap font-normal text-blue-400">
-                      {casts}
-                      {i === 0 && <span className="flex">🎉</span>}
+                    <span className="ml-1 flex items-center justify-center gap-2 text-sm whitespace-nowrap font-normal text-white">
+                      <span className="bg-white group-hover:border-black group-hover:border-[2px] text-black px-1 rounded-sm ">
+                        👥 {followers}
+                      </span>
+                      <span className="bg-blue-500 text-black px-1 rounded-sm">
+                        💬 {casts}
+                      </span>
                     </span>
                   </motion.div>
                 );

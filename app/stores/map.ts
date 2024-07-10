@@ -6,6 +6,8 @@ type ActiveCityResponse = {
   createdAt: string;
   countryCode: string;
   countryName: string;
+  channelId: string;
+  followers: number;
   latitude: number;
   longitude: number;
   casts: Cast[];
@@ -25,6 +27,8 @@ export type Cast = {
 };
 export type ActiveCity = {
   casts: number;
+  channelId: string;
+  followers: number;
   countryCode: string;
   countryName: string;
   createdAt: string;
