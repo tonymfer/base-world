@@ -173,7 +173,7 @@ export default function BaseGlobe() {
       className="relative flex scrollbar-hide h-screen w-screen items-center bg-black"
     >
       <motion.div
-        ref={countriesRef}
+        // ref={countriesRef}
         initial={{ opacity: 0 }}
         animate={{ opacity: globeActive && !activeCity ? 1 : 0 }}
         transition={{ duration: 0.5, staggerChildren: 1 }}
