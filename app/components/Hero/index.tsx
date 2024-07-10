@@ -186,6 +186,7 @@ export default function BaseGlobe() {
           <div className="flex w-full flex-col pointer-events-none justify-start">
             {data
               ?.sort((a, b) => b.casts - a.casts)
+              .slice(0, 15)
               .map((d, i) => {
                 const { casts, countryName } = d;
                 return (
