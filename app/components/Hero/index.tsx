@@ -171,6 +171,8 @@ export default function BaseGlobe() {
     }
   }, [debouncedCity, globeRef]);
 
+  const userTotalCount = data?.reduce((acc, curr) => acc + curr.followers, 0);
+
   return (
     <div
       ref={scrollContainerRef}
@@ -243,6 +245,13 @@ export default function BaseGlobe() {
               <span className="">a community of builders</span>
               <span className="">on Base</span>
             </h1>
+            {data?.length !== 0 && (
+              <div
+                className={`mt-3 block text-base font-extralight text-gray-300`}
+              >
+                {data?.length} countries, {userTotalCount} users on warpcast
+              </div>
+            )}
             <motion.button
               whileTap={{ scale: 0.98 }}
               onClick={() => {
