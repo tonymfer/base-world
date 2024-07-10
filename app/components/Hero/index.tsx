@@ -206,10 +206,10 @@ export default function BaseGlobe() {
                       {countryName} -{" "}
                     </span>
                     <span className="ml-1 flex items-center justify-center gap-2 text-sm whitespace-nowrap font-normal text-white">
-                      <span className="bg-white group-hover:border-black group-hover:border-[2px] text-black px-1 rounded-sm ">
+                      <span className="bg-white group-hover:border-blue-500 group-hover:border-[2px] text-black px-1 rounded-sm ">
                         👥 {followers}
                       </span>
-                      <span className="bg-blue-500 text-black px-1 rounded-sm">
+                      <span className="bg-blue-500 group-hover:border-blue-500 group-hover:border-[2px] text-black px-1 rounded-sm">
                         💬 {casts}
                       </span>
                     </span>
