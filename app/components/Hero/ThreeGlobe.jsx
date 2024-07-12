@@ -13,8 +13,15 @@ import {
 import HEX_DATA from "./countries.json";
 import htmlElement from "./htmlElement";
 import { useLandingStore } from "@/app/stores/landing";
+import { usePassport } from "@/app/stores/passport";
 
 export default function ThreeGlobe({ data }) {
+  const setOpenPassport = usePassport((state) => state.setOpen);
+  const openPassport = usePassport((state) => state.open);
+  const setChosenCoordinates = usePassport(
+    (state) => state.setChosenCoordinates
+  );
+
   let Globe = () => null;
   if (typeof window !== "undefined") {
     Globe = require("react-globe.gl").default;
@@ -106,14 +113,22 @@ export default function ThreeGlobe({ data }) {
       globeActive: active,
       setActiveCity,
     } = useMapStore.getState();
+
     async function handleLogic() {
       setActiveCity(city);
+
       zoomInCity(city);
       if (activeCityResponse?.id === city.id) return;
+      // Open passport
+      setOpenPassport(!openPassport);
+      // Get city data
 
       const response = await api(`country/${city.id}`, {
         method: "GET",
       }).json();
+      console.log("city: ", response);
+      const { latitude: lat, longitude: lng, countryName: name } = response;
+      setChosenCoordinates({ lat, lng, name });
       setActiveCityResponse(response);
     }
 
