@@ -53,7 +53,7 @@ export function DetailsSheet() {
 
   const setFilteredEvents = usePassport((state) => state.setFilteredEvents);
 
-  const chosenCity = chosenCoordinates?.name?.toLowerCase();
+  const chosenCountry = chosenCoordinates?.name?.toLowerCase();
 
   const { data } = useApi({
     url: "countries",
@@ -94,10 +94,10 @@ export function DetailsSheet() {
     }
   }, [ensParams]);
 
-  let cityData = circles.find((circle) => circle.city === chosenCity);
+  let cityData = circles.find((circle) => circle.country === chosenCountry);
   let cityDetails =
     (data &&
-      data.find((city) => city.countryName.toLowerCase() === chosenCity)) ||
+      data.find((city) => city.countryName.toLowerCase() === chosenCountry)) ||
     null;
 
   // console.log("cityData: ", cityData);

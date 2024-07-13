@@ -2,6 +2,7 @@ export const circles = [
   {
     id: 1,
     city: "madrid",
+    country: "spain",
     events: [
       {
         id: 0,
@@ -30,6 +31,7 @@ export const circles = [
   {
     id: 2,
     city: "hanoi",
+    country: "vietnam",
     events: [
       {
         id: 0,
@@ -45,6 +47,7 @@ export const circles = [
   {
     id: 3,
     city: "jakarta",
+    country: "indonesia",
     events: [
       {
         id: 0,
@@ -73,6 +76,7 @@ export const circles = [
   {
     id: 4,
     city: "lisbon",
+    country: "portugal",
     events: [
       {
         id: 0,
@@ -127,6 +131,7 @@ export const circles = [
   {
     id: 5,
     city: "singapore",
+    country: "singapore",
     events: [
       {
         id: 0,
@@ -157,6 +162,7 @@ export const circles = [
   {
     id: 6,
     city: "ulaanbaatar",
+    country: "mongolia",
     events: [
       {
         id: 0,
