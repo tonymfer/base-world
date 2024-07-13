@@ -49,6 +49,9 @@ export function DetailsSheet() {
   const chosenCoordinates = usePassport((state) => state.chosenCoordinates);
   const handleOpenAndReset = usePassport((state) => state.handleOpenAndReset);
   const open = usePassport((state) => state.open);
+  const currentEventId = usePassport((state) => state.currentEventId);
+
+  const setFilteredEvents = usePassport((state) => state.setFilteredEvents);
 
   const chosenCity = chosenCoordinates?.name?.toLowerCase();
 
@@ -97,8 +100,8 @@ export function DetailsSheet() {
       data.find((city) => city.countryName.toLowerCase() === chosenCity)) ||
     null;
 
-  console.log("cityData: ", cityData);
-  console.log("cityDetails: ", cityDetails);
+  // console.log("cityData: ", cityData);
+  // console.log("cityDetails: ", cityDetails);
 
   const attendees = cityData?.events.reduce(
     (acc: number, event: Event) => acc + (event.users?.length ?? 0),
@@ -107,104 +110,31 @@ export function DetailsSheet() {
 
   const filteredEvents: Event[] = cityData ? cityData.events : [];
 
-  const [selectedEventId, setSelectedEventId] = useState<number | null>(0);
-  const selectedIndex = filteredEvents.findIndex(
-    (event) => event.id === selectedEventId
-  );
-  const selectedEvent: Event = filteredEvents[selectedIndex];
+  useEffect(() => setFilteredEvents(filteredEvents), [filteredEvents]);
 
-  // check if user has attended an event
-  let eventIds: number[] = [];
-  if (address) {
-    filteredEvents.forEach((event: Event) => {
-      event.users?.forEach((user: Attendees) => {
-        if (user.address && user.address !== null && user.address === address) {
-          eventIds.push(event.id);
-        }
-      });
-    });
-  }
 
-  const [isStampVisible, setIsStampVisible] = useState(true);
-  const [isMobile, setIsMobile] = useState(false);
+  // const [isMobile, setIsMobile] = useState(false);
 
-  const handleButtonClick = () => {
-    setIsStampVisible(!isStampVisible);
-  };
+  // // Function to detect if the user is on a mobile device
+  // const checkMobileDevice = () => {
+  //   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  //   setIsMobile(isMobile);
+  // };
 
-  // Function to detect if the user is on a mobile device
-  const checkMobileDevice = () => {
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    setIsMobile(isMobile);
-  };
-
-  useEffect(() => {
-    checkMobileDevice();
-  }, []);
-
-  const [mints, setMints] = useState([]);
-  const [contract, setContract] = useState<string | null>(null);
-
-  useEffect(() => {
-    async function fetchToken(collectionAddress: string) {
-      try {
-        const {
-          mints: { nodes },
-        } = await zdk.mints({
-          where: {
-            collectionAddresses: [collectionAddress],
-          },
-        });
-        const owner = nodes.map((node) => node.mint.toAddress);
-        const eventContract = `${nodes[0].mint.collectionAddress}/${nodes[0].mint.tokenId}`;
-        setContract(eventContract);
-        setMints(owner as any);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    if (selectedEvent && selectedEvent.contract) {
-      const contract = selectedEvent.contract.split("/")[0];
-      fetchToken(contract);
-    }
-  }, [selectedEvent]);
-
-  // check if supporters are in the event
-  let tempEventIds: number[] = [];
-  if (filteredEvents.length > 0 && filteredEvents[0].contract !== undefined) {
-    filteredEvents.forEach((event: Event) => {
-      if (
-        contract === event.contract &&
-        address &&
-        mints.includes(address.toLowerCase() as never)
-      ) {
-        tempEventIds.push(event.id);
-      }
-    });
-  }
-
-  const handleCopy = async (link: string) => {
-    try {
-      await copyToClipboard(link);
-      toast.success("Copied!", {
-        position: "bottom-right",
-        duration: 1000,
-      });
-    } catch (error) {
-      toast.error("Failed to copy text"); // Show error toast
-    }
-  };
+  // useEffect(() => {
+  //   checkMobileDevice();
+  // }, []);
 
   return (
     <Sheet
       open={open}
       onOpenChange={(open: boolean) => {
         handleOpenAndReset(open);
-        setSelectedEventId(0);
         setActiveCity(null);
         setActiveCityResponse(null);
-        zoomOutCity(activeCity as NonNullable<typeof activeCity>);
+        if (activeCity) {
+          zoomOutCity(activeCity);
+        }
       }}
     >
       <SheetContent side="right" className="z-[40000] px-0 cursor-default">
@@ -365,8 +295,18 @@ const Events = ({ events }: { events: Event[] }) => {
 };
 
 const EventItem = ({ event }: { event: Event }) => {
+  const setSecondaryOpen = usePassport((state) => state.setSecondaryOpen);
+  const secondaryOpen = usePassport((state) => state.secondaryOpen);
+  const setCurrentEventId = usePassport((state) => state.setCurrentEventId);
+
   return (
-    <div className="flex gap-2 border-b py-3 items-center hover:bg-muted px-6">
+    <div
+      onClick={() => {
+        setSecondaryOpen(!secondaryOpen)
+        setCurrentEventId(event.id);
+      }}
+      className="flex gap-2 border-b py-3 items-center hover:bg-muted px-6"
+    >
       <div className="bg-based w-10 h-10 rounded-full" />
       <div>
         <div className="text-xs font-thin text-muted-foreground">

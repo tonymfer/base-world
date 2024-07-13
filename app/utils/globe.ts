@@ -146,7 +146,7 @@ export function zoomOutCity(city: ActiveCity) {
   const end = {
     xOffset: 0,
     pointOfView: {
-      lat: city.latitude - latValue,
+      lat: city?.latitude - latValue,
       lng: city.longitude,
       altitude: globeSize,
     },
