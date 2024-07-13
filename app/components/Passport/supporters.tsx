@@ -52,12 +52,12 @@ const SupportersList = ({
         <p className="mt-1 text-sm text-gray-600">No Data Available...</p>
       )}
       {event === contract ? (
-        <div className="grid grid-cols-8 gap-2 py-4">
+        <div className="grid grid-cols-9 gap-x-0 pr-10 py-4">
           {supporters
             .slice(0, 15)
             .map((supporter: Attendees, index: number) => (
               <AspectRatio ratio={1} key={index}>
-                <Avatar className="h-full w-full bg-slate-800">
+                <Avatar className="h-10 w-10 bg-slate-800">
                   <AvatarFallback
                     style={{
                       background: generateColorFromAddress(String(supporter)),
@@ -69,7 +69,7 @@ const SupportersList = ({
 
           {supporters.length > 15 && (
             <AspectRatio ratio={1}>
-              <Avatar className="h-full w-full">
+              <Avatar className="h-10 w-10">
                 <AvatarFallback>+{supporters.length - 15}</AvatarFallback>
               </Avatar>
             </AspectRatio>

@@ -36,10 +36,10 @@ const UserList = ({
       {users.length === 0 && (
         <p className="mt-1 text-sm text-gray-600">No Data Available...</p>
       )}
-      <div className="grid grid-cols-8 gap-2 py-4">
-        {users.slice(0, 15).map((user: Attendees, index: number) => (
+      <div className="container pr-10 grid grid-cols-9 gap-x-0 py-4">
+        {users.slice(0, 17).map((user: Attendees, index: number) => (
           <AspectRatio ratio={1} key={index}>
-            <Avatar className="h-full w-full">
+            <Avatar className="h-10 w-10">
               <AvatarImage src={user.imageUrl} alt={user.name} />
               <AvatarFallback
                 style={{
@@ -50,13 +50,13 @@ const UserList = ({
           </AspectRatio>
         ))}
 
-        {users.length > 16 && (
+        {users.length > 17 && (
           <AspectRatio ratio={1}>
-            <Avatar className="h-full w-full bg-slate-800">
+            <Avatar className="h-[41px] w-[41px] bg-slate-800">
               <AvatarFallback
                 className={users.length > 99 ? "text-[10px]" : "text-sm"}
               >
-                +{users.length - 16}
+                +{users.length - 17}
               </AvatarFallback>
             </Avatar>
           </AspectRatio>
