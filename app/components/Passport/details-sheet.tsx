@@ -112,7 +112,6 @@ export function DetailsSheet() {
 
   useEffect(() => setFilteredEvents(filteredEvents), [filteredEvents]);
 
-
   // const [isMobile, setIsMobile] = useState(false);
 
   // // Function to detect if the user is on a mobile device
@@ -302,7 +301,7 @@ const EventItem = ({ event }: { event: Event }) => {
   return (
     <div
       onClick={() => {
-        setSecondaryOpen(!secondaryOpen)
+        setSecondaryOpen(!secondaryOpen);
         setCurrentEventId(event.id);
       }}
       className="flex gap-2 border-b py-3 items-center hover:bg-muted px-6"
