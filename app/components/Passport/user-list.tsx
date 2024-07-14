@@ -36,7 +36,7 @@ const UserList = ({
       {users.length === 0 && (
         <p className="mt-1 text-sm text-gray-600">No Data Available...</p>
       )}
-      <div className="container pr-10 grid grid-cols-9 gap-x-0 py-4">
+      <div className="container grid grid-cols-7 sm:grid-cols-8 md:grid-cols-9 gap-x-0 py-4">
         {users.slice(0, 17).map((user: Attendees, index: number) => (
           <AspectRatio ratio={1} key={index}>
             <Avatar className="h-10 w-10">
