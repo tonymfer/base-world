@@ -152,10 +152,10 @@ export function DetailsSheet() {
                 /{cityDetails?.channelId}
               </Link>
             </div>
-            <div className="font-thin">
+            {/* <div className="font-thin">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
               porta ultricies risus eget luctus.
-            </div>
+            </div> */}
             <div className="flex gap-4">
               {cityDetails?.followers && (
                 <StatsItem title="Follows" value={cityDetails.followers} />
