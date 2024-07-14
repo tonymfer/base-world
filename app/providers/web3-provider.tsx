@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 import { env } from "../../env.mjs";
 import { useRouter } from "next/navigation";
+import { siteConfig } from "../config/site";
 
 const config = createConfig(
   getDefaultConfig({
@@ -19,12 +20,12 @@ const config = createConfig(
     walletConnectProjectId: env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,
 
     // Required App Info
-    appName: "Base Passport",
+    appName: siteConfig.name,
 
     // Optional App Info
-    appDescription: "Your App Description",
-    appUrl: "https://family.co", // your app's url
-    appIcon: "https://family.co/logo.png", // your app's icon, no bigger than 1024x1024px (max. 1MB)
+    appDescription: siteConfig.description,
+    appUrl: env.NEXT_PUBLIC_APP_URL, // your app's url
+    appIcon: `${env.NEXT_PUBLIC_APP_URL}/android-chrome-512x512.png`, // your app's icon, no bigger than 1024x1024px (max. 1MB)
   })
 );
 
