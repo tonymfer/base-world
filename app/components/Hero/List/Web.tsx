@@ -3,7 +3,7 @@ import { useMapStore } from "@/app/stores/map";
 import { api } from "@/app/utils/api";
 import isMobile from "@/app/utils/device";
 import { zoomInCity, zoomOutCity } from "@/app/utils/globe";
-import React from "react";
+import React, { useEffect } from "react";
 import ListItem from "./ListItem";
 
 const TYPE_NEXT = "next";
@@ -18,6 +18,7 @@ export default function List({ data }: { data: any }) {
   );
   const activeCityResponse = useMapStore((state) => state.activeCityResponse);
   const setActiveCity = useMapStore((state) => state.setActiveCity);
+  // activeCity toggles the visibility of the city detail
   const activeCity = useMapStore((state) => state.activeCity);
   const [fetching, setFetching] = React.useState(false);
 

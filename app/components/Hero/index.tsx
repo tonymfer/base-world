@@ -176,7 +176,7 @@ export default function BaseGlobe() {
   return (
     <div
       ref={scrollContainerRef}
-      className="relative flex scrollbar-hide h-screen w-screen items-center bg-black"
+      className="relative flex scrollbar-hide h-screen w-screen items-center bg-transparent"
     >
       <motion.div
         // ref={countriesRef}
@@ -271,7 +271,7 @@ export default function BaseGlobe() {
           </div>
         </motion.div>
       </div>
-      <List data={data} />
+      {/* <List data={data} /> */}
     </div>
   );
 }
