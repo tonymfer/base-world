@@ -20,7 +20,7 @@ export default function GlobeHeader() {
         burgerVisible || mobile
           ? "pointer-events-auto opacity-100"
           : "pointer-events-auto opacity-100"
-      } fixed z-[30000] flex h-20 w-screen justify-between overflow-visible pt-10 padded-horizontal-wide`}
+      } fixed z-[30000] md:gap-2 flex h-20 w-screen justify-between md:justify-start overflow-visible pt-10 padded-horizontal-wide`}
     >
       <button
         onMouseDown={() => {
@@ -52,7 +52,7 @@ export default function GlobeHeader() {
         <BaseLogo />
       </button>
       <Button
-        className="uppercase flex items-start text-sm text-gray-400 md:hidden"
+        className="text-muted-foreground uppercase flex md:items-center md:pb-1 items-start text-sm text-gray-400"
         variant="link"
       >
         <Link href="/leaderboard">Leaderboard</Link>
