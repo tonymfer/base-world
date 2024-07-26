@@ -126,7 +126,6 @@ export default function ThreeGlobe({ data }) {
       const response = await api(`country/${city.id}`, {
         method: "GET",
       }).json();
-      console.log("city: ", response);
       const { latitude: lat, longitude: lng, countryName: name } = response;
       setChosenCoordinates({ lat, lng, name });
       setActiveCityResponse(response);

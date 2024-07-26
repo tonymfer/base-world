@@ -1,18 +1,26 @@
 import useApi from "@/app/hooks/useApi";
+import * as TWEEN from "@tweenjs/tween.js";
 import { useLandingStore } from "@/app/stores/landing";
 import { ActiveCity, useMapStore } from "@/app/stores/map";
 import isMobile from "@/app/utils/device";
-import { activateGlobe, zoomInCity, zoomOutCity } from "@/app/utils/globe";
+import {
+  activateGlobe,
+  deactivateGlobe,
+  zoomInCity,
+  zoomOutCity,
+} from "@/app/utils/globe";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import { useEffect, useMemo, useRef, useState } from "react";
-import List from "./List";
 import { api } from "@/app/utils/api";
 import { useDebounce } from "@uidotdev/usehooks";
+import styles from "@/app/styles/Button.module.css";
+import { useScrollBlock } from "@/app/hooks/useScrollBlock";
 
 const Globe = dynamic(() => import("./ThreeGlobe"), { ssr: false });
 
 export default function BaseGlobe() {
+  const [blockScroll, allowScroll] = useScrollBlock();
   const ready = useMapStore((s) => s.ready);
   const globeActive = useMapStore((s) => s.globeActive);
   const setGlobeActive = useMapStore((s) => s.setGlobeActive);
@@ -40,8 +48,6 @@ export default function BaseGlobe() {
       followers: number;
     }[];
   };
-
-  console.log(data);
 
   useEffect(() => {
     const handleScroll = (e: WheelEvent | TouchEvent) => {
@@ -173,6 +179,45 @@ export default function BaseGlobe() {
 
   const userTotalCount = data?.reduce((acc, curr) => acc + curr.followers, 0);
 
+  const smoothScroll = (target: number, duration: number) => {
+    setScrolling(true);
+    blockScroll();
+    let animateId: number;
+
+    const start = window.scrollY;
+    const tween = new TWEEN.Tween({ y: start })
+      .to({ y: target }, duration)
+      .easing(TWEEN.Easing.Quintic.Out)
+      .onUpdate((obj) => {
+        window.scrollTo(0, obj.y);
+      })
+      .onComplete(() => {
+        setScrolling(false);
+        allowScroll();
+      })
+      .start();
+
+    const animate = (time: number) => {
+      animateId = requestAnimationFrame(animate);
+      TWEEN.update(time);
+    };
+    requestAnimationFrame(animate);
+
+    return () => {
+      if (tween) {
+        tween.stop();
+      }
+      cancelAnimationFrame(animateId);
+    };
+  };
+  const scrollFn = () => {
+    const el = document.getElementById("details");
+    if (!el) return;
+    const targetPos =
+      el.getBoundingClientRect().top + window.scrollY + scrollNumber;
+    smoothScroll(targetPos, 1000);
+  };
+
   return (
     <div
       ref={scrollContainerRef}
@@ -222,6 +267,31 @@ export default function BaseGlobe() {
         </div>
       </motion.div>
       <div className="h-full w-full">
+        <div
+          className="
+      absolute bottom-[20%] left-1/2 z-[10] flex w-fit -translate-x-1/2 mobile:bottom-20
+          "
+        >
+          <button
+            onMouseDown={() => {
+              if (!scrolling) {
+                allowScroll();
+                scrollFn();
+                deactivateGlobe();
+              }
+            }}
+            onTouchStart={() => {
+              if (!scrolling) {
+                allowScroll();
+                scrollFn();
+                deactivateGlobe();
+              }
+            }}
+            className={`${styles.discordButton} flex w-auto items-center border-[1px] border-primary text-sm font-semibold se:text-base`}
+          >
+            Base?
+          </button>
+        </div>
         <div
           className={`absolute z-0 ${
             ready ? "opacity-100" : "opacity-0"

@@ -1,0 +1,21 @@
+.discordButton {
+  padding: 0.7rem 2.5rem;
+  border: none;
+  outline: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  background-color: #090909;
+  color: #fff;
+  transition: 0.6s;
+  box-shadow: 0px 0px 30px #002e93;
+}
+
+.discordButton:active {
+  scale: 0.92;
+}
+
+.discordButton:hover {
+  background: #0052ff;
+  color: #fff;
+  box-shadow: 0px 0px 15px #0052ff;
+}

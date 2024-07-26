@@ -277,7 +277,6 @@ export function deactivateGlobe() {
   let animateId: number;
   const currentCamera = globeRef.current.camera();
   const currentCameraPosition = globeRef.current.camera().position.clone();
-  //TODO
   const targetPosition = new THREE.Vector3(
     initialXY[0],
     initialXY[1],
