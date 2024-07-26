@@ -363,4 +363,109 @@ export const circles: Location[] = [
       },
     ],
   },
+  {
+    id: 11,
+    city: "bangkok",
+    country: "thailand",
+    events: [],
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0xc89E48E1F0cE3b90F03c968FFedCCF5a059e7740",
+  },
+  {
+    id: 12,
+    city: "toronto",
+    country: "canada",
+    events: [],
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0x25BD7883826377CB75085D02D4168c9FeFAE7310",
+  },
+  {
+    id: 13,
+    city: "rome",
+    country: "italy",
+    events: [],
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0x17ca8424F3c42aA840eB1B54a2400eC80330Eea8",
+  },
+  {
+    id: 14,
+    city: "paris",
+    country: "france",
+    events: [],
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0x3aDa53708b167Fbd2907b5a1bA19b58a856E2200",
+  },
+  {
+    id: 15,
+    city: "athens",
+    country: "greece",
+    events: [],
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0x3A15F72863E71A4C2138cb6749d57eE623aa4A16",
+  },
+  {
+    id: 16,
+    city: "kyiv",
+    country: "ukraine",
+    events: [],
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0xC9bC51748F56DEc71755944402BB9B0121E6E26A",
+  },
+  {
+    id: 17,
+    city: "kuala lumpur",
+    country: "malaysia",
+    events: [],
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0xF4671eb460ab6B776aC858B3bD740a9Cc0fD71B7",
+  },
+
+  {
+    id: 18,
+    city: "berlin",
+    country: "germany",
+    events: [],
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0x041a4187bB5F8c1F8C6236679B11Fa48B506e5bB",
+  },
+  {
+    id: 19,
+    city: "london",
+    country: "united kingdom",
+    events: [],
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0x1AB9fbAC129c3BE6A5125195a313feD1f1579762",
+  },
+  {
+    id: 20,
+    city: "moscow",
+    country: "russia",
+    events: [],
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0x2408b3222F4DE8cEA796aDB47DcbF3A2E8911C08",
+  },
+  {
+    id: 21,
+    city: "canberra",
+    country: "australia",
+    events: [],
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0x57F6f04196D47016b42Fe822dE586a59C2ba30f2",
+  },
+  {
+    id: 22,
+    city: "beijing",
+    country: "china",
+    events: [],
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0x5EA40A6D721f6a238EfE1F7c1848a08E2BA97267",
+  },
+  {
+    id: 24,
+    city: "sofia",
+    country: "bulgaria",
+    events: [],
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0xAc0C8E20BEDE4A663F39EEd6ed2E0d90980442f4",
+  },
 ];
