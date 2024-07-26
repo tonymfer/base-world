@@ -28,12 +28,36 @@ export const circles: Location[] = [
         ],
         description: `​Base is coming to Latin America! With Onchain Summer in full swing, we are excited to launch Base LatAm in partnership with Odisea Labs. Base LatAm is an initiative to support Latin America’s most prominent builders building on Base. Over the coming months, we will be hosting a series of online events, IRL meet-ups, build out the Base LatAm community, provide opportunities for builders to engage with the Base ecosystem,host a hackathon in Buenos Aires in October (don’t worry if you’ll also be able to participate online too), and of course have some NFTs for you to mint!`,
       },
+      {
+        id: 1,
+        name: "Based Barcelona Hackathon",
+        date: "September 27, 2024",
+        host: "context",
+        contract: "",
+        users: [
+          {
+            name: "user",
+            address: "",
+            ens: "",
+            imageUrl: "",
+          },
+          ...Array(4).fill({
+            name: "user",
+            address: "",
+            ens: "",
+            imageUrl: "",
+          }),
+        ],
+        description: `​Join BASE for a day of hacking in the heart of Barcelona!\nCome together with developers, designers, and innovators from around the world for a day of hacking, collaboration, and creativity.\n​Whether you're a seasoned hacker or new to the scene, the Based Barcelona Hackathon is your chance to showcase your skills, learn from the best, and push the boundaries of onchain technology.`,
+      },
     ],
   },
   {
     id: 2,
     city: "hanoi",
     country: "vietnam",
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0x0F922221840732cbb79C0913a10fd56A06F537d7",
     events: [
       {
         id: 0,
@@ -50,6 +74,7 @@ export const circles: Location[] = [
     id: 3,
     city: "jakarta",
     country: "indonesia",
+
     events: [
       {
         id: 0,
@@ -79,6 +104,8 @@ export const circles: Location[] = [
     id: 4,
     city: "lisbon",
     country: "portugal",
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0xD4BEFeC04C6b9157430E470e1D45A9932c8da508",
     events: [
       {
         id: 0,
@@ -191,6 +218,149 @@ export const circles: Location[] = [
         ],
         description:
           "​​A day of onchain art, tech and talks bringing together some of the leading artists, builders and experts in the field! ​​​We welcome web3.0 builders looking to explore the Base ecosystem to build real world businesses and bring more people onchain. Developers , Creatives and enthusiasts are all welcome. Be ready to grind with us as we drive the entire world on chain.",
+      },
+    ],
+  },
+  {
+    id: 7,
+    city: "amsterdam",
+    country: "netherlands",
+    events: [
+      {
+        id: 0,
+        name: "BaseDAM",
+        active: false,
+        date: "July 24th, 2024",
+        host: "Sohey",
+        contract: "",
+        users: [
+          {
+            name: "user",
+            address: "",
+            ens: "",
+            imageUrl: "",
+          },
+          ...Array(29).fill({
+            name: "user",
+            address: "",
+            ens: "",
+            imageUrl: "",
+          }),
+        ],
+        description:
+          "​​​Join us at BASEdam to celebrate all builders, from open source projects to DeFi and everything in between. Dive into talks on getting started with Base and showcase projects live in the ecosystem. And yes, we’ve got pizza!",
+      },
+    ],
+  },
+  {
+    id: 8,
+    city: "chicago",
+    country: "united states of america",
+    events: [
+      {
+        id: 0,
+        name: "Base Community Meetup: The Future of Well-being is OnChain",
+        active: false,
+        date: "July 24th, 2024",
+        host: "OMBRUJA",
+        contract: "",
+        users: [
+          {
+            name: "user",
+            address: "",
+            ens: "",
+            imageUrl: "",
+          },
+          ...Array(40).fill({
+            name: "user",
+            address: "",
+            ens: "",
+            imageUrl: "",
+          }),
+        ],
+        description: `Join us for "A Based Evening," an exclusive event designed to introduce the revolutionary Base blockchain to a mainstream audience. This exciting gathering will feature 3 hours of dynamic networking, insightful presentations, and interactive demos, showcasing the potential and innovations within the Base ecosystem`,
+      },
+      {
+        id: 1,
+        name: "Base Community Meetup: The Future of Well-being is OnChain",
+        active: false,
+        date: "July 24th, 2024",
+        host: "OMBRUJA",
+        contract: "",
+        users: [
+          {
+            name: "user",
+            address: "",
+            ens: "",
+            imageUrl: "",
+          },
+          ...Array(40).fill({
+            name: "user",
+            address: "",
+            ens: "",
+            imageUrl: "",
+          }),
+        ],
+        description: `​Join us to celebrate Onchain Summer with a Base Community Meetup in the Web3 HUB of New York City: Station3, located in the heart of the Financial District and hosted by OMBRUJA creator of the digital collectibles CryptoBrujas.`,
+      },
+    ],
+  },
+  {
+    id: 9,
+    city: "zürich",
+    country: "switzerland",
+    events: [
+      {
+        id: 0,
+        name: "Zürich Base Community Meetup",
+        active: false,
+        date: "July 24th, 2024",
+        host: "Tim Palmieri & Sanaz L.",
+        contract: "",
+        users: [
+          {
+            name: "user",
+            address: "",
+            ens: "",
+            imageUrl: "",
+          },
+          ...Array(139).fill({
+            name: "user",
+            address: "",
+            ens: "",
+            imageUrl: "",
+          }),
+        ],
+        description: `​Celebrate Onchain Summer with Base Builders and community members, and Coinbase Product Managers in Zurich.`,
+      },
+    ],
+  },
+  {
+    id: 10,
+    city: "cali",
+    country: "colombia",
+    events: [
+      {
+        id: 0,
+        name: "Happy Based Birthday Ethereum 💠",
+        date: "July 27, 2024",
+        host: "Ethereum Cali x Ekinoxis x MusicaW3",
+        contract: "",
+        users: [
+          {
+            name: "user",
+            address: "",
+            ens: "",
+            imageUrl: "",
+          },
+          ...Array(19).fill({
+            name: "user",
+            address: "",
+            ens: "",
+            imageUrl: "",
+          }),
+        ],
+        description: `​​¡Celebremos los 10 años de Ethereum en lo más alto de la sucursal del cielo!\nÚnete a nosotros para conectarte con otros desarrolladores y conocer los proyectos recientes en Base / aprender sobre Base, una L2 que permite una forma más económica y rápida de construir aplicaciones en cadena.`,
       },
     ],
   },
