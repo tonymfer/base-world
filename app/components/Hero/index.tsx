@@ -9,6 +9,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import List from "./List";
 import { api } from "@/app/utils/api";
 import { useDebounce } from "@uidotdev/usehooks";
+import { Button } from "../ui/button";
+import Link from "next/link";
 
 const Globe = dynamic(() => import("./ThreeGlobe"), { ssr: false });
 
@@ -219,6 +221,13 @@ export default function BaseGlobe() {
                 );
               })}
           </div>
+          <Button
+            className="uppercase mt-2 h-0 text-slate-500 py-4 w-[90%] mx-2"
+            variant="link"
+            asChild
+          >
+            <Link href="/leaderboard">See More</Link>
+          </Button>
         </div>
       </motion.div>
       <div className="h-full w-full">

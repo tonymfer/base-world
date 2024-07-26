@@ -115,3 +115,15 @@ export interface Location {
   mintToSupportLink?: string;
   events: Event[];
 }
+
+export interface CountriesInfo {
+  casts: number;
+  countryCode: string;
+  countryName: string;
+  createdAt: string;
+  id: number;
+  latitude: number;
+  longitude: number;
+  channelId: string;
+  followers: number;
+}
