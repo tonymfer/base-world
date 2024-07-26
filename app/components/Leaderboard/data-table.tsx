@@ -23,6 +23,7 @@ import {
 } from "..//ui/table";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import { DataTablePagination } from "./data-table-pagination";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -56,10 +57,10 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div>
-      <div className="flex items-center py-4">
+    <div className="gap-4 flex flex-col">
+      <div className="flex items-center mt-4">
         <Input
-          placeholder="Filter by channel..."
+          placeholder="Search community..."
           value={
             (table.getColumn("channelId")?.getFilterValue() as string) ?? ""
           }
@@ -119,25 +120,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          className=""
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button>
-      </div>
+      <DataTablePagination table={table} />
     </div>
   );
 }
