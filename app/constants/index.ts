@@ -74,7 +74,6 @@ export const circles: Location[] = [
     id: 3,
     city: "jakarta",
     country: "indonesia",
-
     events: [
       {
         id: 0,

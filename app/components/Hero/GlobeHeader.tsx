@@ -47,10 +47,10 @@ export default function GlobeHeader() {
         <BaseLogo />
       </button>
       <div className="flex gap-1">
-        <Button variant="ghost">
+        <Button asChild variant="ghost">
           <Link href="/">Home</Link>
         </Button>
-        <Button variant="ghost">
+        <Button asChild variant="ghost">
           <Link href="/leaderboard">Leaderboard</Link>
         </Button>
       </div>
