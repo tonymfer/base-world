@@ -468,4 +468,84 @@ export const circles: Location[] = [
     mintToSupportLink:
       "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0xAc0C8E20BEDE4A663F39EEd6ed2E0d90980442f4",
   },
+  {
+    id: 18,
+    city: "berlin",
+    country: "germany",
+    events: [],
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0x041a4187bB5F8c1F8C6236679B11Fa48B506e5bB",
+  },
+  {
+    id: 19,
+    city: "london",
+    country: "united kingdom",
+    events: [],
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0x1AB9fbAC129c3BE6A5125195a313feD1f1579762",
+  },
+  {
+    id: 20,
+    city: "moscow",
+    country: "russia",
+    events: [],
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0x2408b3222F4DE8cEA796aDB47DcbF3A2E8911C08",
+  },
+  {
+    id: 21,
+    city: "canberra",
+    country: "australia",
+    events: [],
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0x57F6f04196D47016b42Fe822dE586a59C2ba30f2",
+  },
+  {
+    id: 22,
+    city: "beijing",
+    country: "china",
+    events: [],
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0x5EA40A6D721f6a238EfE1F7c1848a08E2BA97267",
+  },
+  {
+    id: 23,
+    city: "riyadh",
+    country: "saudi arabia",
+    events: [],
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0x135F8601Ce0f9e391eD11b42430a378BD3325747",
+  },
+  {
+    id: 24,
+    city: "sofia",
+    country: "bulgaria",
+    events: [],
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0xAc0C8E20BEDE4A663F39EEd6ed2E0d90980442f4",
+  },
+  {
+    id: 25,
+    city: "tehran",
+    country: "iran",
+    events: [],
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0xb27f5B78eBfcD54b6A0CF0e52b93C90ac2D5FA0F",
+  },
+  {
+    id: 26,
+    city: "baghdad",
+    country: "iraq",
+    events: [],
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0xD8CfB4338aB0934BDc20dc5a3FEF8b08dbfD1170",
+  },
+  {
+    id: 27,
+    city: "new delhi",
+    country: "india",
+    events: [],
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0x1B8C3485c6f30cf93e738b0eC93143dD226cbaf0",
+  },
 ];
