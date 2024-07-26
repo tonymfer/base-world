@@ -206,7 +206,9 @@ export function activateGlobe(cb?: () => void) {
   const currentCameraPosition = globeRef.current.camera().position.clone();
   globeRef.current.controls.enableZoom = false;
   const timeout = setTimeout(() => {
-    globeRef.current.controls().enabled = true;
+    if (globeRef.current) {
+      globeRef.current.controls().enabled = true;
+    }
     // globeRef.current.controls.enableZoom = true;
   }, 2000);
 
@@ -245,8 +247,10 @@ export function activateGlobe(cb?: () => void) {
     })
     .onComplete(() => {
       cb?.();
-      globeRef.current.controls().autoRotateSpeed = 0.1;
-      globeRef.current.controls().enabled = true;
+      if (globeRef.current) {
+        globeRef.current.controls().autoRotateSpeed = 0.1;
+        globeRef.current.controls().enabled = true;
+      }
     })
     .start();
   // To animate your tween, add this line to your animation loop

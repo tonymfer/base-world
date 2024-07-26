@@ -132,7 +132,7 @@ const EventSheet = () => {
                     href={`${env.NEXT_PUBLIC_ZORA_URL}${displayedEvent.contract}`}
                     target="_blank"
                   >
-                    MINT TO SUPPORT
+                    MINT TO SUPPORT THIS EVENT
                   </Link>
                 </Button>
                 <Button
