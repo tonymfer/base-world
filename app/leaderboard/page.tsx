@@ -1,14 +1,15 @@
 import React from "react";
 import LeaderboardContent from "../components/Leaderboard/leaderboard-content";
 import BaseLogo from "../components/base-logo";
+import GlobeHeader from "../components/Hero/GlobeHeader";
 
 const Leaderboard = () => {
   return (
     <div>
-      <div className="container px-4 mx-auto h-[8vh] flex items-end justify-between">
-        <BaseLogo />
+      <GlobeHeader />
+      <div className="pt-24">
+        <LeaderboardContent />
       </div>
-      <LeaderboardContent />
     </div>
   );
 };

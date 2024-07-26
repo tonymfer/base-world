@@ -19,13 +19,13 @@ const LeaderboardContent = () => {
   const router = useRouter();
 
   return (
-    <div className="container px-4 mx-auto md:py-10 flex flex-col justify-center">
-      <h1 className="text-2xl mb-1 font-bold">
-        <Button onClick={() => router.back()} className="px-2" variant="ghost">
-          <Icons.chevronLeft className="h-4 w-4" />
-        </Button>
-        Leaderboard
-      </h1>
+    <div className="padded-horizontal-wide mx-auto md:py-10 flex flex-col justify-center">
+      <div className="mb-4">
+        <h2 className="text-2xl font-bold tracking-tight mb-1">Leaderboard</h2>
+        <p className="text-muted-foreground">
+          Check out the activity and progress of base global communities.
+        </p>
+      </div>
       {data ? (
         <DataTable data={data} columns={columns} />
       ) : (

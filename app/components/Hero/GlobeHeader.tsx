@@ -5,6 +5,7 @@ import { useMapStore } from "@/app/stores/map";
 import { deactivateGlobe } from "@/app/utils/globe";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
 
 export default function GlobeHeader() {
   const setBurgerVisible = useLandingStore((s) => s.setBurgerVisible);
@@ -13,6 +14,7 @@ export default function GlobeHeader() {
   const globeActive = useMapStore((s) => s.globeActive);
   const activeCity = useMapStore((s) => s.activeCity);
   const mobile = useLandingStore((s) => s.mobile);
+  const router = useRouter();
 
   return (
     <div
@@ -20,7 +22,7 @@ export default function GlobeHeader() {
         burgerVisible || mobile
           ? "pointer-events-auto opacity-100"
           : "pointer-events-auto opacity-100"
-      } fixed z-[30000] md:gap-2 flex h-20 w-screen justify-between md:justify-start overflow-visible pt-10 padded-horizontal-wide`}
+      } fixed z-[30000] md:gap-8 flex h-20 w-screen justify-between md:justify-start overflow-visible pt-10 padded-horizontal-wide items-center`}
     >
       <button
         onMouseDown={() => {
@@ -41,22 +43,17 @@ export default function GlobeHeader() {
         style={{
           filter: "drop-shadow(3px 5px 2px rgb(255 255 255 / 0.2))",
         }}
-        // style={
-        //   !activeCity
-        //     ? {
-        //         filter: "drop-shadow(3px 5px 2px rgb(0 0 0 / 0.7))",
-        //       }
-        //     : {}
-        // }
       >
         <BaseLogo />
       </button>
-      <Button
-        className="text-muted-foreground uppercase flex md:items-center md:pb-1 items-start text-sm text-gray-400"
-        variant="link"
-      >
-        <Link href="/leaderboard">Leaderboard</Link>
-      </Button>
+      <div className="flex gap-1">
+        <Button variant="ghost">
+          <Link href="/">Home</Link>
+        </Button>
+        <Button variant="ghost">
+          <Link href="/leaderboard">Leaderboard</Link>
+        </Button>
+      </div>
 
       {/* <div className="flex flex-col text-xs gap-1 items-center justify-center">
         <div className="text-white">made with ♥️ by</div>

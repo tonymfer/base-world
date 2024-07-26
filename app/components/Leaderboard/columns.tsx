@@ -9,13 +9,26 @@ import Link from "next/link";
 export const columns: ColumnDef<CountriesInfo>[] = [
   {
     accessorKey: "channelId",
-    header: "Channel ID",
+    header: "Channel",
     // In case we ever want to change this to link to the channel page, we do it here
-    cell: ({ row }) => `/${row.original.channelId}`,
+    //
+    cell: ({ row }) => {
+      return (
+        <Link
+          href={`https://warpcast.com/~/channel/${row.original.channelId}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="min-w-40 underline hover:text-primary"
+        >{`/${row.original.channelId}`}</Link>
+      );
+    },
   },
   {
     accessorKey: "countryName",
     header: "Country",
+    cell: ({ row }) => {
+      return <div className="min-w-40">{row.original.countryName}</div>;
+    },
   },
   {
     accessorKey: "followers",
@@ -23,7 +36,7 @@ export const columns: ColumnDef<CountriesInfo>[] = [
       return (
         <Button
           variant="ghost"
-          className="px-0 text-xs md:text-sm"
+          className="-ml-5 text-xs md:text-sm"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Followers
@@ -38,7 +51,7 @@ export const columns: ColumnDef<CountriesInfo>[] = [
       return (
         <Button
           variant="ghost"
-          className="px-0 text-xs md:text-sm"
+          className="-ml-5 text-xs md:text-sm"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Casts
