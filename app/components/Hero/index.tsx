@@ -264,7 +264,7 @@ export default function BaseGlobe() {
                 setGlobeActive(true);
                 setBurgerVisible(true);
               }}
-              className={` flex w-auto bg-white px-3 py-1.5 text-xl mobile:text-2xl items-center border-[1px] border-primary mt-5 mobile:mt-10 rounded-lg text-black`}
+              className={` flex w-auto bg-white px-3 py-1.5 text-xl mobile:text-2xl items-center mt-5 mobile:mt-10 rounded-lg text-black hover:bg-white/90`}
             >
               Explore
             </motion.button>

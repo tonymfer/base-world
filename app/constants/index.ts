@@ -1,4 +1,6 @@
-export const circles = [
+import { Location } from "@/types";
+
+export const circles: Location[] = [
   {
     id: 1,
     city: "madrid",
@@ -132,6 +134,8 @@ export const circles = [
     id: 5,
     city: "singapore",
     country: "singapore",
+    mintToSupportLink:
+      "https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0x71B298d2630f0c8fE8deacEF9A2729CCFEB2a9B5",
     events: [
       {
         id: 0,
@@ -190,4 +194,4 @@ export const circles = [
       },
     ],
   },
-]
+];

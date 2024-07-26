@@ -38,6 +38,7 @@ import { usePassport } from "@/app/stores/passport";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useMapStore } from "@/app/stores/map";
 import useApi from "@/app/hooks/useApi";
+import { Button } from "../ui/button";
 
 export function DetailsSheet() {
   const setActiveCityResponse = useMapStore(
@@ -99,9 +100,6 @@ export function DetailsSheet() {
     (data &&
       data.find((city) => city.countryName.toLowerCase() === chosenCountry)) ||
     null;
-
-  // console.log("cityData: ", cityData);
-  // console.log("cityDetails: ", cityDetails);
 
   const attendees = cityData?.events.reduce(
     (acc: number, event: Event) => acc + (event.users?.length ?? 0),
@@ -168,6 +166,18 @@ export function DetailsSheet() {
               )}
               {attendees && <StatsItem title="Attendees" value={attendees} />}
             </div>
+            {cityData?.mintToSupportLink && (
+              <Button className="w-full" size="sm" asChild>
+                <Link
+                  href={cityData.mintToSupportLink}
+                  passHref
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  {`Mint NFT to support /${cityDetails?.channelId}`}
+                </Link>
+              </Button>
+            )}
           </div>
           <Tabs defaultValue="casts">
             <TabsList className="px-6">
@@ -304,7 +314,7 @@ const EventItem = ({ event }: { event: Event }) => {
         setSecondaryOpen(!secondaryOpen);
         setCurrentEventId(event.id);
       }}
-      className="flex gap-2 border-b py-3 items-center hover:bg-muted px-6"
+      className="flex gap-2 border-b py-3 items-center hover:bg-muted px-6 cursor-pointer"
     >
       <div className="bg-based w-10 h-10 rounded-full" />
       <div>
