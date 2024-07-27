@@ -2,6 +2,7 @@ import { ActiveCity, useMapStore } from "@/app/stores/map";
 import * as THREE from "three";
 import * as TWEEN from "@tweenjs/tween.js";
 import isMobile, { isTablet } from "./device";
+import { useLandingStore } from "../stores/landing";
 
 const mobile = isMobile();
 const tablet = isTablet();
@@ -17,9 +18,8 @@ const globeSize = mobile || tablet ? 3 : 2;
 const ZOOM = {
   INITIAL: mobile || tablet ? 300 : 165,
   ACTIVE: mobile || tablet ? 400 : 300,
+  ABOUT: 0,
 };
-
-let initialXY: number[] = [];
 
 export function init() {
   const globeRef = useMapStore.getState().globeRef;
@@ -29,13 +29,19 @@ export function init() {
   const maxDistance = !mobile ? 300 : 600;
   globeRef.current.controls().maxDistance = maxDistance;
   globeRef.current.controls().minDistance = 130;
+  globeRef.current.controls().autoRotate = true;
+  useMapStore.setState({ about: false });
 
   currentCamera.position.set(
     currentCameraPosition.x,
     currentCameraPosition.y,
     ZOOM.INITIAL
   );
-  initialXY = [currentCameraPosition.x, currentCameraPosition.y];
+
+  useLandingStore.setState({
+    initialXY: [currentCameraPosition.x, currentCameraPosition.y],
+  });
+
   currentCamera.setViewOffset(
     window.innerWidth,
     window.innerHeight,
@@ -274,27 +280,40 @@ export function activateGlobe(cb?: () => void) {
   };
 }
 
-export function deactivateGlobe() {
+export function deactivateGlobe(isAbout = false) {
   const { globeRef, setGlobeActive } = useMapStore.getState();
   setGlobeActive(false);
+  globeRef.current.controls().autoRotate = false;
 
   let animateId: number;
   const currentCamera = globeRef.current.camera();
   const currentCameraPosition = globeRef.current.camera().position.clone();
   //TODO
-  const targetPosition = new THREE.Vector3(
-    initialXY[0],
-    initialXY[1],
-    ZOOM.INITIAL
-  );
+  globeRef.current.controls().minDistance = 0;
+
+  // const targetPosition = new THREE.Vector3(
+  //   currentCameraPosition.x,
+  //   currentCameraPosition.y,
+
+  //   isAbout ? ZOOM.ABOUT : ZOOM.INITIAL
+  // );
+
+  const targetPositionProps = isAbout
+    ? [100, 0, ZOOM.ABOUT]
+    : [currentCameraPosition.x, currentCameraPosition.y, ZOOM.INITIAL];
+
+  const targetPosition = new THREE.Vector3(...targetPositionProps);
+
   if (!currentCamera.view) return;
   const start = {
     yOffset: currentCamera.view.offsetY,
     zoom: currentCameraPosition,
   };
 
+  const yOffset = isAbout ? 0 : SQUASHDOWN;
+
   // Create an object for the ending state of the tween
-  const end = { yOffset: SQUASHDOWN, zoom: targetPosition };
+  const end = { yOffset, zoom: targetPosition };
   // Create a new tween
   const tween = new TWEEN.Tween(start)
     .to(end, 1000) // Adjust duration to your needs

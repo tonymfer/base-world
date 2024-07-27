@@ -48,3 +48,30 @@ export const copyToClipboard = async (text: string) => {
     console.error("Failed to copy: ", err);
   }
 };
+
+export function shortenNumber(num: number | string, prefix = "") {
+  num = Number(num?.toString()?.replaceAll?.(",", ""));
+
+  if (num >= 1_000_000_000_000) {
+    return `${prefix}${toFixed(num / 1_000_000_000_000, 2)}T`;
+  } else if (num >= 1_000_000_000) {
+    return `${prefix}${toFixed(num / 1_000_000_000, 2)}B`;
+  } else if (num >= 1_000_000) {
+    return `${prefix}${toFixed(num / 1_000_000, 2)}M`;
+  } else if (num >= 100_000) {
+    return `${prefix}${toFixed(num / 1_000, 2)}K`;
+  } else if (num === 0) {
+    return `${prefix}0`;
+  } else if (num <= 0.000001) {
+    return `< ${prefix}0.000001`;
+  }
+  return (
+    prefix +
+    num.toLocaleString("en-US", {
+      maximumFractionDigits: 6,
+    })
+  );
+}
+export function toFixed(value: number, t: number) {
+  return Number(Number(value).toFixed(t));
+}

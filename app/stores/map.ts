@@ -47,6 +47,7 @@ interface MapState {
   radius: number;
   places: any[];
   ready: boolean;
+  about: boolean;
   globeActive: boolean;
   globeRef: any;
   setActiveCity: (obj: ActiveCity | null) => void;
@@ -67,6 +68,7 @@ export const useMapStore = create<MapState>((set) => ({
   clicked: false,
   radius: 0,
   ready: false,
+  about: false,
   globeActive: false,
   globeRef,
   setActiveCity: (obj) => set({ activeCity: obj }),
