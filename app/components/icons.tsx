@@ -25,11 +25,13 @@ import {
   X,
   LucideIcon,
   Share,
+  Menu,
 } from "lucide-react"
 
 export type Icon = LucideIcon
 
 export const Icons = {
+  menu: Menu,
   logo: ({ ...props }: LucideProps) => (
     <svg
       viewBox="0 0 119 33"
