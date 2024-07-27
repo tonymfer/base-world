@@ -90,6 +90,7 @@ export default function useRealTimePosts() {
                 <Link
                   href={`https://warpcast.com/${newData.username}/${newData.castHash}`}
                   passHref
+                  target="_blank"
                   className="bg-transparent rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   <motion.div whileTap={{ scale: 0.95 }}>
