@@ -62,7 +62,7 @@ export default function useRealTimePosts() {
         setSeenIds((prevSeenIds) => new Set(prevSeenIds.add(newData.id)));
         toast.custom(
           (t) => (
-            <div className="flex items-center p-4 bg-white w-[350px] shadow rounded-md pointer-events-auto">
+            <div className="flex items-center p-4 bg-white w-full mobile:w-[350px] shadow rounded-md pointer-events-auto">
               <div className="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 text-white text-md rounded-full bg-blue-500">
                 <img
                   src={newData.pfp_url}
