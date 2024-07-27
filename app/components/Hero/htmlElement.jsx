@@ -38,6 +38,9 @@ function styleElement(element, length, fontSize, maxFontSize, d) {
     const scaledSize =
       ((casts - minCasts) / (maxCasts - minCasts)) * (maxSize - minSize) +
       minSize;
+    if (d.countryName === "Base") {
+      return 70;
+    }
     return Math.min(Math.max(scaledSize, minSize), maxSize); // Ensure the size is within bounds
   };
 

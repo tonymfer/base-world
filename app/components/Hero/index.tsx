@@ -1,7 +1,6 @@
 import useApi from "@/app/hooks/useApi";
 import { useLandingStore } from "@/app/stores/landing";
 import { ActiveCity, useMapStore } from "@/app/stores/map";
-import { api } from "@/app/utils/api";
 import isMobile from "@/app/utils/device";
 import { activateGlobe, zoomInCity } from "@/app/utils/globe";
 import { shortenNumber } from "@/lib/utils";
@@ -128,15 +127,17 @@ export default function BaseGlobe() {
   const [temp, setTemp] = useState<any>();
 
   async function handleHover() {
-    const d = temp;
-    setActiveCity(d);
-    zoomInCity(d, "left");
-    setFetching(true);
-    const response = await api(`country/${d.id}`, {
-      method: "GET",
-    });
-    setFetching(false);
-    setActiveCityResponse(await response.json());
+    // const d = temp;
+    // setActiveCity(d);
+    // zoomInCity(d, "left");
+    // setFetching(true);
+    // const response = await api(`country/${d.id}`, {
+    //   method: "GET",
+    // });
+    // setFetching(false);
+    // setActiveCityResponse(await response.json());
+    const channelId = temp.countryName === "Base" ? "base" : temp.channelId;
+    window.open(`https://warpcast.com/${channelId}`, "_blank");
   }
 
   const debouncedCity = useDebounce(temp, 300);
@@ -167,6 +168,11 @@ export default function BaseGlobe() {
         <div className="relative overflow-y-auto scrollbar-hide h-full">
           <div className="flex w-full flex-col justify-start">
             <motion.div
+              onClick={handleHover}
+              onHoverStart={() => {
+                const bData = data?.find((d) => d.countryName === "Base");
+                !activeCity && setTemp(bData);
+              }}
               className={`relative group flex transition-all min-h-[min-content] w-full overflow-visible hover:bg-white px-1.5 py-1 hover:font-normal hover:text-black rounded-sm font-thin items-center text-base justify-start`}
             >
               <span className="whitespace-nowrap ml-1">/base - </span>
