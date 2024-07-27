@@ -310,19 +310,19 @@ export default function BaseGlobe() {
             },
           }}
           className={`
-      absolute top-0 left-0 z-[1000] flex w-screen tablet:padded-horizontal-wide h-screen flex-col items-center justify-center`}
+      absolute top-0 left-0 z-[1000] flex w-screen padded-horizontal-wide h-screen flex-col items-center justify-center`}
         >
           <div className=" flex h-full w-full justify-center flex-col text-white items-center">
-            <div className="flex flex-col items-center justify-center h-full gap-[120px]">
-              <div className="flex w-full tablet:max-w-[1000px] flex-col items-start justify-start gap-5 text-xl font-thin text-white">
-                <div className="text-5xl font-semibold whitespace-nowrap">{`BASE\nIS FOR EVERYONE`}</div>
+            <div className="flex flex-col items-center justify-center h-full gap-10 tablet:gap-[120px]">
+              <div className="flex w-full max-w-full tablet:max-w-[1000px] flex-col items-start justify-start gap-5 text-xl font-thin text-white">
+                <div className="text-xl tablet:text-5xl font-semibold whitespace-nowrap">{`BASE\nIS FOR EVERYONE`}</div>
                 <div className="text-base mobile:text-xl">
                   Base is paving the way for the next generation of the
                   internet, working alongside its community to ensure that
                   builders worldwide have equal access to the opportunities
                   offered by the Global Onchain Economy.
                 </div>
-                <div className="text-base mobile:text-xl">
+                <div className="text-base tablet:text-xl">
                   {`The Base Global Communities initiative leverages the power of
                   community to drive the adoption, education, and growth of
                   Base's ecosystem on a global scale. Currently built on the
@@ -334,7 +334,7 @@ export default function BaseGlobe() {
                 </div>
               </div>
               <div className="flex w-full tablet:max-w-[1000px] flex-col items-start justify-start gap-5 text-xl font-thin text-white">
-                <div className="text-5xl font-semibold whitespace-nowrap">{`ONCHAIN SUMMER\nIS FOR EVERYONE`}</div>
+                <div className="text-xl tablet:text-5xl font-semibold whitespace-nowrap">{`ONCHAIN SUMMER\nIS FOR EVERYONE`}</div>
                 <div className=" text-base mobile:text-xl">
                   Onchain Summer is a global movement calling on the ecosystem
                   to build and create projects that will usher in the next wave
