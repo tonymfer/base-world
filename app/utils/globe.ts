@@ -285,8 +285,19 @@ export function deactivateGlobe(isAbout = false) {
   setGlobeActive(false);
   // globeRef.current.controls().autoRotate = false;
 
+  if (!globeRef.current) {
+    console.warn("globeRef.current is not initialized.");
+    return;
+  }
+
   let animateId: number;
   const currentCamera = globeRef.current.camera();
+
+  if (!currentCamera) {
+    console.warn("globeRef.current.camera() is not initialized.");
+    return;
+  }
+
   const currentCameraPosition = globeRef.current.camera().position.clone();
   //TODO
   globeRef.current.controls().minDistance = 0;
