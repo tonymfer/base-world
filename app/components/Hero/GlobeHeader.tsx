@@ -6,6 +6,7 @@ import { activateGlobe, deactivateGlobe } from "@/app/utils/globe";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { usePathname, useRouter } from "next/navigation";
+import SideMenu from "../mobile-menu";
 
 export default function GlobeHeader() {
   const ready = useMapStore((s) => s.ready);
@@ -23,7 +24,7 @@ export default function GlobeHeader() {
         mobile
           ? "pointer-events-auto opacity-100"
           : "pointer-events-auto opacity-100"
-      } fixed z-[30000] md:gap-8 flex h-20 w-screen justify-between md:justify-start overflow-visible pt-10 padded-horizontal-wide items-center`}
+      } fixed z-[30000] md:gap-8 flex h-20 w-screen justify-between lg:justify-start overflow-visible pt-10 padded-horizontal-wide items-center`}
     >
       <button
         // onMouseDown={() => {
@@ -45,7 +46,9 @@ export default function GlobeHeader() {
       >
         <BaseLogo />
       </button>
-      <div className="flex tablet:gap-1">
+      {/* SideMenu - Mobile */}
+      <SideMenu />
+      <div className="hidden lg:flex tablet:gap-1">
         <Button
           variant="ghost"
           className="text-sm tablet:text-base hover:bg-white hover:text-black"

@@ -309,10 +309,10 @@ export default function BaseGlobe() {
       absolute top-0 left-0 z-[1000] flex w-screen padded-horizontal-wide h-screen flex-col items-center justify-center`}
         >
           <div className=" flex h-full w-full justify-center flex-col text-white items-center">
-            <div className="flex flex-col mt-10 mobile:mt-0 items-center justify-center h-full gap-10 tablet:gap-[120px]">
+            <div className="flex flex-col mt-10 mobile:mt-5 items-center justify-center h-full gap-5 tablet:gap-[120px]">
               <div className="flex w-full max-w-full tablet:max-w-[1000px] flex-col items-start justify-start gap-5 text-xl font-thin text-white">
                 <div className="text-xl tablet:text-5xl font-semibold whitespace-nowrap">{`BASE\nIS FOR EVERYONE`}</div>
-                <div className="text-base mobile:text-xl">
+                <div className="text-sm leading-tight tablet:text-xl">
                   Base is paving the way for the next generation of the
                   internet, working alongside its community to ensure that
                   builders worldwide have equal access to the opportunities
@@ -331,7 +331,7 @@ export default function BaseGlobe() {
               </div>
               <div className="flex w-full tablet:max-w-[1000px] flex-col items-start justify-start gap-5 text-xl font-thin text-white">
                 <div className="text-xl tablet:text-5xl font-semibold whitespace-nowrap">{`ONCHAIN SUMMER\nIS FOR EVERYONE`}</div>
-                <div className=" text-sm leading-tight mobile:text-xl">
+                <div className="text-sm leading-tight mobile:text-xl">
                   Onchain Summer is a global movement calling on the ecosystem
                   to build and create projects that will usher in the next wave
                   of users onchain. To celebrate the diversity and creativity of
