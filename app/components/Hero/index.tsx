@@ -134,7 +134,8 @@ export default function BaseGlobe() {
     // });
     // setFetching(false);
     // setActiveCityResponse(await response.json());
-    const channelId = temp.countryName === "Base" ? "base" : temp.channelId;
+    const channelId =
+      temp.countryName === "Base" ? "base" : `~/channel/${temp.channelId}`;
     window.open(`https://warpcast.com/${channelId}`, "_blank");
   }
 
