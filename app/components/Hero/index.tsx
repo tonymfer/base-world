@@ -25,7 +25,6 @@ export default function BaseGlobe() {
   const scrollNumber = isMobile() ? 150 : 30;
   const setScrolling = useLandingStore((s) => s.setScrolling);
   const scrolling = useLandingStore((s) => s.scrolling);
-  const setBurgerVisible = useLandingStore((s) => s.setBurgerVisible);
 
   const { data } = useApi({
     url: "countries",
@@ -75,7 +74,6 @@ export default function BaseGlobe() {
         ) {
           activateGlobe();
           setGlobeActive(true);
-          setBurgerVisible(true);
         }
       } else if (globeActive && !isScrollable && !containerScrollable) {
         e.preventDefault();
@@ -283,12 +281,10 @@ export default function BaseGlobe() {
               onClick={() => {
                 activateGlobe();
                 setGlobeActive(true);
-                setBurgerVisible(true);
               }}
               onTouchStart={() => {
                 activateGlobe();
                 setGlobeActive(true);
-                setBurgerVisible(true);
               }}
               className={` flex w-auto bg-white px-3 py-1.5 text-xl mobile:text-2xl items-center mt-5 mobile:mt-10 rounded-lg text-black hover:bg-white/90`}
             >
