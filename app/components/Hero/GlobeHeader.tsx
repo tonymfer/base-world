@@ -74,16 +74,18 @@ export default function GlobeHeader() {
         >
           <Link href="/leaderboard">Leaderboard</Link>
         </Button>
-        <Button
-          className="text-sm tablet:text-base hover:bg-white hover:text-black"
-          onClick={() => {
-            deactivateGlobe(true);
-            useMapStore.setState({ about: true });
-          }}
-          variant="ghost"
-        >
-          About
-        </Button>
+        {pathname !== "/leaderboard" && (
+          <Button
+            className="text-sm tablet:text-base hover:bg-white hover:text-black"
+            onClick={() => {
+              deactivateGlobe(true);
+              useMapStore.setState({ about: true });
+            }}
+            variant="ghost"
+          >
+            About
+          </Button>
+        )}
       </div>
     </div>
   );
