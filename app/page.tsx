@@ -1,4 +1,5 @@
 "use client";
+import { Toaster } from "sonner";
 import BaseGlobe from "./components/Hero";
 import GlobeHeader from "./components/Hero/GlobeHeader";
 
@@ -12,6 +13,7 @@ export default function Home() {
       <GlobeHeader />
       <BaseGlobe />
       <EventSheet />
+      <Toaster position="bottom-right" />
     </main>
   );
 }

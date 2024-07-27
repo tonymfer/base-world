@@ -2,18 +2,21 @@
 import BaseLogo from "@/app/components/base-logo";
 import { useLandingStore } from "@/app/stores/landing";
 import { useMapStore } from "@/app/stores/map";
-import { deactivateGlobe } from "@/app/utils/globe";
+import { activateGlobe, deactivateGlobe } from "@/app/utils/globe";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function GlobeHeader() {
   const setBurgerVisible = useLandingStore((s) => s.setBurgerVisible);
   const burgerVisible = useLandingStore((state) => state.burgerVisible);
   const ready = useMapStore((s) => s.ready);
-  const globeActive = useMapStore((s) => s.globeActive);
+  const about = useMapStore((s) => s.about);
   const activeCity = useMapStore((s) => s.activeCity);
+  const globeActive = useMapStore((s) => s.globeActive);
   const mobile = useLandingStore((s) => s.mobile);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const router = useRouter();
 
   return (
@@ -25,17 +28,15 @@ export default function GlobeHeader() {
       } fixed z-[30000] md:gap-8 flex h-20 w-screen justify-between md:justify-start overflow-visible pt-10 padded-horizontal-wide items-center`}
     >
       <button
-        onMouseDown={() => {
-          deactivateGlobe();
-          setBurgerVisible(false);
-        }}
-        onTouchStart={() => {
-          deactivateGlobe();
-          setBurgerVisible(false);
-        }}
+        // onMouseDown={() => {
+        //   deactivateGlobe();
+        // }}
+        // onTouchStart={() => {
+        //   deactivateGlobe();
+        // }}
         className={`h-8 w-auto overflow-y-hidden tablet:h-10
         ${
-          !globeActive || !ready || activeCity
+          !about && (!globeActive || !ready || activeCity)
             ? "pointer-events-none opacity-100"
             : "pointer-events-auto opacity-100"
         }
@@ -47,11 +48,40 @@ export default function GlobeHeader() {
         <BaseLogo />
       </button>
       <div className="flex gap-1">
-        <Button asChild variant="ghost">
-          <Link href="/">Home</Link>
+        <Button
+          variant="ghost"
+          className="text-base hover:bg-white hover:text-black"
+          onClick={() => {
+            if (isHome) {
+              useMapStore.setState({
+                globeActive: true,
+                about: false,
+              });
+              activateGlobe();
+            } else {
+              activateGlobe();
+              router.push("/");
+            }
+          }}
+        >
+          Home
         </Button>
-        <Button asChild variant="ghost">
+        <Button
+          asChild
+          variant="ghost"
+          className="text-base hover:bg-white hover:text-black"
+        >
           <Link href="/leaderboard">Leaderboard</Link>
+        </Button>
+        <Button
+          className="text-base hover:bg-white hover:text-black"
+          onClick={() => {
+            deactivateGlobe(true);
+            useMapStore.setState({ about: true });
+          }}
+          variant="ghost"
+        >
+          About
         </Button>
       </div>
 

@@ -41,12 +41,12 @@ export default function ThreeGlobe({ data }) {
 
   const globeMaterial = new THREE.MeshBasicMaterial({
     color: "#035CF6",
-    opacity: 0.7,
-    transparent: mobile ? false : true,
+    opacity: 0.6,
+    transparent: true,
   });
 
   const polygonsMaterial = new THREE.MeshLambertMaterial({
-    color: "#000",
+    color: "#fff",
     side: THREE.DoubleSide,
   });
 
@@ -126,7 +126,6 @@ export default function ThreeGlobe({ data }) {
       const response = await api(`country/${city.id}`, {
         method: "GET",
       }).json();
-      console.log("city: ", response);
       const { latitude: lat, longitude: lng, countryName: name } = response;
       setChosenCoordinates({ lat, lng, name });
       setActiveCityResponse(response);
