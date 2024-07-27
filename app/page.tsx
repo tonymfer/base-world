@@ -13,7 +13,7 @@ export default function Home() {
       <GlobeHeader />
       <BaseGlobe />
       <EventSheet />
-      <Toaster position="bottom-right" />
+      <Toaster position="bottom-right" visibleToasts={7} />
     </main>
   );
 }
