@@ -4,6 +4,7 @@ import { Button } from "./ui/button";
 import { api } from "../utils/api";
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
+import isMobile from "@/app/utils/device";
 import Link from "next/link";
 
 export default function useRealTimePosts() {
@@ -45,6 +46,7 @@ export default function useRealTimePosts() {
   };
 
   useEffect(() => {
+    if (isMobile()) return;
     fetchData();
     const intervalId = setInterval(fetchData, 30000); // 1분마다 fetchData 호출
     return () => clearInterval(intervalId);
