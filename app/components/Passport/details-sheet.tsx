@@ -161,10 +161,10 @@ export function DetailsSheet() {
               {cityDetails?.casts && (
                 <StatsItem title="Casts" value={cityDetails?.casts} />
               )}
-              {cityData?.events && cityData?.events.length > 0 && (
+              {/* {cityData?.events && cityData?.events.length > 0 && (
                 <StatsItem title="Events" value={cityData?.events.length} />
-              )}
-              {attendees && <StatsItem title="Attendees" value={attendees} />}
+              )} */}
+              {/* {attendees && <StatsItem title="Attendees" value={attendees} />} */}
             </div>
             {cityData?.mintToSupportLink && (
               <Button className="w-full" size="sm" asChild>
