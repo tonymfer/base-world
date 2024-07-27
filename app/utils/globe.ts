@@ -283,7 +283,7 @@ export function activateGlobe(cb?: () => void) {
 export function deactivateGlobe(isAbout = false) {
   const { globeRef, setGlobeActive } = useMapStore.getState();
   setGlobeActive(false);
-  globeRef.current.controls().autoRotate = false;
+  // globeRef.current.controls().autoRotate = false;
 
   let animateId: number;
   const currentCamera = globeRef.current.camera();

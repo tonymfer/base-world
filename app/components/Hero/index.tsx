@@ -11,7 +11,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "../ui/button";
-import useRealTimePosts from "../RealTimePosts";
+import useRealTimePosts from "../useRealTimePosts";
 
 const Globe = dynamic(() => import("./ThreeGlobe"), { ssr: false });
 

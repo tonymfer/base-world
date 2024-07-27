@@ -59,6 +59,7 @@ export default function GlobeHeader() {
               });
               activateGlobe();
             } else {
+              activateGlobe();
               router.push("/");
             }
           }}
