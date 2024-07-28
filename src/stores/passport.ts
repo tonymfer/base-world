@@ -1,4 +1,4 @@
-import { Coordinates, Event } from "@/types";
+import { Coordinates, Event } from "types";
 import { create } from "zustand";
 
 interface PassportState {

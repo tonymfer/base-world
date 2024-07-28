@@ -1,4 +1,4 @@
-import { Location } from "@/types";
+import { Location } from "types";
 
 export const circles: Location[] = [
   {
