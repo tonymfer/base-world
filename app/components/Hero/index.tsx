@@ -311,7 +311,7 @@ export default function BaseGlobe() {
         >
           <div className=" flex h-full w-full justify-center flex-col text-white items-center">
             <div className="flex flex-col mt-10 mobile:mt-5 items-center justify-center h-full gap-5 tablet:gap-[120px]">
-              <div className="flex w-full max-w-full tablet:max-w-[1000px] flex-col items-start justify-start gap-5 text-xl font-thin text-white">
+              <div className="flex w-full max-w-full tablet:max-w-[1000px] flex-col items-start justify-start gap-2 lg:gap-5 text-xl font-thin text-white">
                 <div className="text-xl tablet:text-5xl font-semibold whitespace-nowrap">{`BASE\nIS FOR EVERYONE`}</div>
                 <div className="text-sm leading-tight tablet:text-xl">
                   Base is paving the way for the next generation of the
@@ -330,7 +330,7 @@ export default function BaseGlobe() {
                   vision of Base and the Global Onchain Economy.`}
                 </div>
               </div>
-              <div className="flex w-full tablet:max-w-[1000px] flex-col items-start justify-start gap-5 text-xl font-thin text-white">
+              <div className="flex w-full tablet:max-w-[1000px] flex-col items-start justify-start gap-2 lg:gap-5 text-xl font-thin text-white">
                 <div className="text-xl tablet:text-5xl font-semibold whitespace-nowrap">{`ONCHAIN SUMMER\nIS FOR EVERYONE`}</div>
                 <div className="text-sm leading-tight mobile:text-xl">
                   Onchain Summer is a global movement calling on the ecosystem

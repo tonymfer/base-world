@@ -68,17 +68,19 @@ const SideMenu = () => {
               >
                 <Link href="/leaderboard">Leaderboard</Link>
               </Button>
-              <Button
-                className="text-sm tablet:text-base hover:bg-white hover:text-black"
-                onClick={() => {
-                  deactivateGlobe(true);
-                  setOpen(false);
-                  useMapStore.setState({ about: true });
-                }}
-                variant="ghost"
-              >
-                About
-              </Button>
+              {pathname !== "/leaderboard" && (
+                <Button
+                  className="text-sm tablet:text-base hover:bg-white hover:text-black"
+                  onClick={() => {
+                    deactivateGlobe(true);
+                    setOpen(false);
+                    useMapStore.setState({ about: true });
+                  }}
+                  variant="ghost"
+                >
+                  About
+                </Button>
+              )}
             </div>
           </SheetDescription>
         </SheetHeader>
