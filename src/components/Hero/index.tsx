@@ -338,7 +338,7 @@ export default function BaseGlobe() {
                   collection to spread the word about Onchain Summer in their
                   native languages!
                 </div>
-                <div className="text-base mobile:text-xl">
+                {/* <div className="text-base mobile:text-xl">
                   See the gallery on Coinbase Wallet web app:{' '}
                   <Link
                     className="underline"
@@ -347,7 +347,7 @@ export default function BaseGlobe() {
                   >
                     wallet.coinbase.com/nft/gallery/........
                   </Link>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
