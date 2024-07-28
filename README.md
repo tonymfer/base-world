@@ -154,6 +154,6 @@ Project Link: [https://github.com/tonypark99/base-globe](https://github.com/tony
 [issues-shield]: https://img.shields.io/github/issues/tonypark99/base-globe.svg?style=for-the-badge
 [issues-url]: https://github.com/tonypark99/base-globe/issues
 [license-shield]: https://img.shields.io/github/license/tonypark99/base-globe.svg?style=for-the-badge
-[license-url]: https://github.com/tonypark99/base-globe/blob/master/LICENSE.txt
+[license-url]: https://github.com/tonypark99/base-globe/blob/main/LICENSE.txt
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
