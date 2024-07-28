@@ -86,8 +86,8 @@ const config = {
   },
   plugins: [
     require("tailwindcss-animate"),
-    require("./app/tailwind-plugins/padded-horizontal"),
-    require("./app/tailwind-plugins/scrollbar-hide"),
+    require("./src/tailwind-plugins/padded-horizontal"),
+    require("./src/tailwind-plugins/scrollbar-hide"),
   ],
 } satisfies Config;
 
