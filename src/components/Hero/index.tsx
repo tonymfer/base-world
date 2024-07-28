@@ -298,7 +298,7 @@ export default function BaseGlobe() {
           animate={{
             opacity: about ? 1 : 0,
             pointerEvents: about ? "auto" : "none",
-            backdropFilter: about ? `blur(4px)` : `blur(0px)`,
+            backdropFilter: about ? `blur(300px)` : `blur(0px)`,
             transition: {
               backdropFilter: { delay: about ? 1 : 0 },
               opacity: {
