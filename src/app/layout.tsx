@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
-import "@/styles/globals.css";
+import "./globals.css";
 import { Provider } from "@/providers";
 import { ThemeProvider } from "@/components/theme-provider";
 import { siteConfig } from "@/config/site";
