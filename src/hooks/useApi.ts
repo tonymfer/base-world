@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { api } from "@/utils/api";
+import { useEffect, useState } from 'react';
+import { api } from '@/utils/api';
 
 interface ApiRequest {
   url: string;
-  method: "GET" | "POST" | "PUT" | "DELETE";
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE';
   data?: any;
 }
 

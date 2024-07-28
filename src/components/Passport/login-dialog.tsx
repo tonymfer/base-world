@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Icons } from "@/components/icons";
-import { useEffect, useState } from "react";
-import { useAccount } from "wagmi";
-import { useModal } from "connectkit";
-import { AddressForm } from "./address-form";
-import { DialogClose } from "@radix-ui/react-dialog";
+} from '@/components/ui/dialog';
+import { Icons } from '@/components/icons';
+import { useEffect, useState } from 'react';
+import { useAccount } from 'wagmi';
+import { useModal } from 'connectkit';
+import { AddressForm } from './address-form';
+import { DialogClose } from '@radix-ui/react-dialog';
 
 export function LoginDialog({ address }: { address: string }) {
   const { isConnected } = useAccount();

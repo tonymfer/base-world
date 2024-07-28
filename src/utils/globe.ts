@@ -1,15 +1,15 @@
-import { ActiveCity, useMapStore } from "@/stores/map";
-import * as THREE from "three";
-import * as TWEEN from "@tweenjs/tween.js";
-import isMobile, { isTablet } from "./device";
-import { useLandingStore } from "../stores/landing";
+import { ActiveCity, useMapStore } from '@/stores/map';
+import * as THREE from 'three';
+import * as TWEEN from '@tweenjs/tween.js';
+import isMobile, { isTablet } from './device';
+import { useLandingStore } from '../stores/landing';
 
 const mobile = isMobile();
 const tablet = isTablet();
 let SQUASHDOWN = -350;
 const longValue = mobile ? 0 : 20;
 const latValue = mobile ? 8 : 0;
-if (typeof window !== "undefined") {
+if (typeof window !== 'undefined') {
   SQUASHDOWN = mobile ? -350 : window?.innerHeight * -0.9;
 }
 
@@ -35,7 +35,7 @@ export function init() {
   currentCamera.position.set(
     currentCameraPosition.x,
     currentCameraPosition.y,
-    ZOOM.INITIAL
+    ZOOM.INITIAL,
   );
 
   useLandingStore.setState({
@@ -48,7 +48,7 @@ export function init() {
     0,
     SQUASHDOWN,
     window.innerWidth,
-    window.innerHeight
+    window.innerHeight,
   );
 
   globeRef.current.camera().updateProjectionMatrix();
@@ -56,12 +56,12 @@ export function init() {
   globeRef.current.controls().autoRotate = true;
   globeRef.current.controls().autoRotateSpeed = 0.1;
 
-  document.body.classList.add("globe-inactive");
+  document.body.classList.add('globe-inactive');
 }
 
 export function zoomInCity(
   city: ActiveCity,
-  direction: "left" | "right" = "left"
+  direction: 'left' | 'right' = 'left',
 ) {
   const globeRef = useMapStore.getState().globeRef;
   if (!globeRef.current) return;
@@ -80,10 +80,10 @@ export function zoomInCity(
   };
 
   let xOffset = mobile ? 0 : Math.min(width * 0.4, 1000);
-  if (direction === "right") {
+  if (direction === 'right') {
     xOffset = -xOffset;
   }
-  let latLongVar = direction === "right" ? -1 : 1;
+  const latLongVar = direction === 'right' ? -1 : 1;
 
   // Create an object for the ending state of the tween
   const end = {
@@ -95,8 +95,8 @@ export function zoomInCity(
     },
   };
 
-  document.body.classList.remove("city-inactive");
-  document.body.classList.add("city-active");
+  document.body.classList.remove('city-inactive');
+  document.body.classList.add('city-active');
   highlightLabel(city);
 
   const tween = new TWEEN.Tween(start)
@@ -111,7 +111,7 @@ export function zoomInCity(
         start.xOffset,
         currentCamera.view.offsetY,
         window.innerWidth,
-        window.innerHeight
+        window.innerHeight,
       );
       globeRef.current.pointOfView(start.pointOfView);
 
@@ -158,8 +158,8 @@ export function zoomOutCity(city: ActiveCity) {
     },
   };
 
-  document.body.classList.remove("city-active");
-  document.body.classList.add("city-inactive");
+  document.body.classList.remove('city-active');
+  document.body.classList.add('city-inactive');
 
   // Create a new tween
   const tween = new TWEEN.Tween(start)
@@ -174,7 +174,7 @@ export function zoomOutCity(city: ActiveCity) {
         start.xOffset,
         currentCamera.view.offsetY,
         window.innerWidth,
-        window.innerHeight
+        window.innerHeight,
       );
       globeRef.current.pointOfView(start.pointOfView);
       currentCamera.updateProjectionMatrix();
@@ -222,7 +222,7 @@ export function activateGlobe(cb?: () => void) {
   const targetPosition = new THREE.Vector3(
     currentCameraPosition.x,
     currentCameraPosition.y,
-    ZOOM.ACTIVE
+    ZOOM.ACTIVE,
   );
   if (!currentCamera.view) return;
   const start = {
@@ -246,7 +246,7 @@ export function activateGlobe(cb?: () => void) {
         0,
         start.yOffset,
         window.innerWidth,
-        window.innerHeight
+        window.innerHeight,
       );
       currentCamera.position.set(start.zoom.x, start.zoom.y, start.zoom.z);
       currentCamera.updateProjectionMatrix();
@@ -265,8 +265,8 @@ export function activateGlobe(cb?: () => void) {
     TWEEN.update(time);
   };
   requestAnimationFrame(animate);
-  document.body.classList.remove("globe-inactive");
-  document.body.classList.add("city-inactive");
+  document.body.classList.remove('globe-inactive');
+  document.body.classList.add('city-inactive');
 
   return () => {
     // This will stop the tween when the component unmounts
@@ -286,7 +286,7 @@ export function deactivateGlobe(isAbout = false) {
   // globeRef.current.controls().autoRotate = false;
 
   if (!globeRef.current) {
-    console.warn("globeRef.current is not initialized.");
+    console.warn('globeRef.current is not initialized.');
     return;
   }
 
@@ -294,7 +294,7 @@ export function deactivateGlobe(isAbout = false) {
   const currentCamera = globeRef.current.camera();
 
   if (!currentCamera) {
-    console.warn("globeRef.current.camera() is not initialized.");
+    console.warn('globeRef.current.camera() is not initialized.');
     return;
   }
 
@@ -338,7 +338,7 @@ export function deactivateGlobe(isAbout = false) {
         0,
         start.yOffset,
         window.innerWidth,
-        window.innerHeight
+        window.innerHeight,
       );
       currentCamera.position.set(start.zoom.x, start.zoom.y, start.zoom.z);
       currentCamera.updateProjectionMatrix();
@@ -353,8 +353,8 @@ export function deactivateGlobe(isAbout = false) {
   requestAnimationFrame(animate);
   globeRef.current.controls().enabled = false;
 
-  document.body.classList.add("globe-inactive");
-  document.body.classList.remove("city-inactive");
+  document.body.classList.add('globe-inactive');
+  document.body.classList.remove('city-inactive');
   globeRef.current.controls().autoRotateSpeed = 0.1;
   return () => {
     if (tween) {
@@ -396,7 +396,7 @@ type GlobeRef = {
   current: {
     toGlobeCoords: (
       x: number,
-      y: number
+      y: number,
     ) => { lat: number; lng: number } | null;
   } | null;
 };
@@ -411,7 +411,7 @@ export function handleMouseUp(
   e: MouseEvent,
   globeRef: GlobeRef,
   data: City[],
-  handleLabelClick: (city: City) => void
+  handleLabelClick: (city: City) => void,
 ): void {
   const mouseUpCoords = { x: e.clientX, y: e.clientY };
   if (!mouseDownCoords) return;
@@ -429,7 +429,7 @@ export function handleGlobeClick(
   e: MouseEvent,
   globeRef: GlobeRef,
   data: City[],
-  handleLabelClick: (city: City) => void
+  handleLabelClick: (city: City) => void,
 ): void {
   if (!globeRef.current) return;
   const coords = globeRef.current.toGlobeCoords(e.clientX, e.clientY);
@@ -453,18 +453,18 @@ export function handleGlobeClick(
 }
 
 function highlightLabel(activeCity: ActiveCity) {
-  document.querySelectorAll(".city-label").forEach((el) => {
+  document.querySelectorAll('.city-label').forEach((el) => {
     const e = el as HTMLDivElement;
     if (e) {
-      e.classList.remove("active");
+      e.classList.remove('active');
     }
   });
 
   const elem = document.getElementById(
-    `${activeCity.countryName}-div`
+    `${activeCity.countryName}-div`,
   ) as HTMLDivElement;
 
   if (elem) {
-    elem.classList.add("active");
+    elem.classList.add('active');
   }
 }

@@ -1,4 +1,4 @@
-import ky from "ky";
+import ky from 'ky';
 
 export class ApiError {
   status: number;
@@ -12,17 +12,17 @@ export class ApiError {
 
 export const api = ky.create({
   headers: {
-    "content-type": "application/json",
+    'content-type': 'application/json',
   },
   hooks: {
     afterResponse: [
       async (_request, _options, response) => {
-        if (`${response.status}`.startsWith("2")) {
+        if (`${response.status}`.startsWith('2')) {
           const json = await response.json();
           return new Response(JSON.stringify(json), {
             status: response.status,
           });
-        } else if (`${response.status}`.startsWith("4")) {
+        } else if (`${response.status}`.startsWith('4')) {
           const json = await response.json();
           throw new ApiError({
             status: response.status,
@@ -34,5 +34,5 @@ export const api = ky.create({
       },
     ],
   },
-  prefixUrl: "https://warpcast.sh/baseglobe/api",
+  prefixUrl: 'https://warpcast.sh/baseglobe/api',
 });

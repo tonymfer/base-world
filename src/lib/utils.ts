@@ -1,10 +1,10 @@
-import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
-import { createPublicClient, http } from "viem";
-import { mainnet } from "viem/chains";
-import { ZDK, ZDKNetwork } from "@zoralabs/zdk";
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+import { createPublicClient, http } from 'viem';
+import { mainnet } from 'viem/chains';
+import { ZDK, ZDKNetwork } from '@zoralabs/zdk';
 
-import { env } from "env.mjs";
+import { env } from 'env.mjs';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -12,11 +12,11 @@ export function cn(...inputs: ClassValue[]) {
 
 // endpoint docs gave me:  https://api.zora.co/graphql
 export const zdk = new ZDK({
-  endpoint: "https://api.zora.co/graphql",
+  endpoint: 'https://api.zora.co/graphql',
   networks: [
     {
-      // @ts-ignore
-      chain: "ZORA_SEPOLIA",
+      // @ts-expect-error Description: This error is expected because the chain value is intentionally set to 'ZORA_SEPOLIA' which may cause an error.
+      chain: 'ZORA_SEPOLIA',
       network: ZDKNetwork.Zora,
     },
   ],
@@ -24,10 +24,10 @@ export const zdk = new ZDK({
 
 export function formatDate(input: string | number): string {
   const date = new Date(input);
-  return date.toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
+  return date.toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
   });
 }
 
@@ -43,14 +43,14 @@ export function absoluteUrl(path: string) {
 export const copyToClipboard = async (text: string) => {
   try {
     await navigator.clipboard.writeText(text);
-    console.log("Copied to clipboard: ", text);
+    console.log('Copied to clipboard: ', text);
   } catch (err) {
-    console.error("Failed to copy: ", err);
+    console.error('Failed to copy: ', err);
   }
 };
 
-export function shortenNumber(num: number | string, prefix = "") {
-  num = Number(num?.toString()?.replaceAll?.(",", ""));
+export function shortenNumber(num: number | string, prefix = '') {
+  num = Number(num?.toString()?.replaceAll?.(',', ''));
 
   if (num >= 1_000_000_000_000) {
     return `${prefix}${toFixed(num / 1_000_000_000_000, 2)}T`;
@@ -67,7 +67,7 @@ export function shortenNumber(num: number | string, prefix = "") {
   }
   return (
     prefix +
-    num.toLocaleString("en-US", {
+    num.toLocaleString('en-US', {
       maximumFractionDigits: 6,
     })
   );

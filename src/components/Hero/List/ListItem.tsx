@@ -1,7 +1,7 @@
-import React from "react";
-import ProfileImage from "@/components/ProfileImage";
-import Link from "next/link";
-import queryString from "query-string";
+import React from 'react';
+import ProfileImage from '@/components/ProfileImage';
+import Link from 'next/link';
+import queryString from 'query-string';
 
 type ListItemProps = {
   data: {
@@ -25,7 +25,7 @@ export default function ListItem({ data, index, className }: ListItemProps) {
 
   const shareQs = queryString.stringify({
     text: `this cast deserves some 👏`,
-    "embeds[]": [
+    'embeds[]': [
       `https://warpcast.com/${username}/${castHash}`,
       `https://tip.hunt.town/allowance/${fid}?t=${Date.now()}`,
     ],
@@ -35,7 +35,7 @@ export default function ListItem({ data, index, className }: ListItemProps) {
 
   return (
     <div
-      className={`shadow-lg pointer-events-none mb-3 overscroll-none rounded-md p-4 py-5 ${className}`}
+      className={`pointer-events-none mb-3 overscroll-none rounded-md p-4 py-5 shadow-lg ${className}`}
       style={{
         animationDelay: `${index * 0.1}s`,
       }}
@@ -64,7 +64,7 @@ export default function ListItem({ data, index, className }: ListItemProps) {
           </div>
         </Link>
         <Link
-          className="text-[26px] pointer-events-auto"
+          className="pointer-events-auto text-[26px]"
           href={shareLink}
           target="_blank"
           rel="noreferrer noopener"
@@ -73,7 +73,7 @@ export default function ListItem({ data, index, className }: ListItemProps) {
         </Link>
       </div>
       <Link
-        className={`mt-2.5 pointer-events-auto flex w-full justify-start whitespace-pre-wrap text-sm text-grey line-clamp-1 ${className}`}
+        className={`text-grey pointer-events-auto mt-2.5 line-clamp-1 flex w-full justify-start whitespace-pre-wrap text-sm ${className}`}
         href={`https://warpcast.com/${username}/${castHash}`}
         target="_blank"
         rel="noreferrer noopener"

@@ -1,5 +1,5 @@
-import { createRef } from "react";
-import create from "zustand";
+import { createRef } from 'react';
+import create from 'zustand';
 
 type ActiveCityResponse = {
   id: number;

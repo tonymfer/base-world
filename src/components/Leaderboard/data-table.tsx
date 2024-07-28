@@ -1,5 +1,5 @@
-"use client";
-import * as React from "react";
+'use client';
+import * as React from 'react';
 
 import {
   ColumnDef,
@@ -11,7 +11,7 @@ import {
   useReactTable,
   getPaginationRowModel,
   SortingState,
-} from "@tanstack/react-table";
+} from '@tanstack/react-table';
 
 import {
   Table,
@@ -20,9 +20,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Input } from "@/components/ui/input";
-import { DataTablePagination } from "./data-table-pagination";
+} from '@/components/ui/table';
+import { Input } from '@/components/ui/input';
+import { DataTablePagination } from './data-table-pagination';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -34,10 +34,10 @@ export function DataTable<TData, TValue>({
   data,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([
-    { id: "followers", desc: true },
+    { id: 'followers', desc: true },
   ]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
+    [],
   );
 
   const table = useReactTable({
@@ -56,15 +56,15 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="gap-4 flex flex-col">
-      <div className="flex items-center mt-4">
+    <div className="flex flex-col gap-4">
+      <div className="mt-4 flex items-center">
         <Input
           placeholder="Search community..."
           value={
-            (table.getColumn("channelId")?.getFilterValue() as string) ?? ""
+            (table.getColumn('channelId')?.getFilterValue() as string) ?? ''
           }
           onChange={(event) =>
-            table.getColumn("channelId")?.setFilterValue(event.target.value)
+            table.getColumn('channelId')?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
@@ -81,7 +81,7 @@ export function DataTable<TData, TValue>({
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext()
+                            header.getContext(),
                           )}
                     </TableHead>
                   );
@@ -94,13 +94,13 @@ export function DataTable<TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
+                  data-state={row.getIsSelected() && 'selected'}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext()
+                        cell.getContext(),
                       )}
                     </TableCell>
                   ))}

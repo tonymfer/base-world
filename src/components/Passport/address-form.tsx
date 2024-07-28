@@ -1,31 +1,31 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { useRouter } from 'next/navigation';
 
 const FormSchema = z.object({
   address: z.string().refine(
     (value) => {
       return (
-        (value.startsWith("0x") &&
+        (value.startsWith('0x') &&
           value.length === 42 &&
           /^[a-zA-Z0-9]{3,}$/.test(value.slice(2))) ||
-        (value.endsWith(".eth") && value.length >= 7)
+        (value.endsWith('.eth') && value.length >= 7)
       );
     },
     {
-      message: "Paste a valid address or ENS name",
-    }
+      message: 'Paste a valid address or ENS name',
+    },
   ),
 });
 
@@ -33,7 +33,7 @@ export function AddressForm() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      address: "",
+      address: '',
     },
   });
 
@@ -50,7 +50,7 @@ export function AddressForm() {
           name="address"
           render={({ field }) => (
             <FormItem>
-              {" "}
+              {' '}
               <FormControl>
                 <Input placeholder="Paste address or ENS" {...field} />
               </FormControl>

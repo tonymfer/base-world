@@ -1,6 +1,6 @@
-import { Attendees } from "types";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Attendees } from 'types';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const UserList = ({
   title,
@@ -32,7 +32,7 @@ const UserList = ({
       {users.length === 0 && (
         <p className="mt-1 text-sm text-gray-600">No Data Available...</p>
       )}
-      <div className="container grid grid-cols-7 sm:grid-cols-8 md:grid-cols-9 gap-x-0 py-4">
+      <div className="container grid grid-cols-7 gap-x-0 py-4 sm:grid-cols-8 md:grid-cols-9">
         {users.slice(0, 17).map((user: Attendees, index: number) => (
           <AspectRatio ratio={1} key={index}>
             <Avatar className="h-10 w-10">
@@ -50,7 +50,7 @@ const UserList = ({
           <AspectRatio ratio={1}>
             <Avatar className="h-[41px] w-[41px] bg-slate-800">
               <AvatarFallback
-                className={users.length > 99 ? "text-[10px]" : "text-sm"}
+                className={users.length > 99 ? 'text-[10px]' : 'text-sm'}
               >
                 +{users.length - 17}
               </AvatarFallback>

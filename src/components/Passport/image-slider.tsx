@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
-import Image from "next/image";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
+} from '@/components/ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
+import Image from 'next/image';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 const carouselItems = [
-  "/images/event-1.jpg",
-  "/images/event-2.jpg",
-  "/images/event-3.jpg",
+  '/images/event-1.jpg',
+  '/images/event-2.jpg',
+  '/images/event-3.jpg',
 ];
 
 export const ImageSlider = () => {

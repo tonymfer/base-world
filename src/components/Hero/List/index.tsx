@@ -1,11 +1,11 @@
-import React from "react";
-import dynamic from "next/dynamic.js";
+import React from 'react';
+import dynamic from 'next/dynamic.js';
 
-const Web = dynamic(() => import("./Web"), {
+const Web = dynamic(() => import('./Web'), {
   ssr: false,
 });
 
-const Mobile = dynamic(() => import("./Mobile"), {
+const Mobile = dynamic(() => import('./Mobile'), {
   ssr: false,
 });
 

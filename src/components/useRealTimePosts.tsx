@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Toaster, toast } from "sonner";
-import { Button } from "./ui/button";
-import { api } from "../utils/api";
-import { ArrowUpRight } from "lucide-react";
-import { motion } from "framer-motion";
-import isMobile from "@/utils/device";
-import Link from "next/link";
+import React, { useEffect, useRef, useState } from 'react';
+import { Toaster, toast } from 'sonner';
+import { Button } from './ui/button';
+import { api } from '../utils/api';
+import { ArrowUpRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import isMobile from '@/utils/device';
+import Link from 'next/link';
 
 export default function useRealTimePosts() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -16,9 +16,9 @@ export default function useRealTimePosts() {
   const fetchData = async () => {
     try {
       const response = await api(`last-cast?t=${Date.now()}`, {
-        method: "GET",
+        method: 'GET',
       });
-      let newData = (await response.json()) as {
+      const newData = (await response.json()) as {
         castHash: string;
         channelUrl: string;
         countryId: number;
@@ -34,7 +34,7 @@ export default function useRealTimePosts() {
 
       setData((prevData) => {
         const updatedData = newData.filter(
-          (item) => !prevData.some((prevItem) => prevItem.id === item.id)
+          (item) => !prevData.some((prevItem) => prevItem.id === item.id),
         );
         return [...prevData, ...updatedData].slice(-20); // 최신 20개의 데이터만 유지
       });
@@ -62,36 +62,36 @@ export default function useRealTimePosts() {
         setSeenIds((prevSeenIds) => new Set(prevSeenIds.add(newData.id)));
         toast.custom(
           (t) => (
-            <div className="flex items-center p-4 bg-white w-full mobile:w-[350px] shadow rounded-md pointer-events-auto">
-              <div className="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 text-white text-md rounded-full bg-blue-500">
+            <div className="pointer-events-auto flex w-full items-center rounded-md bg-white p-4 shadow mobile:w-[350px]">
+              <div className="text-md inline-flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-blue-500 text-white">
                 <img
                   src={newData.pfp_url}
                   alt="Profile"
-                  className="rounded-full aspect-square"
+                  className="aspect-square rounded-full"
                 />
               </div>
               <div className="ml-3 w-0 flex-1">
                 <p className="text-sm font-medium text-gray-900">
-                  {newData.username}{" "}
+                  {newData.username}{' '}
                   <span className="mt-1 text-sm text-gray-500">
                     /
-                    {newData.channelUrl === "https://onchainsummer.xyz"
-                      ? "base"
+                    {newData.channelUrl === 'https://onchainsummer.xyz'
+                      ? 'base'
                       : newData.channelUrl.substring(
-                          newData.channelUrl.lastIndexOf("/") + 1
+                          newData.channelUrl.lastIndexOf('/') + 1,
                         )}
                   </span>
                 </p>
-                <p className="mt-1 text-sm line-clamp-1 text-gray-500">
+                <p className="mt-1 line-clamp-1 text-sm text-gray-500">
                   {newData.text}
                 </p>
               </div>
-              <div className="ml-4 flex-shrink-0 flex">
+              <div className="ml-4 flex flex-shrink-0">
                 <Link
                   href={`https://warpcast.com/${newData.username}/${newData.castHash}`}
                   passHref
                   target="_blank"
-                  className="bg-transparent rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="inline-flex rounded-md bg-transparent text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   <motion.div whileTap={{ scale: 0.95 }}>
                     <svg
@@ -120,11 +120,11 @@ export default function useRealTimePosts() {
           ),
           {
             duration: 10000,
-          }
+          },
         );
       }
     },
-    { minDelay: 3000, maxDelay: 10000 }
+    { minDelay: 3000, maxDelay: 10000 },
   );
 
   return { data, isLoading, error };
@@ -137,7 +137,7 @@ interface UseRandomIntervalOptions {
 
 export function useRandomInterval(
   callback: () => void,
-  { minDelay, maxDelay }: UseRandomIntervalOptions
+  { minDelay, maxDelay }: UseRandomIntervalOptions,
 ) {
   const savedCallback = useRef<() => void>();
 

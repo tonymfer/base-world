@@ -1,6 +1,6 @@
-import React from "react";
-import LeaderboardContent from "@/components/Leaderboard/leaderboard-content";
-import GlobeHeader from "@/components/Hero/GlobeHeader";
+import React from 'react';
+import LeaderboardContent from '@/components/Leaderboard/leaderboard-content';
+import GlobeHeader from '@/components/Hero/GlobeHeader';
 
 const Leaderboard = () => {
   return (

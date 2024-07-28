@@ -1,29 +1,29 @@
-"use client";
+'use client';
 
-import { zoomOutCity } from "@/utils/globe";
-import queryString from "query-string";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import moment from "moment";
-import { Sheet, SheetContent } from "@/components/ui/sheet";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { circles } from "@/constants";
-import { Event } from "types";
+import { zoomOutCity } from '@/utils/globe';
+import queryString from 'query-string';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import moment from 'moment';
+import { Sheet, SheetContent } from '@/components/ui/sheet';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { circles } from '@/constants';
+import { Event } from 'types';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import Link from "next/link";
-import { normalize } from "viem/ens";
-import { publicClient } from "@/lib/utils";
-import { usePathname } from "next/navigation";
-import { usePassport } from "@/stores/passport";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { useMapStore } from "@/stores/map";
-import useApi from "@/hooks/useApi";
-import { Button } from "../ui/button";
+import Link from 'next/link';
+import { normalize } from 'viem/ens';
+import { publicClient } from '@/lib/utils';
+import { usePathname } from 'next/navigation';
+import { usePassport } from '@/stores/passport';
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import { useMapStore } from '@/stores/map';
+import useApi from '@/hooks/useApi';
+import { Button } from '../ui/button';
 
 export function DetailsSheet() {
   const setActiveCityResponse = useMapStore(
-    (state) => state.setActiveCityResponse
+    (state) => state.setActiveCityResponse,
   );
   const setActiveCity = useMapStore((state) => state.setActiveCity);
   const activeCity = useMapStore((state) => state.activeCity);
@@ -38,8 +38,8 @@ export function DetailsSheet() {
   const chosenCountry = chosenCoordinates?.name?.toLowerCase();
 
   const { data } = useApi({
-    url: "countries",
-    method: "GET",
+    url: 'countries',
+    method: 'GET',
   }) as {
     data: {
       casts: number;
@@ -57,11 +57,11 @@ export function DetailsSheet() {
 
   const pathname = usePathname();
   const ensParams = pathname.substring(1);
-  const [address, setAddress] = useState<string | null>("");
+  const [address, setAddress] = useState<string | null>('');
 
   useEffect(() => {
     async function getEnsAddress() {
-      if (ensParams.includes(".eth")) {
+      if (ensParams.includes('.eth')) {
         const addressFromEns = await publicClient.getEnsAddress({
           name: normalize(ensParams),
         });
@@ -76,15 +76,15 @@ export function DetailsSheet() {
     }
   }, [ensParams]);
 
-  let cityData = circles.find((circle) => circle.country === chosenCountry);
-  let cityDetails =
+  const cityData = circles.find((circle) => circle.country === chosenCountry);
+  const cityDetails =
     (data &&
       data.find((city) => city.countryName.toLowerCase() === chosenCountry)) ||
     null;
 
   const attendees = cityData?.events.reduce(
     (acc: number, event: Event) => acc + (event.users?.length ?? 0),
-    0
+    0,
   );
 
   const filteredEvents: Event[] = cityData ? cityData.events : [];
@@ -115,15 +115,15 @@ export function DetailsSheet() {
         }
       }}
     >
-      <SheetContent side="right" className="z-[40000] px-0 cursor-default">
+      <SheetContent side="right" className="z-[40000] cursor-default px-0">
         <div className="space-y-3">
-          <div className="px-6 space-y-3">
+          <div className="space-y-3 px-6">
             <div>
               <div className="text-xl font-bold">
                 {cityDetails?.countryName}
               </div>
               <Link
-                href={cityDetails?.channelUrl || "#"}
+                href={cityDetails?.channelUrl || '#'}
                 target="_blank"
                 className="text-based hover:underline"
                 rel="noreferrer noopener"
@@ -182,7 +182,7 @@ const StatsItem = ({ title, value }: { title: string; value: number }) => {
   return (
     <div className="flex gap-1 text-xs">
       <div>{value}</div>
-      <div className="text-muted-foreground font-thin">{title}</div>
+      <div className="font-thin text-muted-foreground">{title}</div>
     </div>
   );
 };
@@ -200,7 +200,7 @@ const Casts = () => {
           );
         })
         .map((data, i) => (
-          <CastItem data={data} key={activeCityResponse.id + "-" + i} />
+          <CastItem data={data} key={activeCityResponse.id + '-' + i} />
         ))}
     </ScrollArea>
   );
@@ -226,7 +226,7 @@ const CastItem = ({ data }: CastItemProps) => {
 
   const shareQs = queryString.stringify({
     text: `this cast deserves some 👏`,
-    "embeds[]": [
+    'embeds[]': [
       `https://warpcast.com/${username}/${castHash}`,
       `https://tip.hunt.town/allowance/${fid}?t=${Date.now()}`,
     ],
@@ -237,7 +237,7 @@ const CastItem = ({ data }: CastItemProps) => {
   const time = moment(createdAt).fromNow();
 
   return (
-    <div className="flex gap-2 border-b py-3 px-6">
+    <div className="flex gap-2 border-b px-6 py-3">
       <Avatar>
         <AvatarImage
           src={`https://res.cloudinary.com/merkle-manufactory/image/fetch/c_fill,w_30,h_30/${pfp_url}`}
@@ -245,7 +245,7 @@ const CastItem = ({ data }: CastItemProps) => {
         <AvatarFallback>AA</AvatarFallback>
       </Avatar>
       <div className="max-w-md">
-        <div className="flex gap-1 items-center">
+        <div className="flex items-center gap-1">
           {/* <div className="font-bold">ayvee</div> */}
           <div className="text-sm font-thin text-muted-foreground">
             @{username}
@@ -256,7 +256,7 @@ const CastItem = ({ data }: CastItemProps) => {
         </div>
         <div className="font-thin">{text}</div>
         <Link
-          className="text-[26px] pointer-events-auto pt-2 text-xs hover:opacity-70"
+          className="pointer-events-auto pt-2 text-[26px] text-xs hover:opacity-70"
           href={shareLink}
           target="_blank"
           rel="noreferrer noopener"
@@ -272,7 +272,7 @@ const Events = ({ events }: { events: Event[] }) => {
   return (
     <ScrollArea className="h-[500px]">
       {events.length === 0 ? (
-        <div className="text-center text-muted-foreground font-thin">
+        <div className="text-center font-thin text-muted-foreground">
           No events yet
         </div>
       ) : (
@@ -295,15 +295,15 @@ const EventItem = ({ event }: { event: Event }) => {
         setSecondaryOpen(!secondaryOpen);
         setCurrentEventId(event.id);
       }}
-      className="flex gap-2 border-b py-3 items-center hover:bg-muted px-6 cursor-pointer"
+      className="flex cursor-pointer items-center gap-2 border-b px-6 py-3 hover:bg-muted"
     >
-      <div className="bg-based w-10 h-10 rounded-full" />
+      <div className="h-10 w-10 rounded-full bg-based" />
       <div>
         <div className="text-xs font-thin text-muted-foreground">
           {event.date}
         </div>
         <div className="font-bold">{event.name}</div>
-        <div className="font-thin text-xs text-muted-foreground">
+        <div className="text-xs font-thin text-muted-foreground">
           by {event.host}
         </div>
       </div>

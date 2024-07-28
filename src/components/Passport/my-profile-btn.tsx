@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useAccount } from "wagmi";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { Icons } from "@/components/icons";
+import { useAccount } from 'wagmi';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { Icons } from '@/components/icons';
 
 const MyProfileBtn = () => {
   const { isConnected, address } = useAccount();

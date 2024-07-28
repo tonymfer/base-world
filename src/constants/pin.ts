@@ -12,4 +12,4 @@ export const pin = `<svg width="36.6" height="55" viewBox="0 0 146 219" fill="no
         <rect width="146" height="219" fill="white" />
     </clipPath>
 </defs>
-</svg>`
+</svg>`;

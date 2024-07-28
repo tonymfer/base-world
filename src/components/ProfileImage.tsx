@@ -1,7 +1,7 @@
-import Image from "next/image";
-import React from "react";
-import { twMerge } from "tailwind-merge";
-import { api } from "@/utils/api";
+import Image from 'next/image';
+import React from 'react';
+import { twMerge } from 'tailwind-merge';
+import { api } from '@/utils/api';
 
 export default function ProfileImage({
   className,
@@ -21,8 +21,8 @@ export default function ProfileImage({
   return (
     <div
       className={twMerge(
-        "relative flex items-center justify-center overflow-hidden rounded-full",
-        className
+        'relative flex items-center justify-center overflow-hidden rounded-full',
+        className,
       )}
       style={{
         width: containerSize,

@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import * as Dialog from "@radix-ui/react-dialog";
+import React, { useState } from 'react';
+import * as Dialog from '@radix-ui/react-dialog';
 import {
   Sheet,
   SheetContent,
@@ -9,18 +9,18 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import Link from "next/link";
-import { Icons } from "./icons";
-import { Button } from "./ui/button";
-import { useMapStore } from "@/stores/map";
-import { activateGlobe, deactivateGlobe } from "@/utils/globe";
-import { usePathname, useRouter } from "next/navigation";
+} from '@/components/ui/sheet';
+import Link from 'next/link';
+import { Icons } from './icons';
+import { Button } from './ui/button';
+import { useMapStore } from '@/stores/map';
+import { activateGlobe, deactivateGlobe } from '@/utils/globe';
+import { usePathname, useRouter } from 'next/navigation';
 
 const SideMenu = () => {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const isHome = pathname === "/";
+  const isHome = pathname === '/';
   const router = useRouter();
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -44,7 +44,7 @@ const SideMenu = () => {
             <div className="flex flex-col items-start">
               <Button
                 variant="ghost"
-                className="text-sm tablet:text-base hover:bg-white hover:text-black"
+                className="text-sm hover:bg-white hover:text-black tablet:text-base"
                 onClick={() => {
                   if (isHome) {
                     useMapStore.setState({
@@ -55,7 +55,7 @@ const SideMenu = () => {
                     activateGlobe();
                   } else {
                     activateGlobe();
-                    router.push("/");
+                    router.push('/');
                   }
                 }}
               >
@@ -64,13 +64,13 @@ const SideMenu = () => {
               <Button
                 asChild
                 variant="ghost"
-                className="text-sm tablet:text-base hover:bg-white hover:text-black"
+                className="text-sm hover:bg-white hover:text-black tablet:text-base"
               >
                 <Link href="/leaderboard">Leaderboard</Link>
               </Button>
-              {pathname !== "/leaderboard" && (
+              {pathname !== '/leaderboard' && (
                 <Button
-                  className="text-sm tablet:text-base hover:bg-white hover:text-black"
+                  className="text-sm hover:bg-white hover:text-black tablet:text-base"
                   onClick={() => {
                     deactivateGlobe(true);
                     setOpen(false);

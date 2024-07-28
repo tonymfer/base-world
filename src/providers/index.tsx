@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Web3Provider } from "@/providers/web3-provider";
+import { Web3Provider } from '@/providers/web3-provider';
 
 const buildProvidersTree = (componentsWithProps: any[]) => {
   const initialComponent = ({ children }: { children: React.ReactNode }) => (
@@ -18,11 +18,11 @@ const buildProvidersTree = (componentsWithProps: any[]) => {
         </AccumulatedComponents>
       );
       ProviderWithProps.displayName = `ProviderWithProps(${
-        Provider.displayName || Provider.name || "Unknown"
+        Provider.displayName || Provider.name || 'Unknown'
       })`;
       return ProviderWithProps;
     },
-    initialComponent
+    initialComponent,
   );
 };
 

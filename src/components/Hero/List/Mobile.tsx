@@ -1,20 +1,20 @@
-import React, { useEffect } from "react";
-import { useMapStore } from "@/stores/map";
-import { api } from "@/utils/api";
-import ListItem from "./ListItem";
-import { zoomInCity, zoomOutCity } from "@/utils/globe";
-import Draggable, { DraggableData, DraggableEvent } from "react-draggable";
-import isMobile from "@/utils/device";
+import React, { useEffect } from 'react';
+import { useMapStore } from '@/stores/map';
+import { api } from '@/utils/api';
+import ListItem from './ListItem';
+import { zoomInCity, zoomOutCity } from '@/utils/globe';
+import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
+import isMobile from '@/utils/device';
 
-const TYPE_NEXT = "next";
-const TYPE_PREV = "prev";
+const TYPE_NEXT = 'next';
+const TYPE_PREV = 'prev';
 
-type ArrowButtonType = "next" | "prev";
+type ArrowButtonType = 'next' | 'prev';
 
 export default function List({ data }: { data: any }) {
   const mobile = isMobile();
   const setActiveCityResponse = useMapStore(
-    (state) => state.setActiveCityResponse
+    (state) => state.setActiveCityResponse,
   );
   const activeCityResponse = useMapStore((state) => state.activeCityResponse);
   const [position, setPosition] = React.useState({ x: 0, y: 0 });
@@ -27,7 +27,7 @@ export default function List({ data }: { data: any }) {
   async function handleArrowButton(type: ArrowButtonType) {
     if (!activeCityResponse) return;
     const currentIndex = data.findIndex(
-      (place: any) => place.id === activeCityResponse.id
+      (place: any) => place.id === activeCityResponse.id,
     );
     let nextCity;
     if (type === TYPE_NEXT) {
@@ -41,7 +41,7 @@ export default function List({ data }: { data: any }) {
     setFetching(true);
 
     const response = await api(`country/${nextCity.id}`, {
-      method: "GET",
+      method: 'GET',
     });
     setFetching(false);
     setActiveCityResponse(await response.json());
@@ -52,7 +52,7 @@ export default function List({ data }: { data: any }) {
     setPosition({ x: 0, y: ui.y });
     if (ui.y > 0 && ui.deltaY > 0) {
       setPosition({ x: 0, y: 0 });
-    } else if (ui.y < -0) {
+    } else if (ui.y < 0) {
       if (ui.deltaY < 0) {
         setPosition({ x: 0, y: fullscreen });
       }
@@ -87,25 +87,23 @@ export default function List({ data }: { data: any }) {
     >
       <div
         ref={nodeRef}
-        className={`handle text-black absolute left-[10px] z-[50000] h-screen w-[calc(100%-20px)] rounded-t-2xl border-[1px] border-b-0 border-gray-900 p-6 pb-0 bg-white transition-all delay-[0.05s] duration-200 detail:hidden
-        ${activeCity ? "opacity-100" : "pointer-events-none opacity-0"}
-        `}
+        className={`handle delay-[0.05s] absolute left-[10px] z-[50000] h-screen w-[calc(100%-20px)] rounded-t-2xl border-[1px] border-b-0 border-gray-900 bg-white p-6 pb-0 text-black transition-all duration-200 detail:hidden ${activeCity ? 'opacity-100' : 'pointer-events-none opacity-0'} `}
       >
         <div className="relative flex h-full w-full flex-col justify-start">
-          <hr className="absolute top-[-10px] left-1/2 w-20 -translate-x-1/2 rounded-[2px] border-[2px] border-[#000] opacity-30" />
+          <hr className="absolute left-1/2 top-[-10px] w-20 -translate-x-1/2 rounded-[2px] border-[2px] border-[#000] opacity-30" />
           <div className="mb-5 flex w-full items-center justify-between">
             <div className="flex gap-2">
               <button
                 onTouchEnd={() => handleArrowButton(TYPE_PREV)}
                 className="flex aspect-square h-10 items-center justify-center rounded-full"
               >
-                <div className="aspect-square h-[18px] rotate-45 border-l-[2px] border-b-[2px] border-[#000] hover:scale-[1.1]" />
+                <div className="aspect-square h-[18px] rotate-45 border-b-[2px] border-l-[2px] border-[#000] hover:scale-[1.1]" />
               </button>
               <button
                 onTouchEnd={() => handleArrowButton(TYPE_NEXT)}
-                className=" flex aspect-square h-10 items-center justify-center rounded-full"
+                className="flex aspect-square h-10 items-center justify-center rounded-full"
               >
-                <div className="aspect-square h-[18px] rotate-45 border-t-[2px] border-r-[2px] border-[#000] hover:scale-[1.1]" />
+                <div className="aspect-square h-[18px] rotate-45 border-r-[2px] border-t-[2px] border-[#000] hover:scale-[1.1]" />
               </button>
             </div>
             <button
@@ -122,25 +120,25 @@ export default function List({ data }: { data: any }) {
                 viewBox="0 0 15 15"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-7 h-7"
+                className="h-7 w-7"
               >
                 <path
                   d="M12.8536 2.85355C13.0488 2.65829 13.0488 2.34171 12.8536 2.14645C12.6583 1.95118 12.3417 1.95118 12.1464 2.14645L7.5 6.79289L2.85355 2.14645C2.65829 1.95118 2.34171 1.95118 2.14645 2.14645C1.95118 2.34171 1.95118 2.65829 2.14645 2.85355L6.79289 7.5L2.14645 12.1464C1.95118 12.3417 1.95118 12.6583 2.14645 12.8536C2.34171 13.0488 2.65829 13.0488 2.85355 12.8536L7.5 8.20711L12.1464 12.8536C12.3417 13.0488 12.6583 13.0488 12.8536 12.8536C13.0488 12.6583 13.0488 12.3417 12.8536 12.1464L8.20711 7.5L12.8536 2.85355Z"
                   fill="#000"
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                 ></path>
               </svg>
             </button>
           </div>
-          <h1 className="text-4xl font-bold text-black uppercase leading-none">
+          <h1 className="text-4xl font-bold uppercase leading-none text-black">
             {activeCity?.countryName}
           </h1>
           <h2 className="flex w-full justify-end text-xl text-black">
             <span className="mr-2 text-lg">total : </span>
             <span className="text-xl text-primary">
-              {activeCity?.casts || 0}{" "}
-              {activeCity?.casts === 1 ? "cast" : "casts"}
+              {activeCity?.casts || 0}{' '}
+              {activeCity?.casts === 1 ? 'cast' : 'casts'}
             </span>
           </h2>
           {fetching ? (
@@ -158,7 +156,7 @@ export default function List({ data }: { data: any }) {
             </div>
           ) : (
             <div
-              className={`cancel mt-5 flex grow text-black flex-col overflow-hidden overflow-y-scroll overscroll-none pb-[50%] scrollbar-hide`}
+              className={`cancel mt-5 flex grow flex-col overflow-hidden overflow-y-scroll overscroll-none pb-[50%] text-black scrollbar-hide`}
             >
               {activeCityResponse?.casts
                 .sort((a, b) => {
@@ -169,7 +167,7 @@ export default function List({ data }: { data: any }) {
                     data={data}
                     // className={'overscroll-none'}
                     index={i}
-                    key={activeCityResponse.id + "-" + i}
+                    key={activeCityResponse.id + '-' + i}
                   />
                 ))}
             </div>

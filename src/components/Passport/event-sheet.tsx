@@ -1,27 +1,27 @@
-"use client";
+'use client';
 
-import React, { useEffect } from "react";
-import { Sheet, SheetContent, SheetOverlay } from "@/components/ui/sheet";
-import { usePassport } from "@/stores/passport";
-import Link from "next/link";
-import UserList from "./user-list";
-import SupportersList from "./supporters";
-import { cn, copyToClipboard, zdk } from "@/lib/utils";
-import { Attendees } from "types";
-import { Button } from "@/components/ui/button";
-import { env } from "env.mjs";
-import { Icons } from "@/components//icons";
-import { toast } from "sonner";
+import React, { useEffect } from 'react';
+import { Sheet, SheetContent, SheetOverlay } from '@/components/ui/sheet';
+import { usePassport } from '@/stores/passport';
+import Link from 'next/link';
+import UserList from './user-list';
+import SupportersList from './supporters';
+import { cn, copyToClipboard, zdk } from '@/lib/utils';
+import { Attendees } from 'types';
+import { Button } from '@/components/ui/button';
+import { env } from 'env.mjs';
+import { Icons } from '@/components//icons';
+import { toast } from 'sonner';
 
 const EventSheet = () => {
   const secondaryOpen = usePassport((state) => state.secondaryOpen);
   const handleSecondaryOpenAndReset = usePassport(
-    (state) => state.handleSecondaryOpenAndReset
+    (state) => state.handleSecondaryOpenAndReset,
   );
   const filteredEvents = usePassport((state) => state.filteredEvents);
   const currentEventId = usePassport((state) => state.currentEventId);
   const displayedEvent = filteredEvents.find(
-    (event) => event.id === currentEventId
+    (event) => event.id === currentEventId,
   );
   const mints = usePassport((state) => state.mints);
   const contract = usePassport((state) => state.contract);
@@ -48,7 +48,7 @@ const EventSheet = () => {
     }
 
     if (displayedEvent && displayedEvent.contract) {
-      const contract = displayedEvent.contract.split("/")[0];
+      const contract = displayedEvent.contract.split('/')[0];
       fetchToken(contract);
     }
   }, [displayedEvent]);
@@ -56,12 +56,12 @@ const EventSheet = () => {
   const handleCopy = async (link: string) => {
     try {
       await copyToClipboard(link);
-      toast.success("Copied!", {
-        position: "bottom-right",
+      toast.success('Copied!', {
+        position: 'bottom-right',
         duration: 1000,
       });
     } catch (error) {
-      toast.error("Failed to copy text"); // Show error toast
+      toast.error('Failed to copy text'); // Show error toast
     }
   };
 
@@ -75,31 +75,31 @@ const EventSheet = () => {
       <SheetContent
         hideOverlay
         side="right"
-        className="z-[40000] px-0 cursor-default"
+        className="z-[40000] cursor-default px-0"
       >
         {displayedEvent ? (
           <>
             <SheetOverlay
               style={{
-                backgroundColor: "rgba(0, 0, 0, 0.1)",
+                backgroundColor: 'rgba(0, 0, 0, 0.1)',
                 zIndex: -40000,
               }}
               asChild
-              className="bg-transparent z-[-4000]"
+              className="z-[-4000] bg-transparent"
               data-state="closed"
             />
-            <div className="flex flex-col h-full justify-between">
+            <div className="flex h-full flex-col justify-between">
               <div className="space-y-3">
-                <div className="px-6 space-y-3">
+                <div className="space-y-3 px-6">
                   <div>
-                    <p className="text-gray-500 text-sm">
+                    <p className="text-sm text-gray-500">
                       {displayedEvent.date}
                     </p>
                     <div className="text-2xl font-bold">
                       {displayedEvent.name}
                     </div>
                     <Link
-                      href={"#"}
+                      href={'#'}
                       target="_blank"
                       className="text-based hover:underline"
                       rel="noreferrer noopener"
@@ -122,10 +122,10 @@ const EventSheet = () => {
                   />
                 </div>
               </div>
-              <div className="px-5 flex w-full items-center gap-2">
+              <div className="flex w-full items-center gap-2 px-5">
                 <Button
                   size="sm"
-                  className={cn("w-full font-bold")}
+                  className={cn('w-full font-bold')}
                   disabled={!displayedEvent.contract}
                 >
                   <Link
@@ -139,7 +139,7 @@ const EventSheet = () => {
                   disabled={!displayedEvent.contract}
                   onClick={() =>
                     handleCopy(
-                      `${env.NEXT_PUBLIC_ZORA_URL}${displayedEvent.contract}`
+                      `${env.NEXT_PUBLIC_ZORA_URL}${displayedEvent.contract}`,
                     )
                   }
                   size="icon"

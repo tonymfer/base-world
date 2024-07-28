@@ -1,52 +1,52 @@
-"use client";
-import React, { useCallback, useMemo, useEffect, use } from "react";
-import { useMapStore } from "@/stores/map";
-import * as THREE from "three";
-import { api } from "@/utils/api";
+'use client';
+import React, { useCallback, useMemo, useEffect, use } from 'react';
+import { useMapStore } from '@/stores/map';
+import * as THREE from 'three';
+import { api } from '@/utils/api';
 import {
   activateGlobe,
   init,
   zoomInCity,
   handleMouseDown,
   handleMouseUp,
-} from "@/utils/globe";
-import HEX_DATA from "./countries.json";
-import htmlElement from "./htmlElement";
-import { useLandingStore } from "@/stores/landing";
-import { usePassport } from "@/stores/passport";
+} from '@/utils/globe';
+import HEX_DATA from './countries.json';
+import htmlElement from './htmlElement';
+import { useLandingStore } from '@/stores/landing';
+import { usePassport } from '@/stores/passport';
 
 export default function ThreeGlobe({ data }) {
   const setOpenPassport = usePassport((state) => state.setOpen);
   const openPassport = usePassport((state) => state.open);
   const setChosenCoordinates = usePassport(
-    (state) => state.setChosenCoordinates
+    (state) => state.setChosenCoordinates,
   );
 
   let Globe = () => null;
-  if (typeof window !== "undefined") {
-    Globe = require("react-globe.gl").default;
+  if (typeof window !== 'undefined') {
+    Globe = require('react-globe.gl').default;
   }
   const globeRef = useMapStore((state) => state.globeRef);
   const setReady = useMapStore((state) => state.setReady);
   const setActiveCityResponse = useMapStore(
-    (state) => state.setActiveCityResponse
+    (state) => state.setActiveCityResponse,
   );
   const activeCity = useMapStore((state) => state.activeCity);
   const mobile = useLandingStore((state) => state.mobile);
 
   const [screenSize, setScreenSize] = React.useState({
-    width: typeof window !== "undefined" && window.innerWidth,
-    height: typeof window !== "undefined" && window.innerHeight,
+    width: typeof window !== 'undefined' && window.innerWidth,
+    height: typeof window !== 'undefined' && window.innerHeight,
   });
 
   const globeMaterial = new THREE.MeshBasicMaterial({
-    color: "#035CF6",
+    color: '#035CF6',
     opacity: 0.6,
     transparent: true,
   });
 
   const polygonsMaterial = new THREE.MeshLambertMaterial({
-    color: "#fff",
+    color: '#fff',
     side: THREE.DoubleSide,
   });
 
@@ -87,16 +87,16 @@ export default function ThreeGlobe({ data }) {
       handleMouseUp(e, globeRef, data, handleLabelClick);
     }
 
-    window.addEventListener("pointerdown", handleMouseDown);
-    window.addEventListener("pointermove", onPointerMove);
-    window.addEventListener("pointerup", onMouseUp);
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('pointerdown', handleMouseDown);
+    window.addEventListener('pointermove', onPointerMove);
+    window.addEventListener('pointerup', onMouseUp);
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener("pointerdown", handleMouseDown);
-      window.removeEventListener("pointermove", onPointerMove);
-      window.removeEventListener("pointerup", onMouseUp);
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('pointerdown', handleMouseDown);
+      window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('pointerup', onMouseUp);
+      window.removeEventListener('resize', handleResize);
       setReady(false);
       if (globeRef.current) {
         globeRef.current.renderer().dispose();
@@ -124,7 +124,7 @@ export default function ThreeGlobe({ data }) {
       // Get city data
 
       const response = await api(`country/${city.id}`, {
-        method: "GET",
+        method: 'GET',
       }).json();
       const { latitude: lat, longitude: lng, countryName: name } = response;
       setChosenCoordinates({ lat, lng, name });
@@ -153,7 +153,7 @@ export default function ThreeGlobe({ data }) {
   }, []);
 
   const pointColor = useCallback(() => {
-    return "#fff";
+    return '#fff';
   }, []);
 
   const pointAltitude = useCallback(() => {
@@ -163,7 +163,7 @@ export default function ThreeGlobe({ data }) {
 
   const hexPolygonColor = useCallback(() => {
     // return "#0059D2";
-    return "#fff";
+    return '#fff';
   }, []);
 
   const hexPolygonResolution = useCallback(() => {
@@ -185,7 +185,7 @@ export default function ThreeGlobe({ data }) {
         polygonSideMaterial: polygonsMaterial,
         polygonAltitude: 0.006,
         polygonCapCurvatureResolution: 0,
-        polygonStrokeColor: "#000000",
+        polygonStrokeColor: '#000000',
       };
 
   const pointProps = {
@@ -221,8 +221,8 @@ export default function ThreeGlobe({ data }) {
         init();
         setReady(true);
       }}
-      width={typeof window !== "undefined" && screenSize.width}
-      height={typeof window !== "undefined" && screenSize.height}
+      width={typeof window !== 'undefined' && screenSize.width}
+      height={typeof window !== 'undefined' && screenSize.height}
       globeMaterial={globeMaterial}
       onZoom={() => {
         if (!globeRef.current) return;

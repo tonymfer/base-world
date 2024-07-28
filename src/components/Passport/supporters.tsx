@@ -1,6 +1,6 @@
-import { Attendees } from "types";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Attendees } from 'types';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
 const SupportersList = ({
   title,
@@ -21,7 +21,7 @@ const SupportersList = ({
   let contract;
 
   function generateColorFromAddress(address: string) {
-    if (address.startsWith("0x")) {
+    if (address.startsWith('0x')) {
       address = address.slice(2);
     }
     const colorHex = address.slice(-6);
@@ -38,8 +38,8 @@ const SupportersList = ({
   }
 
   if (selectedEvent && eventContract) {
-    event = selectedEvent.split("/")[1];
-    contract = eventContract.split("/")[1];
+    event = selectedEvent.split('/')[1];
+    contract = eventContract.split('/')[1];
   }
 
   return (
@@ -52,7 +52,7 @@ const SupportersList = ({
         <p className="mt-1 text-sm text-gray-600">No Data Available...</p>
       )}
       {event === contract ? (
-        <div className="grid grid-cols-9 gap-x-0 pr-10 py-4">
+        <div className="grid grid-cols-9 gap-x-0 py-4 pr-10">
           {supporters
             .slice(0, 15)
             .map((supporter: Attendees, index: number) => (

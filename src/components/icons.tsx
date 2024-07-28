@@ -26,9 +26,9 @@ import {
   LucideIcon,
   Share,
   Menu,
-} from "lucide-react"
+} from 'lucide-react';
 
-export type Icon = LucideIcon
+export type Icon = LucideIcon;
 
 export const Icons = {
   menu: Menu,
@@ -87,4 +87,4 @@ export const Icons = {
   ),
   twitter: Twitter,
   check: Check,
-}
+};
