@@ -283,7 +283,7 @@ export function activateGlobe(cb?: () => void) {
 export function deactivateGlobe(isAbout = false) {
   const { globeRef, setGlobeActive } = useMapStore.getState();
   setGlobeActive(false);
-  // globeRef.current.controls().autoRotate = false;
+  globeRef.current.controls().autoRotate = false;
 
   if (!globeRef.current) {
     console.warn('globeRef.current is not initialized.');
