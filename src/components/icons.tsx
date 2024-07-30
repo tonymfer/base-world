@@ -26,11 +26,13 @@ import {
   LucideIcon,
   Share,
   Menu,
+  Filter,
 } from 'lucide-react';
 
 export type Icon = LucideIcon;
 
 export const Icons = {
+  filter: Filter,
   menu: Menu,
   logo: ({ ...props }: LucideProps) => (
     <svg
