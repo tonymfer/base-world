@@ -13,6 +13,21 @@ const LeaderboardContent = () => {
   }) as {
     data: CountriesInfo[];
   };
+  // HACK: update /base-arabic to have the correct coordinates to dubai in api
+  const tempFixedData = data?.reduce((acc: GlobeDataType[], cur) => {
+    const channelId = cur.channelId;
+    if (channelId === 'base-arabic') {
+      return [
+        ...acc,
+        {
+          ...cur,
+          longitude: 55.296249,
+          latitude: 25.276987,
+          countryName: 'UAE',
+        },
+      ];
+    } else return [...acc, cur];
+  }, []);
 
   const router = useRouter();
 
@@ -25,7 +40,7 @@ const LeaderboardContent = () => {
         </p>
       </div>
       {data ? (
-        <DataTable data={data} columns={columns} />
+        <DataTable data={tempFixedData} columns={columns} />
       ) : (
         <h1>Loading data...</h1>
       )}

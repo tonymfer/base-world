@@ -70,7 +70,7 @@ export function zoomInCity(
   const extraZoomIn = Number(city.casts) < 5 ? 0.05 : 0;
 
   const currentCamera = globeRef.current.camera();
-  globeRef.current.controls().autoRotateSpeed = 0.03;
+  globeRef.current.controls().autoRotateSpeed = 0.01;
 
   if (!currentCamera.view) return;
   const pointOfView = globeRef.current.pointOfView();
@@ -215,7 +215,7 @@ export function activateGlobe(cb?: () => void) {
     if (globeRef.current) {
       globeRef.current.controls().enabled = true;
     }
-    // globeRef.current.controls.enableZoom = true;
+    globeRef.current.controls().autoRotateSpeed = 0.5;
   }, 2000);
 
   // Define the target position for the camera.

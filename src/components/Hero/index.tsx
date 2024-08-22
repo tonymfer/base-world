@@ -48,7 +48,15 @@ export default function BaseGlobe() {
   const tempFixedData = data?.reduce((acc: GlobeDataType[], cur) => {
     const channelId = cur.channelId;
     if (channelId === 'base-arabic') {
-      return [...acc, { ...cur, longitude: 55.296249, latitude: 25.276987 }];
+      return [
+        ...acc,
+        {
+          ...cur,
+          longitude: 55.296249,
+          latitude: 25.276987,
+          countryName: 'UAE',
+        },
+      ];
     } else return [...acc, cur];
   }, []);
 
