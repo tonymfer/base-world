@@ -13,6 +13,17 @@ import { Button } from '../ui/button';
 import useRealTimePosts from '../useRealTimePosts';
 
 const Globe = dynamic(() => import('./ThreeGlobe'), { ssr: false });
+type GlobeDataType = {
+  casts: number;
+  countryCode: string;
+  countryName: string;
+  createdAt: string;
+  id: number;
+  latitude: number;
+  longitude: number;
+  channelId: string;
+  followers: number;
+};
 
 export default function BaseGlobe() {
   const ready = useMapStore((s) => s.ready);
@@ -30,18 +41,16 @@ export default function BaseGlobe() {
     url: 'countries',
     method: 'GET',
   }) as {
-    data: {
-      casts: number;
-      countryCode: string;
-      countryName: string;
-      createdAt: string;
-      id: number;
-      latitude: number;
-      longitude: number;
-      channelId: string;
-      followers: number;
-    }[];
+    data: GlobeDataType[];
   };
+
+  // HACK: update /base-arabic to have the correct coordinates to dubai in api
+  const tempFixedData = data?.reduce((acc: GlobeDataType[], cur) => {
+    const channelId = cur.channelId;
+    if (channelId === 'base-arabic') {
+      return [...acc, { ...cur, longitude: 55.296249, latitude: 25.276987 }];
+    } else return [...acc, cur];
+  }, []);
 
   const { data: baseData } = useApi({
     url: 'base',
@@ -110,17 +119,14 @@ export default function BaseGlobe() {
 
     return (
       <Globe
-        data={(data as ActiveCity[])?.sort((a, b) => a.longitude - b.longitude)}
+        data={(tempFixedData as ActiveCity[])?.sort(
+          (a, b) => a.longitude - b.longitude,
+        )}
       />
     );
   }, [data]);
 
-  const setActiveCity = useMapStore((state) => state.setActiveCity);
   const globeRef = useMapStore((state) => state.globeRef);
-  const [fetching, setFetching] = useState(false);
-  const setActiveCityResponse = useMapStore(
-    (state) => state.setActiveCityResponse,
-  );
 
   const [temp, setTemp] = useState<any>();
 
