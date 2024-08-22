@@ -13,7 +13,7 @@ import { Button } from '../ui/button';
 import useRealTimePosts from '../useRealTimePosts';
 
 const Globe = dynamic(() => import('./ThreeGlobe'), { ssr: false });
-type GlobeDataType = {
+export type GlobeDataType = {
   casts: number;
   countryCode: string;
   countryName: string;

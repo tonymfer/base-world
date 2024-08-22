@@ -5,6 +5,7 @@ import { CountriesInfo } from 'types';
 import { DataTable } from './data-table';
 import { columns } from './columns';
 import { useRouter } from 'next/navigation';
+import { GlobeDataType } from '../Hero';
 
 const LeaderboardContent = () => {
   const { data } = useApi({
