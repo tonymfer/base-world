@@ -20,6 +20,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { useMapStore } from '@/stores/map';
 import useApi from '@/hooks/useApi';
 import { Button } from '../ui/button';
+import { useFixedGlobeData } from '../Hero/useCountries';
 
 export function DetailsSheet() {
   const setActiveCityResponse = useMapStore(
@@ -37,23 +38,7 @@ export function DetailsSheet() {
 
   const chosenCountry = chosenCoordinates?.name?.toLowerCase();
 
-  const { data } = useApi({
-    url: 'countries',
-    method: 'GET',
-  }) as {
-    data: {
-      casts: number;
-      countryCode: string;
-      countryName: string;
-      createdAt: string;
-      id: number;
-      latitude: number;
-      longitude: number;
-      channelId: string;
-      followers: number;
-      channelUrl: string;
-    }[];
-  };
+  const data = useFixedGlobeData();
 
   const pathname = usePathname();
   const ensParams = pathname.substring(1);

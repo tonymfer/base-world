@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from '../ui/button';
 import useRealTimePosts from '../useRealTimePosts';
+import { useFixedGlobeData } from './useCountries';
 
 const Globe = dynamic(() => import('./ThreeGlobe'), { ssr: false });
 export type GlobeDataType = {
@@ -37,28 +38,7 @@ export default function BaseGlobe() {
   const setScrolling = useLandingStore((s) => s.setScrolling);
   const scrolling = useLandingStore((s) => s.scrolling);
 
-  const { data } = useApi({
-    url: 'countries',
-    method: 'GET',
-  }) as {
-    data: GlobeDataType[];
-  };
-
-  // HACK: update /base-arabic to have the correct coordinates to dubai in api
-  const tempFixedData = data?.reduce((acc: GlobeDataType[], cur) => {
-    const channelId = cur.channelId;
-    if (channelId === 'base-arabic') {
-      return [
-        ...acc,
-        {
-          ...cur,
-          longitude: 55.296249,
-          latitude: 25.276987,
-          countryName: 'UAE',
-        },
-      ];
-    } else return [...acc, cur];
-  }, []);
+  const data = useFixedGlobeData();
 
   const { data: baseData } = useApi({
     url: 'base',
@@ -127,9 +107,7 @@ export default function BaseGlobe() {
 
     return (
       <Globe
-        data={(tempFixedData as ActiveCity[])?.sort(
-          (a, b) => a.longitude - b.longitude,
-        )}
+        data={(data as ActiveCity[])?.sort((a, b) => a.longitude - b.longitude)}
       />
     );
   }, [data]);
@@ -162,7 +140,8 @@ export default function BaseGlobe() {
     }
   }, [debouncedCity, globeRef]);
 
-  const userTotalCount = data?.reduce((acc, curr) => acc + curr.followers, 0);
+  const userTotalCount =
+    data?.reduce((acc, curr) => acc + curr.followers, 0) + baseData?.followers;
 
   return (
     <div
@@ -279,18 +258,42 @@ export default function BaseGlobe() {
         >
           <div className="flex h-fit w-fit flex-col items-center text-white">
             <h1 className="flex w-full flex-col items-center justify-start gap-2 whitespace-pre-wrap text-center text-xl font-thin text-white se:text-2xl detail:mt-0 detail:flex detail:flex-row detail:whitespace-nowrap detail:text-3xl laptop:text-4xl">
-              <span className="">Bringing the world onchain,</span>
-              <span className="">a community of builders</span>
-              <span className="">on Base</span>
-            </h1>
-            {data?.length !== 0 && (
-              <div
-                className={`mt-3 block text-base font-extralight text-gray-300`}
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0 }}
               >
-                {data?.length} countries, {userTotalCount} users on warpcast
-              </div>
-            )}
+                Bringing the world onchain,
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.7 }}
+              >
+                a community of builders
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.4 }}
+              >
+                on Base
+              </motion.span>
+            </h1>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: data && data?.length !== 0 ? 1 : 0 }}
+              transition={{ delay: 1.4 }}
+              className={`mt-3 block text-sm font-extralight text-gray-300 tablet:text-lg`}
+            >
+              {data?.length} countries, {userTotalCount} users on Warpcast
+            </motion.div>
+
             <motion.button
+              initial={{ opacity: 0 }}
+              animate={{ opacity: data && data?.length !== 0 ? 1 : 0 }}
+              transition={{ delay: 1.4 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => {
                 activateGlobe();

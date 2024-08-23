@@ -17,7 +17,6 @@ export default function GlobeHeader() {
   const pathname = usePathname();
   const isHome = pathname === '/';
   const router = useRouter();
-  return null;
 
   return (
     <div

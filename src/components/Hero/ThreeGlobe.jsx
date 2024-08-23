@@ -218,8 +218,8 @@ export default function ThreeGlobe({ data }) {
       }}
       enablePointerInteraction={false}
       onGlobeReady={() => {
-        init();
         setReady(true);
+        init();
       }}
       width={typeof window !== 'undefined' && screenSize.width}
       height={typeof window !== 'undefined' && screenSize.height}

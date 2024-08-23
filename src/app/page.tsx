@@ -6,15 +6,19 @@ import GlobeHeader from '@/components/Hero/GlobeHeader';
 import { DetailsSheet } from '@/components/Passport/details-sheet';
 import EventSheet from '@/components/Passport/event-sheet';
 import { usePassport } from '@/stores/passport';
+import { Suspense } from 'react';
+import Loading from './loading';
 
 export default function Home() {
   const open = usePassport((state) => state.open);
 
   return (
-    <main className="bg-white scrollbar-hide">
+    <main className="bg-black scrollbar-hide">
       <DetailsSheet />
       <GlobeHeader />
-      <BaseGlobe />
+      <Suspense fallback={<Loading />}>
+        <BaseGlobe />
+      </Suspense>
       <EventSheet />
       <Toaster
         position={open ? 'bottom-left' : 'bottom-right'}

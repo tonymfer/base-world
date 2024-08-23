@@ -1,36 +1,10 @@
 'use client';
-import React from 'react';
-import useApi from '@/hooks/useApi';
-import { CountriesInfo } from 'types';
-import { DataTable } from './data-table';
+import { useFixedGlobeData } from '../Hero/useCountries';
 import { columns } from './columns';
-import { useRouter } from 'next/navigation';
-import { GlobeDataType } from '../Hero';
+import { DataTable } from './data-table';
 
 const LeaderboardContent = () => {
-  const { data } = useApi({
-    url: 'countries',
-    method: 'GET',
-  }) as {
-    data: CountriesInfo[];
-  };
-  // HACK: update /base-arabic to have the correct coordinates to dubai in api
-  const tempFixedData = data?.reduce((acc: GlobeDataType[], cur) => {
-    const channelId = cur.channelId;
-    if (channelId === 'base-arabic') {
-      return [
-        ...acc,
-        {
-          ...cur,
-          longitude: 55.296249,
-          latitude: 25.276987,
-          countryName: 'UAE',
-        },
-      ];
-    } else return [...acc, cur];
-  }, []);
-
-  const router = useRouter();
+  const data = useFixedGlobeData();
 
   return (
     <div className="mx-auto flex flex-col justify-center padded-horizontal-wide md:py-10">
@@ -41,7 +15,7 @@ const LeaderboardContent = () => {
         </p>
       </div>
       {data ? (
-        <DataTable data={tempFixedData} columns={columns} />
+        <DataTable data={data} columns={columns} />
       ) : (
         <h1>Loading data...</h1>
       )}
