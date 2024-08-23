@@ -14,17 +14,6 @@ import useRealTimePosts from '../useRealTimePosts';
 import { useFixedGlobeData } from './useCountries';
 
 const Globe = dynamic(() => import('./ThreeGlobe'), { ssr: false });
-export type GlobeDataType = {
-  casts: number;
-  countryCode: string;
-  countryName: string;
-  createdAt: string;
-  id: number;
-  latitude: number;
-  longitude: number;
-  channelId: string;
-  followers: number;
-};
 
 export default function BaseGlobe() {
   const ready = useMapStore((s) => s.ready);
@@ -140,8 +129,9 @@ export default function BaseGlobe() {
     }
   }, [debouncedCity, globeRef]);
 
-  const userTotalCount =
-    data?.reduce((acc, curr) => acc + curr.followers, 0) + baseData?.followers;
+  const userTotalCount = data
+    ? data?.reduce((acc, curr) => acc + curr.followers, 0) + baseData?.followers
+    : 0;
 
   return (
     <div

@@ -1,7 +1,18 @@
 import { useState, useEffect } from 'react';
 import { singletonHook } from 'react-singleton-hook';
 import useApi from '@/hooks/useApi';
-import { GlobeDataType } from '@/components/Hero'; // Adjust the import path as necessary
+export type GlobeDataType = {
+  casts: number;
+  countryCode: string;
+  countryName: string;
+  createdAt: string;
+  id: number;
+  latitude: number;
+  longitude: number;
+  channelId: string;
+  followers: number;
+  channelUrl: string;
+};
 
 const useFixedGlobeDataImpl = () => {
   const [fixedData, setFixedData] = useState<GlobeDataType[] | null>(null);
