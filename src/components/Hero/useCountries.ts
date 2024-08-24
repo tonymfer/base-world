@@ -31,9 +31,10 @@ const useFixedGlobeDataImpl = () => {
             ...acc,
             {
               ...cur,
-              longitude: 55.296249,
-              latitude: 25.276987,
-              countryName: 'UAE',
+              longitude: 33.8547,
+              latitude: 35.8623,
+              countryCode: 'LB',
+              countryName: 'lebanon',
             },
           ];
         } else {
