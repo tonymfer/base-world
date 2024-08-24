@@ -34,7 +34,7 @@ const useFixedGlobeDataImpl = () => {
               longitude: 33.8547,
               latitude: 35.8623,
               countryCode: 'LB',
-              countryName: 'lebanon',
+              countryName: 'Lebanon',
             },
           ];
         } else {
