@@ -510,8 +510,8 @@ export const circles: Location[] = [
   },
   {
     id: 23,
-    city: 'riyadh',
-    country: 'saudi arabia',
+    city: 'beirut',
+    country: 'lebanon',
     events: [],
     mintToSupportLink:
       'https://wallet.coinbase.com/nft/mint/eip155:8453:erc721:0x135F8601Ce0f9e391eD11b42430a378BD3325747',
