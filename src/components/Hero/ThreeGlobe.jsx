@@ -129,9 +129,9 @@ export default function ThreeGlobe({ data }) {
       let { latitude: lat, longitude: lng, countryName: name } = response;
 
       if (name === 'Saudi Arabia') {
-        lat = 35.8623;
-        lng = 33.8547;
-        name = 'Lebanon';
+        lat = 25.276987;
+        lng = 55.296249;
+        name = 'UAE';
       }
 
       console.log('===lat, lng, name', lat, lng, name);
