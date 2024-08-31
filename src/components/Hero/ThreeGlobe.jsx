@@ -134,7 +134,6 @@ export default function ThreeGlobe({ data }) {
         name = 'UAE';
       }
 
-      console.log('===lat, lng, name', lat, lng, name);
       setChosenCoordinates({ lat, lng, name });
       setActiveCityResponse(response);
     }
