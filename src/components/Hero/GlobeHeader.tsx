@@ -79,6 +79,8 @@ export default function GlobeHeader() {
             useMapStore.setState({ about: true });
             if (isHome) {
               deactivateGlobe(true);
+            } else {
+              router.push('/');
             }
           }}
           variant="ghost"
