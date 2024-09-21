@@ -77,7 +77,9 @@ export default function GlobeHeader() {
           className="text-sm hover:bg-white hover:text-black tablet:text-base"
           onClick={() => {
             useMapStore.setState({ about: true });
-            router.push('/');
+            if (isHome) {
+              deactivateGlobe(true);
+            }
           }}
           variant="ghost"
         >
