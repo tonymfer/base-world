@@ -34,6 +34,13 @@ export const metadata: Metadata = {
     apple: '/apple-touch-icon.png',
   },
   manifest: `${siteConfig.url}/site.webmanifest`,
+  other: {
+    'fc:frame': 'vNext',
+    'fc:frame:image': 'https://baseworld.org/og.jpg',
+    'fc:frame:button:1': 'Visit Base World',
+    'fc:frame:button:1:action': 'link',
+    'fc:frame:button:1:target': 'https://baseworld.org',
+  },
 };
 
 export default function RootLayout({
