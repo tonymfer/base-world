@@ -30,7 +30,6 @@ export function init() {
   globeRef.current.controls().maxDistance = maxDistance;
   globeRef.current.controls().minDistance = 130;
   globeRef.current.controls().autoRotate = true;
-  useMapStore.setState({ about: false });
 
   currentCamera.position.set(
     currentCameraPosition.x,
@@ -205,7 +204,10 @@ export function zoomOutCity(city: ActiveCity) {
 
 export function activateGlobe(cb?: () => void) {
   const { globeRef, setGlobeActive } = useMapStore.getState();
-  if (!globeRef.current) return;
+  if (!globeRef.current) {
+    console.warn('globeRef.current is not initialized.');
+    return;
+  }
   setGlobeActive(true);
   let animateId: number;
   const currentCamera = globeRef.current.camera();
@@ -224,7 +226,10 @@ export function activateGlobe(cb?: () => void) {
     currentCameraPosition.y,
     ZOOM.ACTIVE,
   );
-  if (!currentCamera.view) return;
+  if (!currentCamera.view) {
+    console.warn('currentCamera.view is not initialized.');
+    return;
+  }
   const start = {
     yOffset: currentCamera.view.offsetY,
     zoom: currentCameraPosition,
@@ -282,6 +287,7 @@ export function activateGlobe(cb?: () => void) {
 
 export function deactivateGlobe(isAbout = false) {
   const { globeRef, setGlobeActive } = useMapStore.getState();
+  if (!globeRef.current) return;
   setGlobeActive(false);
   globeRef.current.controls().autoRotate = false;
 

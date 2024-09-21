@@ -2,7 +2,7 @@ import useApi from '@/hooks/useApi';
 import { useLandingStore } from '@/stores/landing';
 import { ActiveCity, useMapStore } from '@/stores/map';
 import isMobile from '@/utils/device';
-import { activateGlobe, zoomInCity } from '@/utils/globe';
+import { activateGlobe, deactivateGlobe, zoomInCity } from '@/utils/globe';
 import { shortenNumber } from '@/lib/utils';
 import { useDebounce } from '@uidotdev/usehooks';
 import { motion } from 'framer-motion';
@@ -18,6 +18,7 @@ const Globe = dynamic(() => import('./ThreeGlobe'), { ssr: false });
 export default function BaseGlobe() {
   const ready = useMapStore((s) => s.ready);
   const globeActive = useMapStore((s) => s.globeActive);
+  const globeRef = useMapStore((s) => s.globeRef);
   const about = useMapStore((s) => s.about);
   const setGlobeActive = useMapStore((s) => s.setGlobeActive);
   const activeCity = useMapStore((s) => s.activeCity);
@@ -39,7 +40,27 @@ export default function BaseGlobe() {
   useRealTimePosts();
 
   useEffect(() => {
+    if (!globeRef.current) {
+      console.warn('globeRef.current is not initialized.');
+      return;
+    }
+    const currentCamera = globeRef.current.camera();
+    if (!currentCamera) {
+      console.warn('currentCamera is not initialized.');
+      return;
+    }
+    if (globeActive) {
+      activateGlobe();
+    } else if (about) {
+      deactivateGlobe(true);
+    } else {
+      deactivateGlobe();
+    }
+  }, [globeActive, globeRef.current, about]);
+
+  useEffect(() => {
     const handleScroll = (e: WheelEvent | TouchEvent) => {
+      e.preventDefault();
       if (!ready || about) {
         e.preventDefault();
         return;
@@ -52,18 +73,18 @@ export default function BaseGlobe() {
         elem.classList.remove('cancel');
       }
 
-      if (!globeActive) {
-        e.preventDefault();
-        if (
-          (e instanceof WheelEvent && e.deltaY > 0) ||
-          e instanceof TouchEvent
-        ) {
-          activateGlobe();
-          setGlobeActive(true);
-        }
-      } else if (globeActive && !isScrollable && !containerScrollable) {
-        e.preventDefault();
-      }
+      // if (!globeActive) {
+      //   e.preventDefault();
+      //   if (
+      //     (e instanceof WheelEvent && e.deltaY > 0) ||
+      //     e instanceof TouchEvent
+      //   ) {
+      //     activateGlobe();
+      //     setGlobeActive(true);
+      //   }
+      // } else if (globeActive && !isScrollable && !containerScrollable) {
+      //   e.preventDefault();
+      // }
     };
 
     const container = scrollContainerRef.current;
@@ -100,8 +121,6 @@ export default function BaseGlobe() {
       />
     );
   }, [data]);
-
-  const globeRef = useMapStore((state) => state.globeRef);
 
   const [temp, setTemp] = useState<any>();
 

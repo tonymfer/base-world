@@ -12,6 +12,7 @@ export default function GlobeHeader() {
   const ready = useMapStore((s) => s.ready);
   const about = useMapStore((s) => s.about);
   const activeCity = useMapStore((s) => s.activeCity);
+  const setGlobeActive = useMapStore((s) => s.setGlobeActive);
   const globeActive = useMapStore((s) => s.globeActive);
   const mobile = useLandingStore((s) => s.mobile);
   const pathname = usePathname();
@@ -58,7 +59,6 @@ export default function GlobeHeader() {
               });
               activateGlobe();
             } else {
-              activateGlobe();
               router.push('/');
             }
           }}
@@ -72,18 +72,17 @@ export default function GlobeHeader() {
         >
           <Link href="/leaderboard">Leaderboard</Link>
         </Button>
-        {pathname !== '/leaderboard' && (
-          <Button
-            className="text-sm hover:bg-white hover:text-black tablet:text-base"
-            onClick={() => {
-              deactivateGlobe(true);
-              useMapStore.setState({ about: true });
-            }}
-            variant="ghost"
-          >
-            About
-          </Button>
-        )}
+
+        <Button
+          className="text-sm hover:bg-white hover:text-black tablet:text-base"
+          onClick={() => {
+            useMapStore.setState({ about: true });
+            router.push('/');
+          }}
+          variant="ghost"
+        >
+          About
+        </Button>
       </div>
     </div>
   );
