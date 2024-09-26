@@ -235,8 +235,8 @@ export default function ThreeGlobe({ data }) {
         if (!globeRef.current) return;
         globeRef.current.controls().zoomSpeed = mobile ? 1 : 0.7;
       }}
-      atmosphereColor="#0059D2"
-      atmosphereAltitude={0.3}
+      // atmosphereColor="#0059D2"
+      // atmosphereAltitude={0.3}
       {...landProps}
       {...pointProps}
       {...htmlProps}
