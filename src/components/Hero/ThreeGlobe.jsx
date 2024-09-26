@@ -218,7 +218,6 @@ export default function ThreeGlobe({ data }) {
     <Globe
       ref={globeRef}
       waitForGlobeReady={true}
-      animateIn={true}
       rendererConfig={{
         antialias: false,
         alpha: true,
@@ -237,7 +236,7 @@ export default function ThreeGlobe({ data }) {
         globeRef.current.controls().zoomSpeed = mobile ? 1 : 0.7;
       }}
       atmosphereColor="#0059D2"
-      atmosphereAltitude={0}
+      atmosphereAltitude={0.3}
       {...landProps}
       {...pointProps}
       {...htmlProps}
