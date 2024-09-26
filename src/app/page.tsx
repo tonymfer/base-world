@@ -20,10 +20,7 @@ export default function Home() {
         <BaseGlobe />
       </Suspense>
       <EventSheet />
-      <Toaster
-        position={open ? 'bottom-left' : 'bottom-right'}
-        visibleToasts={7}
-      />
+      <Toaster visibleToasts={7} />
     </main>
   );
 }

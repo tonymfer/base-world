@@ -204,9 +204,11 @@ export function zoomOutCity(city: ActiveCity) {
 }
 
 export function activateGlobe(cb?: () => void) {
-  const { globeRef, setGlobeActive } = useMapStore.getState();
-  if (!globeRef.current) return;
-  setGlobeActive(true);
+  const { globeRef } = useMapStore.getState();
+  if (!globeRef.current) {
+    console.warn('globeRef.current is not initialized.');
+    return;
+  }
   let animateId: number;
   const currentCamera = globeRef.current.camera();
   const currentCameraPosition = globeRef.current.camera().position.clone();
