@@ -19,7 +19,7 @@ const globeSize = mobile || tablet ? 3 : 2;
 const ZOOM = {
   INITIAL: mobile || tablet ? 300 : 165,
   ACTIVE: mobile || tablet ? 400 : 350,
-  ABOUT: 0,
+  ABOUT: -10,
 };
 
 export function init() {
