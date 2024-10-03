@@ -220,14 +220,14 @@ export default function BaseGlobe() {
               </motion.span>
             </h1>
 
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: data && data?.length !== 0 ? 1 : 0 }}
               transition={{ delay: 1.4 }}
               className={`mt-3 block text-sm font-extralight text-gray-300 tablet:text-lg`}
             >
               {data?.length} countries, {userTotalCount} users on Warpcast
-            </motion.div>
+            </motion.div> */}
 
             <motion.button
               initial={{ opacity: 0 }}
