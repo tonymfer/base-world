@@ -53,7 +53,7 @@ module.exports = {
     'react/jsx-filename-extension': [
       'warn',
       {
-        extensions: ['ts', 'tsx'],
+        extensions: ['ts', 'tsx', 'js', 'jsx'],
       },
     ],
     'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks

@@ -3,7 +3,6 @@ import { useLandingStore } from '@/stores/landing';
 import { ActiveCity, useMapStore } from '@/stores/map';
 import isMobile from '@/utils/device';
 import { activateGlobe, deactivateGlobe, zoomInCity } from '@/utils/globe';
-import { shortenNumber } from '@/lib/utils';
 import { useDebounce } from '@uidotdev/usehooks';
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
@@ -12,6 +11,10 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from '../ui/button';
 import useRealTimePosts from '../useRealTimePosts';
 import { useFixedGlobeData } from './useCountries';
+import Image from 'next/image';
+import batwLogo from '@/images/batw-logo.png';
+import { baseAroundTheWorld } from './baseAroundTheWorld';
+import { ExpandableCardDemo } from '../Expandable';
 
 const Globe = dynamic(() => import('./ThreeGlobe'), { ssr: false });
 
@@ -58,59 +61,59 @@ export default function BaseGlobe() {
     }
   }, [globeActive, globeRef.current, about]);
 
-  useEffect(() => {
-    const handleScroll = (e: WheelEvent | TouchEvent) => {
-      e.preventDefault();
-      if (!ready || about) {
-        e.preventDefault();
-        return;
-      }
-      const elem = e.target as HTMLElement;
-      const isScrollable = elem.classList.contains('scrollable');
-      const containerScrollable = elem.offsetHeight < elem.scrollHeight;
+  // useEffect(() => {
+  //   const handleScroll = (e: WheelEvent | TouchEvent) => {
+  //     e.preventDefault();
+  //     if (!ready || about) {
+  //       e.preventDefault();
+  //       return;
+  //     }
+  //     const elem = e.target as HTMLElement;
+  //     const isScrollable = elem.classList.contains('scrollable');
+  //     const containerScrollable = elem.offsetHeight < elem.scrollHeight;
 
-      if (!containerScrollable && elem.classList.contains('cancel')) {
-        elem.classList.remove('cancel');
-      }
+  //     if (!containerScrollable && elem.classList.contains('cancel')) {
+  //       elem.classList.remove('cancel');
+  //     }
 
-      // if (!globeActive) {
-      //   e.preventDefault();
-      //   if (
-      //     (e instanceof WheelEvent && e.deltaY > 0) ||
-      //     e instanceof TouchEvent
-      //   ) {
-      //     activateGlobe();
-      //     setGlobeActive(true);
-      //   }
-      // } else if (globeActive && !isScrollable && !containerScrollable) {
-      //   e.preventDefault();
-      // }
-    };
+  //     // if (!globeActive) {
+  //     //   e.preventDefault();
+  //     //   if (
+  //     //     (e instanceof WheelEvent && e.deltaY > 0) ||
+  //     //     e instanceof TouchEvent
+  //     //   ) {
+  //     //     activateGlobe();
+  //     //     setGlobeActive(true);
+  //     //   }
+  //     // } else if (globeActive && !isScrollable && !containerScrollable) {
+  //     //   e.preventDefault();
+  //     // }
+  //   };
 
-    const container = scrollContainerRef.current;
-    if (container) {
-      container.addEventListener('wheel', handleScroll, {
-        passive: false,
-      });
-      container.addEventListener('touchmove', handleScroll, {
-        passive: false,
-      });
-    }
+  //   const container = scrollContainerRef.current;
+  //   if (container) {
+  //     container.addEventListener('wheel', handleScroll, {
+  //       passive: false,
+  //     });
+  //     container.addEventListener('touchmove', handleScroll, {
+  //       passive: false,
+  //     });
+  //   }
 
-    if (globeActive) {
-      document.body.style.cursor = 'pointer';
-    } else {
-      document.body.style.cursor = 'auto';
-    }
+  //   if (globeActive) {
+  //     document.body.style.cursor = 'pointer';
+  //   } else {
+  //     document.body.style.cursor = 'auto';
+  //   }
 
-    return () => {
-      if (container) {
-        container.removeEventListener('wheel', handleScroll);
-        container.removeEventListener('touchmove', handleScroll);
-      }
-      document.body.style.cursor = 'auto';
-    };
-  }, [scrollContainerRef, globeActive, ready]);
+  //   return () => {
+  //     if (container) {
+  //       container.removeEventListener('wheel', handleScroll);
+  //       container.removeEventListener('touchmove', handleScroll);
+  //     }
+  //     document.body.style.cursor = 'auto';
+  //   };
+  // }, [scrollContainerRef, globeActive, ready]);
 
   const memoizedGlobe = useMemo(() => {
     if (!data) return null;
@@ -123,21 +126,6 @@ export default function BaseGlobe() {
   }, [data]);
 
   const [temp, setTemp] = useState<any>();
-
-  async function handleHover() {
-    // const d = temp;
-    // setActiveCity(d);
-    // zoomInCity(d, "left");
-    // setFetching(true);
-    // const response = await api(`country/${d.id}`, {
-    //   method: "GET",
-    // });
-    // setFetching(false);
-    // setActiveCityResponse(await response.json());
-    const channelId =
-      temp.countryName === 'Base' ? 'base' : `~/channel/${temp.channelId}`;
-    window.open(`https://warpcast.com/${channelId}`, '_blank');
-  }
 
   const debouncedCity = useDebounce(temp, 300);
 
@@ -164,95 +152,37 @@ export default function BaseGlobe() {
         style={{
           pointerEvents: globeActive && !activeCity ? 'auto' : 'none',
         }}
-        className="top-1/6 absolute left-0 z-[10] hidden h-2/3 w-[400px] flex-col items-start justify-start text-white transition-all padded-horizontal-wide scrollbar-hide mobile:flex"
+        className="absolute left-0 top-1/2 z-[10] hidden h-1/2 -translate-y-1/2 flex-col items-start justify-start overflow-visible text-white transition-all padded-left mobile:flex"
       >
-        <div className="relative h-full overflow-y-auto scrollbar-hide">
-          <div className="flex w-full flex-col justify-start">
-            <motion.div
-              onClick={handleHover}
-              onHoverStart={() => {
-                const bData = data?.find((d) => d.countryName === 'Base');
-                !activeCity && setTemp(bData);
-              }}
-              className={`group relative flex min-h-[min-content] w-full items-center justify-start overflow-visible rounded-sm px-1.5 py-1 text-base font-thin transition-all hover:bg-white hover:font-normal hover:text-black`}
-            >
-              <span className="ml-1 whitespace-nowrap">/base - </span>
-              <span className="ml-1 flex items-center justify-center gap-1 text-base">
-                <span className=" ">{shortenNumber(baseData?.followers)}</span>
-                <svg
-                  fill="#ffffff"
-                  className="h-4 w-4 group-hover:fill-black group-hover:stroke-black"
-                  viewBox="0 0 32 32"
-                  xmlns="http://www.w3.org/2000/svg"
-                  stroke="#ffffff"
+        <div className="relative h-full overflow-visible scrollbar-hide">
+          <ExpandableCardDemo />
+          {/* <Image
+            src={batwLogo}
+            alt="Base Around The World"
+            width={400}
+            className="min-w-[400px]"
+          /> */}
+          {/* <div className="flex w-full flex-col justify-start">
+            {baseAroundTheWorld.map((d, i) => {
+              const { channelId } = d;
+              return (
+                <motion.div
+                  key={i}
+                  onClick={() => !activeCity && setTemp(d)}
+                  className={`group relative flex min-h-[min-content] w-full items-center justify-start overflow-visible rounded-sm px-1.5 py-1 text-base font-thin transition-all hover:bg-white hover:font-normal hover:text-black`}
                 >
-                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                  <g
-                    id="SVGRepo_tracerCarrier"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  ></g>
-                  <g id="SVGRepo_iconCarrier">
-                    <path d="M16 15.503A5.041 5.041 0 1 0 16 5.42a5.041 5.041 0 0 0 0 10.083zm0 2.215c-6.703 0-11 3.699-11 5.5v3.363h22v-3.363c0-2.178-4.068-5.5-11-5.5z"></path>
-                  </g>
-                </svg>
-              </span>
-            </motion.div>
-            {data
-              ?.sort((a, b) => b.followers - a.followers)
-              .slice(0, 15)
-              .map((d, i) => {
-                const { casts, channelId, countryName, followers } = d;
-                return (
-                  <motion.div
-                    key={i}
-                    onClick={handleHover}
-                    onHoverStart={() => !activeCity && setTemp(d)}
-                    // onMouseEnter={() => setTemp(d)}
-                    className={`group relative flex min-h-[min-content] w-full items-center justify-start overflow-visible rounded-sm px-1.5 py-1 text-base font-thin transition-all hover:bg-white hover:font-normal hover:text-black`}
-                  >
-                    {/* <span className="">{i + 1}.</span> */}
-                    <span className="ml-1 whitespace-nowrap">
-                      /{channelId} -{' '}
-                    </span>
-                    <span className="ml-1 flex items-center justify-center gap-0.5 text-base">
-                      <span className=" ">{shortenNumber(followers)}</span>
-                      <svg
-                        fill="#ffffff"
-                        className="h-4 w-4 group-hover:fill-black group-hover:stroke-black"
-                        viewBox="0 0 32 32"
-                        xmlns="http://www.w3.org/2000/svg"
-                        stroke="#ffffff"
-                      >
-                        <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                        <g
-                          id="SVGRepo_tracerCarrier"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        ></g>
-                        <g id="SVGRepo_iconCarrier">
-                          <path d="M16 15.503A5.041 5.041 0 1 0 16 5.42a5.041 5.041 0 0 0 0 10.083zm0 2.215c-6.703 0-11 3.699-11 5.5v3.363h22v-3.363c0-2.178-4.068-5.5-11-5.5z"></path>
-                        </g>
-                      </svg>
-                    </span>
-                  </motion.div>
-                );
-              })}
-          </div>
-          <Button
-            className="mx-2 mt-2 h-0 w-[90%] py-4 uppercase text-slate-500"
-            variant="link"
-            asChild
-          >
-            <Link href="/leaderboard">See More</Link>
-          </Button>
+                  <span className="ml-1 whitespace-nowrap">{channelId}</span>
+                </motion.div>
+              );
+            })}
+          </div> */}
         </div>
       </motion.div>
       <div className="h-full w-full">
         <div
           className={`absolute z-0 ${
             ready ? 'opacity-100' : 'opacity-0'
-          } duration-[0.5s] h-screen w-screen transition-opacity`}
+          } h-screen w-screen transition-opacity`}
         >
           {memoizedGlobe}
         </div>

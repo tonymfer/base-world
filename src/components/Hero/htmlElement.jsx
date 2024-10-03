@@ -1,8 +1,8 @@
 export default function htmlElement({ d, mobile }) {
   // Constants for configuration
-  const fontSize = mobile ? 8 : 12;
+  const fontSize = mobile ? 8 : 10;
   const length = Math.min(Math.sqrt(d.casts) * 1, 15);
-  const maxFontSize = mobile ? 30 : 50;
+  const maxFontSize = mobile ? 30 : 30;
   const id = `${d.countryName}-div`;
 
   // Check for an existing element or create a new one
@@ -43,7 +43,7 @@ function styleElement(element, length, fontSize, maxFontSize, d) {
       return 50;
     }
     if (d.color) {
-      return 20;
+      return 25;
     }
     return Math.min(Math.max(scaledSize, minSize), maxSize); // Ensure the size is within bounds
   };
@@ -54,7 +54,9 @@ function styleElement(element, length, fontSize, maxFontSize, d) {
   // ... rest of the styleElement function remains unchanged ...
   element.style.fontSize = computedFontSize;
 
-  element.style.transform = `translate(-50%, ${(length || 0) * -0.5}px)`;
+  element.style.transform = hasColor
+    ? `translate(-50%, 0%)`
+    : `translate(-50%, ${(length || 0) * -0.5}px)`;
   element.style.textTransform = 'uppercase';
   element.style.whiteSpace = 'nowrap';
   element.style.fontSize = computedFontSize;
@@ -63,13 +65,18 @@ function styleElement(element, length, fontSize, maxFontSize, d) {
   element.style.position = 'absolute';
   element.style.bottom = '0';
   element.style.left = '0';
-  element.style.color = hasColor ? '#41343D' : '#000';
+  element.style.color = hasColor ? '#fff' : '#000';
   // element.style.color = "#104DF1";
-  element.style.backgroundColor = d.color ?? 'rgba(255, 255, 255, 1)';
+  element.style.background = d.color
+    ? `linear-gradient(to bottom, ${d.color3}, ${d.color}, ${d.color2})`
+    : 'rgba(255, 255, 255, 1)';
   element.style.padding = '2.5px 5px';
   element.style.borderRadius = '5px';
-  element.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.2)';
-  element.style.zIndex = '-1';
+  element.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.3)';
+  element.style.textShadow = hasColor
+    ? '0 0 1px rgba(0, 0, 0, 1)'
+    : '0 0 0px rgba(0, 0, 0, 0.5)';
+  element.style.zIndex = '1';
   element.style.display = 'inline-block';
   // element.style.textShadow = "2px 4px 3px #000";
   element.style.transition = 'transform 0.5s ease-out';

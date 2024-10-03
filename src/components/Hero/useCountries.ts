@@ -37,6 +37,26 @@ const useFixedGlobeDataImpl = () => {
               countryName: 'UAE',
             },
           ];
+        }
+        if (cur.countryName === 'Thailand') {
+          return [
+            ...acc,
+            {
+              ...cur,
+              longitude: 100.523186,
+              latitude: 13.736717,
+            },
+          ];
+        }
+        if (cur.countryName === 'Philippines') {
+          return [
+            ...acc,
+            {
+              ...cur,
+              longitude: 120.984219,
+              latitude: 14.599512,
+            },
+          ];
         } else {
           return [...acc, cur];
         }

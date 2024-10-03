@@ -25,7 +25,7 @@ export default function GlobeHeader() {
         mobile
           ? 'pointer-events-auto opacity-100'
           : 'pointer-events-auto opacity-100'
-      } fixed z-[30000] flex h-20 w-screen items-center justify-between overflow-visible pt-10 padded-horizontal-wide md:gap-8 lg:justify-start`}
+      } fixed z-[30000] flex h-20 w-screen items-center justify-between overflow-visible pt-10 padded-horizontal md:gap-8 lg:justify-start`}
     >
       <button
         // onMouseDown={() => {
@@ -34,14 +34,25 @@ export default function GlobeHeader() {
         // onTouchStart={() => {
         //   deactivateGlobe();
         // }}
+        onClick={() => {
+          if (isHome) {
+            useMapStore.setState({
+              globeActive: true,
+              about: false,
+            });
+            activateGlobe();
+          } else {
+            router.push('/');
+          }
+        }}
         className={`h-8 w-auto overflow-y-hidden tablet:h-10 ${
           !about && (!globeActive || !ready || activeCity)
             ? 'pointer-events-none opacity-100'
             : 'pointer-events-auto opacity-100'
         } `}
-        style={{
-          filter: 'drop-shadow(3px 5px 2px rgb(255 255 255 / 0.2))',
-        }}
+        // style={{
+        //   filter: 'drop-shadow(3px 5px 2px rgb(255 255 255 / 0.2))',
+        // }}
       >
         <BaseLogo />
       </button>

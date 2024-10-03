@@ -5,11 +5,6 @@ import { Provider } from '@/providers';
 import { ThemeProvider } from '@/components/theme-provider';
 import { siteConfig } from '@/config/site';
 
-const inter = Roboto({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '700'],
-});
-
 export const metadata: Metadata = {
   title: siteConfig.name,
   description: siteConfig.description,
@@ -42,6 +37,11 @@ export const metadata: Metadata = {
     'fc:frame:button:1:target': 'https://baseworld.org',
   },
 };
+
+const inter = Roboto({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '700'],
+});
 
 export default function RootLayout({
   children,

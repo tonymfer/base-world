@@ -1,23 +1,23 @@
 'use client';
-import React, { useCallback, useMemo, useEffect, use } from 'react';
+import { useLandingStore } from '@/stores/landing';
 import { useMapStore } from '@/stores/map';
-import * as THREE from 'three';
+import { usePassport } from '@/stores/passport';
 import { api } from '@/utils/api';
 import {
   activateGlobe,
-  init,
-  zoomInCity,
   handleMouseDown,
   handleMouseUp,
+  init,
+  zoomInCity,
 } from '@/utils/globe';
-import HEX_DATA from './countries.json';
-import htmlElement from './htmlElement';
-import { useLandingStore } from '@/stores/landing';
-import { usePassport } from '@/stores/passport';
+import React, { useCallback, useEffect, useMemo } from 'react';
+import * as THREE from 'three';
 import {
   baseAroundTheWorld,
   baseAroundTheWorldArcs,
 } from './baseAroundTheWorld';
+import HEX_DATA from './countries.json';
+import htmlElement from './htmlElement';
 
 export default function ThreeGlobe({ data }) {
   const setOpenPassport = usePassport((state) => state.setOpen);
@@ -43,9 +43,11 @@ export default function ThreeGlobe({ data }) {
     height: typeof window !== 'undefined' && window.innerHeight,
   });
 
-  const globeMaterial = new THREE.MeshBasicMaterial({
+  const globeMaterial = new THREE.MeshLambertMaterial({
     color: '#035CF6',
-    opacity: 0.6,
+    emissive: '#035CF6',
+    emissiveIntensity: 1,
+    opacity: 0.7,
     transparent: true,
   });
 
@@ -67,11 +69,12 @@ export default function ThreeGlobe({ data }) {
 
     if (globeRef.current) {
       const scene = globeRef.current.scene();
+      console.log({ scene });
 
-      if (scene.children.length > 1) {
-        scene.children[1].intensity = 1.5;
-        scene.children[2].intensity = 0;
-      }
+      // if (scene.children.length > 1) {
+      //   scene.children[1].intensity = 1.5;
+      //   scene.children[2].intensity = 0;
+      // }
     }
 
     const controls = globeRef.current.controls();
@@ -129,13 +132,7 @@ export default function ThreeGlobe({ data }) {
       const response = await api(`country/${city.id}`, {
         method: 'GET',
       }).json();
-      let { latitude: lat, longitude: lng, countryName: name } = response;
-
-      if (name === 'Saudi Arabia') {
-        lat = 25.276987;
-        lng = 55.296249;
-        name = 'UAE';
-      }
+      const { latitude: lat, longitude: lng, countryName: name } = response;
 
       setChosenCoordinates({ lat, lng, name });
       setActiveCityResponse(response);
@@ -159,16 +156,17 @@ export default function ThreeGlobe({ data }) {
   const pointRadius = useCallback((d) => {
     // const length = Math.min(Math.sqrt(d._count.users) / 5, 1);
     // return length;
-    return 2;
+    return d.color ? 1 : 1;
   }, []);
 
   const pointColor = useCallback((d) => {
-    return d.color ?? '#fff';
+    return d.color2 ?? '#fff';
   }, []);
 
-  const pointAltitude = useCallback(() => {
+  const pointAltitude = useCallback((d) => {
     const result = mobile ? 0.007 : 0.0001;
-    return result;
+    const multiplier = d.color ? 2 : 1;
+    return result * multiplier;
   }, []);
 
   const hexPolygonColor = useCallback(() => {
@@ -204,18 +202,18 @@ export default function ThreeGlobe({ data }) {
     pointLng,
     pointLabel: useCallback((d) => d.city, []),
     pointAltitude,
-    pointRadius: 1,
+    pointRadius,
     pointColor,
     pointResolution: 3,
     pointsMerge: true,
   };
 
   const htmlProps = {
-    htmlElementsData: useMemo(() => [...data], []),
+    htmlElementsData: useMemo(() => [...data, ...baseAroundTheWorld], []),
     htmlLat: useCallback((d) => d.latitude, []),
     htmlLng: useCallback((d) => d.longitude, []),
     htmlElement: useCallback((d) => htmlElement({ d, mobile }), []),
-    htmlAltitude: 0.003,
+    htmlAltitude: useCallback((d) => (d.color ? 0.01 : 0.0001), []),
   };
 
   const labelsProps = {
@@ -234,11 +232,11 @@ export default function ThreeGlobe({ data }) {
     arcEndLat: useCallback((d) => d.endLat, []),
     arcEndLng: useCallback((d) => d.endLng, []),
     arcColor: useCallback((d) => d.color, []),
-    arcDashAnimateTime: 2000,
+    arcDashAnimateTime: 1500,
     arcDashAnimate: true,
-    arcAltitude: 0.2,
-    arcDashGap: 4,
-    arcDashScale: 1,
+    arcAltitude: 0.05,
+    arcDashGap: 2,
+    arcDashScale: 4,
     arcStroke: 1,
     arcDashInitialGap: useCallback((d) => d.gap, []),
   };
@@ -246,7 +244,6 @@ export default function ThreeGlobe({ data }) {
   return (
     <Globe
       ref={globeRef}
-      waitForGlobeReady={true}
       rendererConfig={{
         antialias: false,
         alpha: true,
@@ -264,8 +261,9 @@ export default function ThreeGlobe({ data }) {
         if (!globeRef.current) return;
         globeRef.current.controls().zoomSpeed = mobile ? 1 : 0.7;
       }}
-      // atmosphereColor="#0059D2"
-      // atmosphereAltitude={0.3}
+      showAtmosphere={true}
+      atmosphereColor="#0059D2"
+      atmosphereAltitude={0.4}
       {...landProps}
       {...labelsProps}
       {...pointProps}

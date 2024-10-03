@@ -1,11 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Toaster, toast } from 'sonner';
-import { Button } from './ui/button';
-import { api } from '../utils/api';
-import { ArrowUpRight } from 'lucide-react';
-import { motion } from 'framer-motion';
 import isMobile from '@/utils/device';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
+import { toast } from 'sonner';
+import { api } from '../utils/api';
 
 export default function useRealTimePosts() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -30,7 +28,6 @@ export default function useRealTimePosts() {
         timestamp: string;
         username: string;
       }[];
-      console.log(newData);
 
       setData((prevData) => {
         const updatedData = newData.filter(
@@ -55,7 +52,6 @@ export default function useRealTimePosts() {
   useRandomInterval(
     () => {
       const unseenData = data.filter((item) => !seenIds.has(item.id));
-      console.log(data);
       if (unseenData.length > 0) {
         const randomIndex = Math.floor(Math.random() * unseenData.length);
         const newData = unseenData[randomIndex];
