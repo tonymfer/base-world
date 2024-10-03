@@ -29,6 +29,7 @@ function createNewElement(id, innerHTML) {
 }
 
 function styleElement(element, length, fontSize, maxFontSize, d) {
+  const hasColor = d.color ? true : false;
   const scaleFontSize = (casts, minSize, maxSize) => {
     // Define the range for casts
     const minCasts = 1; // Assuming 1 is the minimum number of casts
@@ -41,6 +42,9 @@ function styleElement(element, length, fontSize, maxFontSize, d) {
     if (d.countryName === 'Base') {
       return 50;
     }
+    if (d.color) {
+      return 20;
+    }
     return Math.min(Math.max(scaledSize, minSize), maxSize); // Ensure the size is within bounds
   };
 
@@ -50,7 +54,7 @@ function styleElement(element, length, fontSize, maxFontSize, d) {
   // ... rest of the styleElement function remains unchanged ...
   element.style.fontSize = computedFontSize;
 
-  element.style.transform = `translate(-50%, ${length * -1}px)`;
+  element.style.transform = `translate(-50%, ${(length || 0) * -0.5}px)`;
   element.style.textTransform = 'uppercase';
   element.style.whiteSpace = 'nowrap';
   element.style.fontSize = computedFontSize;
@@ -59,13 +63,13 @@ function styleElement(element, length, fontSize, maxFontSize, d) {
   element.style.position = 'absolute';
   element.style.bottom = '0';
   element.style.left = '0';
-  element.style.color = '#000';
+  element.style.color = hasColor ? '#41343D' : '#000';
   // element.style.color = "#104DF1";
-  element.style.backgroundColor = 'rgba(255, 255, 255, 1)';
+  element.style.backgroundColor = d.color ?? 'rgba(255, 255, 255, 1)';
   element.style.padding = '2.5px 5px';
   element.style.borderRadius = '5px';
   element.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.2)';
-  element.style.zIndex = '1';
+  element.style.zIndex = '-1';
   element.style.display = 'inline-block';
   // element.style.textShadow = "2px 4px 3px #000";
   element.style.transition = 'transform 0.5s ease-out';

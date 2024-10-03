@@ -14,6 +14,10 @@ import HEX_DATA from './countries.json';
 import htmlElement from './htmlElement';
 import { useLandingStore } from '@/stores/landing';
 import { usePassport } from '@/stores/passport';
+import {
+  baseAroundTheWorld,
+  baseAroundTheWorldArcs,
+} from './baseAroundTheWorld';
 
 export default function ThreeGlobe({ data }) {
   const setOpenPassport = usePassport((state) => state.setOpen);
@@ -51,7 +55,6 @@ export default function ThreeGlobe({ data }) {
   });
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     function handleResize() {
       setScreenSize({
         width: window.innerWidth,
@@ -159,8 +162,8 @@ export default function ThreeGlobe({ data }) {
     return 2;
   }, []);
 
-  const pointColor = useCallback(() => {
-    return '#fff';
+  const pointColor = useCallback((d) => {
+    return d.color ?? '#fff';
   }, []);
 
   const pointAltitude = useCallback(() => {
@@ -196,9 +199,10 @@ export default function ThreeGlobe({ data }) {
       };
 
   const pointProps = {
-    pointsData: useMemo(() => data, []),
+    pointsData: useMemo(() => [...data, ...baseAroundTheWorld], []),
     pointLat,
     pointLng,
+    pointLabel: useCallback((d) => d.city, []),
     pointAltitude,
     pointRadius: 1,
     pointColor,
@@ -207,11 +211,36 @@ export default function ThreeGlobe({ data }) {
   };
 
   const htmlProps = {
-    htmlElementsData: useMemo(() => data, []),
+    htmlElementsData: useMemo(() => [...data], []),
     htmlLat: useCallback((d) => d.latitude, []),
     htmlLng: useCallback((d) => d.longitude, []),
     htmlElement: useCallback((d) => htmlElement({ d, mobile }), []),
     htmlAltitude: 0.003,
+  };
+
+  const labelsProps = {
+    labelsData: useMemo(() => [...baseAroundTheWorld], []),
+    labelLat: useCallback((d) => d.latitude, []),
+    labelSize: 1,
+    labelLabel: useCallback((d) => labelElement({ d, mobile }), []),
+    labelLng: useCallback((d) => d.longitude, []),
+    labelColor: useCallback((d) => d.color, []),
+  };
+
+  const arcsProps = {
+    arcsData: baseAroundTheWorldArcs,
+    arcStartLat: useCallback((d) => d.startLat, []),
+    arcStartLng: useCallback((d) => d.startLng, []),
+    arcEndLat: useCallback((d) => d.endLat, []),
+    arcEndLng: useCallback((d) => d.endLng, []),
+    arcColor: useCallback((d) => d.color, []),
+    arcDashAnimateTime: 2000,
+    arcDashAnimate: true,
+    arcAltitude: 0.2,
+    arcDashGap: 4,
+    arcDashScale: 1,
+    arcStroke: 1,
+    arcDashInitialGap: useCallback((d) => d.gap, []),
   };
 
   return (
@@ -238,8 +267,14 @@ export default function ThreeGlobe({ data }) {
       // atmosphereColor="#0059D2"
       // atmosphereAltitude={0.3}
       {...landProps}
+      {...labelsProps}
       {...pointProps}
       {...htmlProps}
+      {...arcsProps}
     ></Globe>
   );
+}
+
+function labelElement({ d, mobile }) {
+  return <div>{d.countryName}</div>;
 }
