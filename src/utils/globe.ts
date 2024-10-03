@@ -13,11 +13,12 @@ if (typeof window !== 'undefined') {
   SQUASHDOWN = mobile ? -350 : window?.innerHeight * -0.9;
 }
 
-const zoomedGlobeSize = mobile || tablet ? 1 : 0.65;
+// const zoomedGlobeSize = mobile || tablet ? 1 : 0.65;
+const zoomedGlobeSize = 1;
 const globeSize = mobile || tablet ? 3 : 2;
 const ZOOM = {
   INITIAL: mobile || tablet ? 300 : 165,
-  ACTIVE: mobile || tablet ? 400 : 300,
+  ACTIVE: mobile || tablet ? 400 : 350,
   ABOUT: 0,
 };
 
@@ -26,10 +27,9 @@ export function init() {
   if (!globeRef.current) return;
   const currentCamera = globeRef.current.camera();
   const currentCameraPosition = currentCamera.position.clone();
-  const maxDistance = !mobile ? 300 : 600;
+  const maxDistance = !mobile ? 400 : 600;
   globeRef.current.controls().maxDistance = maxDistance;
   globeRef.current.controls().minDistance = 130;
-  globeRef.current.controls().autoRotate = true;
 
   currentCamera.position.set(
     currentCameraPosition.x,
@@ -51,22 +51,20 @@ export function init() {
   );
 
   globeRef.current.camera().updateProjectionMatrix();
+  globeRef.current.camera().position.z = 1000;
 
   globeRef.current.controls().autoRotate = true;
-  globeRef.current.controls().autoRotateSpeed = 0.1;
+  globeRef.current.controls().autoRotateSpeed = 0.3;
 
   document.body.classList.add('globe-inactive');
 }
 
-export function zoomInCity(
-  city: ActiveCity,
-  direction: 'left' | 'right' = 'left',
-) {
+export function zoomInCity(city: any, direction: 'left' | 'right' = 'left') {
   const globeRef = useMapStore.getState().globeRef;
   if (!globeRef.current) return;
   let animateId: number;
   const width = window.innerWidth;
-  const extraZoomIn = Number(city.casts) < 5 ? 0.05 : 0;
+  // const extraZoomIn = Number(city.casts) < 5 && !city.color ? 0.05 : 0;
 
   const currentCamera = globeRef.current.camera();
   globeRef.current.controls().autoRotateSpeed = 0.01;
@@ -78,7 +76,7 @@ export function zoomInCity(
     pointOfView,
   };
 
-  let xOffset = mobile ? 0 : Math.min(width * 0.4, 1000);
+  let xOffset = mobile ? 0 : Math.min(width * 0.5, 1000);
   if (direction === 'right') {
     xOffset = -xOffset;
   }
@@ -90,7 +88,7 @@ export function zoomInCity(
     pointOfView: {
       lat: city.latitude - latValue * latLongVar,
       lng: city.longitude - longValue * latLongVar,
-      altitude: zoomedGlobeSize - extraZoomIn,
+      altitude: zoomedGlobeSize,
     },
   };
 
@@ -217,7 +215,7 @@ export function activateGlobe(cb?: () => void) {
     if (globeRef.current) {
       globeRef.current.controls().enabled = true;
     }
-    globeRef.current.controls().autoRotateSpeed = 0.5;
+    globeRef.current.controls().autoRotateSpeed = 0.3;
   }, 2000);
 
   // Define the target position for the camera.
@@ -362,6 +360,7 @@ export function deactivateGlobe(isAbout = false) {
   document.body.classList.add('globe-inactive');
   document.body.classList.remove('city-inactive');
   globeRef.current.controls().autoRotateSpeed = 0.1;
+  globeRef.current.controls().autoRotate = true;
   return () => {
     if (tween) {
       tween.stop();
