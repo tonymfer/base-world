@@ -68,7 +68,8 @@ function styleElement(element, length, fontSize, maxFontSize, d) {
   element.style.color = hasColor ? '#fff' : '#000';
   // element.style.color = "#104DF1";
   element.style.background = d.color
-    ? `linear-gradient(to bottom, ${d.color3}, ${d.color}, ${d.color2})`
+    ? // ? `linear-gradient(to bottom, ${d.color3}, ${d.color}, ${d.color2})`
+      d.color
     : 'rgba(255, 255, 255, 1)';
   element.style.padding = hasColor ? '4px 8px' : '2.5px 5px';
   element.style.borderRadius = hasColor ? '8px' : '5px';
