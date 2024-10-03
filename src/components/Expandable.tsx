@@ -162,7 +162,7 @@ export function ExpandableCardDemo() {
             }}
             className="flex cursor-pointer flex-col items-center justify-between rounded-lg py-3 hover:bg-neutral-50 dark:hover:bg-neutral-800 md:flex-row"
           >
-            <div className="flex flex-col gap-4 md:flex-row">
+            <div className="flex flex-col gap-4 pl-3 md:flex-row">
               <motion.div layoutId={`image-${card.title}-${id}`}>
                 <Image
                   width={150}
