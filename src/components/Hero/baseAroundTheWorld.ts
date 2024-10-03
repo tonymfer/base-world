@@ -21,7 +21,7 @@ export const baseAroundTheWorld = [
   },
   {
     cityName: 'Singapore',
-    countryName: 'SEA',
+    countryName: 'SE Asia',
     latitude: 1.352083,
     longitude: 103.819836,
     color: '#FD6F1E',
