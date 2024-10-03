@@ -263,7 +263,7 @@ export default function ThreeGlobe({ data }) {
       }}
       showAtmosphere={true}
       atmosphereColor="#0059D2"
-      atmosphereAltitude={0.4}
+      atmosphereAltitude={0.7}
       {...landProps}
       {...labelsProps}
       {...pointProps}

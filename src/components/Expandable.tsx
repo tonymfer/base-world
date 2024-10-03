@@ -13,6 +13,8 @@ import seaHackImage from '@/images/BATW_Devfolio_featured_SEA_576x268.png';
 import latamHackImage from '@/images/BATW_Devfolio_featured_LatAm_576x268.png';
 import { baseAroundTheWorld } from './Hero/baseAroundTheWorld';
 import { zoomInCity } from '@/utils/globe';
+import logo from '@/images/batw-logo.png';
+import { barlowCondensed } from '@/app/font';
 
 export function ExpandableCardDemo() {
   const [active, setActive] = useState<(typeof cards)[number] | boolean | null>(
@@ -42,6 +44,15 @@ export function ExpandableCardDemo() {
 
   return (
     <>
+      <div className={`${barlowCondensed.className} text-4xl text-white`}>
+        BASE AROUND THE WORLD
+      </div>
+      {/* <Image
+        src={logo}
+        alt="Base Around The World"
+        width={300}
+        className="min-w-[300px]"
+      /> */}
       <AnimatePresence>
         {active && typeof active === 'object' && (
           <motion.div
@@ -134,7 +145,7 @@ export function ExpandableCardDemo() {
           </div>
         ) : null}
       </AnimatePresence>
-      <ul className="mx-auto flex h-full w-full max-w-2xl flex-col justify-center gap-4">
+      <ul className="mx-auto mt-5 flex h-full w-full max-w-2xl flex-col justify-start gap-4">
         {cards.map((card) => (
           <motion.div
             layoutId={`card-${card.title}-${id}`}
@@ -149,7 +160,7 @@ export function ExpandableCardDemo() {
               setActive(card);
               zoomInCity(card.data, 'right');
             }}
-            className="flex cursor-pointer flex-col items-center justify-between rounded-lg p-3 hover:bg-neutral-50 dark:hover:bg-neutral-800 md:flex-row"
+            className="flex cursor-pointer flex-col items-center justify-between rounded-lg py-3 hover:bg-neutral-50 dark:hover:bg-neutral-800 md:flex-row"
           >
             <div className="flex flex-col gap-4 md:flex-row">
               <motion.div layoutId={`image-${card.title}-${id}`}>

@@ -26,6 +26,9 @@ const useFixedGlobeDataImpl = () => {
   useEffect(() => {
     if (data) {
       const tempFixedData = data.reduce((acc: GlobeDataType[], cur) => {
+        if (cur.countryName === 'India') {
+          return [];
+        }
         if (cur.channelId === 'base-arabic') {
           return [
             ...acc,

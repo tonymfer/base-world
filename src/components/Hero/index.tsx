@@ -15,6 +15,8 @@ import Image from 'next/image';
 import batwLogo from '@/images/batw-logo.png';
 import { baseAroundTheWorld } from './baseAroundTheWorld';
 import { ExpandableCardDemo } from '../Expandable';
+import { TextGenerateEffect } from '../text-generate-effect';
+import { barlowCondensed } from '@/app/font';
 
 const Globe = dynamic(() => import('./ThreeGlobe'), { ssr: false });
 
@@ -197,38 +199,11 @@ export default function BaseGlobe() {
         >
           <div className="flex h-fit w-fit flex-col items-center text-white">
             <h1 className="flex w-full flex-col items-center justify-start gap-2 whitespace-pre-wrap text-center text-xl font-thin text-white se:text-2xl detail:mt-0 detail:flex detail:flex-row detail:whitespace-nowrap detail:text-3xl laptop:text-4xl">
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0 }}
-              >
-                Bringing the world onchain,
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.7 }}
-              >
-                a community of builders
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.4 }}
-              >
-                on Base
-              </motion.span>
+              <TextGenerateEffect
+                words="Bringing the world onchain, a community of builders on Base"
+                duration={0.5}
+              />
             </h1>
-
-            {/* <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: data && data?.length !== 0 ? 1 : 0 }}
-              transition={{ delay: 1.4 }}
-              className={`mt-3 block text-sm font-extralight text-gray-300 tablet:text-lg`}
-            >
-              {data?.length} countries, {userTotalCount} users on Warpcast
-            </motion.div> */}
-
             <motion.button
               initial={{ opacity: 0 }}
               animate={{ opacity: data && data?.length !== 0 ? 1 : 0 }}

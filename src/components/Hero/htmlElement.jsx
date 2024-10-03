@@ -43,7 +43,7 @@ function styleElement(element, length, fontSize, maxFontSize, d) {
       return 50;
     }
     if (d.color) {
-      return 25;
+      return 30;
     }
     return Math.min(Math.max(scaledSize, minSize), maxSize); // Ensure the size is within bounds
   };
@@ -70,8 +70,8 @@ function styleElement(element, length, fontSize, maxFontSize, d) {
   element.style.background = d.color
     ? `linear-gradient(to bottom, ${d.color3}, ${d.color}, ${d.color2})`
     : 'rgba(255, 255, 255, 1)';
-  element.style.padding = '2.5px 5px';
-  element.style.borderRadius = '5px';
+  element.style.padding = hasColor ? '4px 8px' : '2.5px 5px';
+  element.style.borderRadius = hasColor ? '8px' : '5px';
   element.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.3)';
   element.style.textShadow = hasColor
     ? '0 0 1px rgba(0, 0, 0, 1)'
