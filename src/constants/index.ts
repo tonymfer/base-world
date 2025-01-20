@@ -332,6 +332,52 @@ export const circles: Location[] = [
         ],
         description: `Celebrate Onchain Summer with Base Builders and community members, and Coinbase Product Managers in Zurich.`,
       },
+      {
+        id: 1,
+        name: 'BASED JANUARY - Switzerland base community first meetup (Geneva)',
+        active: false,
+        date: 'Jan 14th, 2025',
+        host: 'Raph Grieco & Sanaz L.',
+        contract: '',
+        users: [
+          {
+            name: 'user',
+            address: '',
+            ens: '',
+            imageUrl: '',
+          },
+          ...Array(49).fill({
+            name: 'user',
+            address: '',
+            ens: '',
+            imageUrl: '',
+          }),
+        ],
+        description: `First-ever @base 🔵 community meetup in Switzerland will be on Tuesday Jan. 14th, 2025 at 6pm @ Sauvage in Geneva`,
+      },
+      {
+        id: 2,
+        name: 'BASED FEBRUARY - Switzerland base community meetup (Zurich)',
+        active: false,
+        date: 'Feb 20th, 2025',
+        host: 'Raph Grieco & Sanaz L.',
+        contract: '',
+        users: [
+          {
+            name: 'user',
+            address: '',
+            ens: '',
+            imageUrl: '',
+          },
+          ...Array(50).fill({
+            name: 'user',
+            address: '',
+            ens: '',
+            imageUrl: '',
+          }),
+        ],
+        description: `2nd base event in Switzerland, 1st in Zurich!`,
+      },
     ],
   },
   {
