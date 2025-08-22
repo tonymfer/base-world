@@ -118,7 +118,7 @@ export default function BaseGlobe() {
   // }, [scrollContainerRef, globeActive, ready]);
 
   const memoizedGlobe = useMemo(() => {
-    if (!data) return null;
+    // if (!data) return null;
 
     return (
       <Globe

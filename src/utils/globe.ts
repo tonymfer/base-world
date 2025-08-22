@@ -441,7 +441,7 @@ export function handleGlobeClick(
   if (!coords) return;
   const { lat, lng } = coords;
 
-  const closestCity: ClosestCity = data.reduce((acc, city) => {
+  const closestCity: ClosestCity = data?.reduce((acc, city) => {
     const cityDistanceSquared =
       Math.pow(city.latitude - lat, 2) + Math.pow(city.longitude - lng, 2);
     if (cityDistanceSquared > 50) return acc;

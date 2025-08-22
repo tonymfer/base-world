@@ -196,8 +196,13 @@ export default function ThreeGlobe({ data }) {
         polygonStrokeColor: '#000000',
       };
 
+  const pointsData = useMemo(() => {
+    if (!data) return [];
+    return [...data, ...baseAroundTheWorld];
+  }, [data]);
+
   const pointProps = {
-    pointsData: useMemo(() => [...data, ...baseAroundTheWorld], []),
+    pointsData,
     pointLat,
     pointLng,
     pointLabel: useCallback((d) => d.city, []),
@@ -208,8 +213,13 @@ export default function ThreeGlobe({ data }) {
     pointsMerge: true,
   };
 
+  const htmlElementsData = useMemo(() => {
+    if (!data) return [];
+    return [...data, ...baseAroundTheWorld];
+  }, [data]);
+
   const htmlProps = {
-    htmlElementsData: useMemo(() => [...data, ...baseAroundTheWorld], []),
+    htmlElementsData,
     htmlLat: useCallback((d) => d.latitude, []),
     htmlLng: useCallback((d) => d.longitude, []),
     htmlElement: useCallback((d) => htmlElement({ d, mobile }), []),
@@ -217,7 +227,7 @@ export default function ThreeGlobe({ data }) {
   };
 
   const labelsProps = {
-    labelsData: useMemo(() => [...baseAroundTheWorld], []),
+    labelsData: baseAroundTheWorld,
     labelLat: useCallback((d) => d.latitude, []),
     labelSize: 1,
     labelLabel: useCallback((d) => labelElement({ d, mobile }), []),
